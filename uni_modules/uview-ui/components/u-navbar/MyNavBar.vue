@@ -20,7 +20,29 @@
 					backgroundColor: bgColor,
 				}"
 			>
-
+		<!-- 		<view
+					class="u-navbar__content__left"
+					hover-class="u-navbar__content__left--hover"
+					hover-start-time="150"
+					@tap="leftClick"
+				>
+					<slot name="left">
+						<u-icon
+							v-if="leftIcon"
+							:name="leftIcon"
+							:size="leftIconSize"
+							:color="leftIconColor"
+						></u-icon>
+						<text
+							v-if="leftText"
+							:style="{
+								color: leftIconColor
+							}"
+							class="u-navbar__content__left__text"
+						>{{ leftText }}</text>
+					</slot>
+				</view> -->
+				
 				<slot name="center">
 					<text
 						class="u-line-1 u-navbar__content__title"
@@ -123,7 +145,7 @@
 			position: relative;
 			justify-content: center;
 
-			&__left,
+
 			&__right {
 				padding: 0 13px;
 				position: absolute;
@@ -133,18 +155,18 @@
 				align-items: center;
 			}
 
-			&__left {
-				left: 0;
+			// &__left {
+			// 	left: 0;
 				
-				&--hover {
-					opacity: 0.7;
-				}
+			// 	&--hover {
+			// 		opacity: 0.7;
+			// 	}
 
-				&__text {
-					font-size: 15px;
-					margin-left: 3px;
-				}
-			}
+			// 	&__text {
+			// 		font-size: 15px;
+			// 		margin-left: 3px;
+			// 	}
+			// }
 
 			&__title {
 				text-align: center;
