@@ -5,6 +5,7 @@
 			"style": {
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom",
+				// "titleNView":false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
 					"animationType": "zoom-fade-out",
@@ -16,12 +17,13 @@
 			"path": "pages/zadopt/zadopt",
 			"style": {
 				"navigationStyle": "custom"
+				// "titleNView":true
 			}
 		},
 		{
 			"path": "pages/askdoc/askdoc",
 			"style": {
-				"navigationStyle": "custom"
+				// "navigationStyle": "custom"
 			}
 		}
 	],

@@ -143,36 +143,23 @@ function checkUrl(url) {
 	return true
 }
 
-// uni.addInterceptor('request', {
-//   invoke(args) {
-//     // request 触发前拼接 url 
-//     args.url = config.baseUrl+args.url
-// 	console.log(args);
-//   },
-//   success(args) {
-//     // 请求成功后，修改code值为1
-//     // args.data.code = 1
-// 	if(args.statusCode==200){
-// 		uni.request({
-			
-// 		})
-// 	}
-// 	console.log(args,'args');
-//   }, 
-//   fail(err) {
-//     // console.log('interceptor-fail',err)
-//   }, 
-//   complete(res) {
-//     // console.log('interceptor-complete',res)
-//   }
-// })
+uni.addInterceptor('request', {
+  invoke(e) {
+    // request 触发前拼接 url 
+    // args.url = config.baseUrl+args.url
+  },
+  success(e) {
+	  console.log('不做拦截');
+    
+  }
+})
 
-// uni.addInterceptor({
-//   returnValue(args) {
-// 	  console.log(args,'args2');
-//     // 只返回 data 字段
-//     return args.data
-//   }
-// })
+uni.addInterceptor({
+  returnValue(res) {
+	  console.log(res,'args2');
+    // 只返回 data 字段
+    // return args.data
+  }
+})
 // // module.exports = myhttp
 export default myhttp
