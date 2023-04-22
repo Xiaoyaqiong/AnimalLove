@@ -11,7 +11,7 @@
 		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
 		 :tabHeight="tabHeight">
 			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor" :menuList.sync="menuListTemp"
-			 ref="slFilterView" @confirm="filterResult"></sl-filter-view>
+			 ref="slFilterView" @confirm="filterResult" :currentCity="currentCity"></sl-filter-view>
 		</popup-layer>
 	</view>
 
@@ -26,6 +26,12 @@
 			slFilterView
 		},
 		props: {
+			currentCity:{
+				type:String,
+				default(){
+					return ''
+				}
+			},
 			menuList: {
 				type: Array,
 				default () {
@@ -161,11 +167,11 @@
 					let item = arr[i];
 					for (let j = 0; j < item.detailList.length; j++) {
 						let d_item = item.detailList[j];
-						if (j == 0) {
-							d_item.isSelected = true
-						} else {
-							d_item.isSelected = false
-						}
+						// if (j == 0) {
+						// 	// d_item.isSelected = true
+						// } else {
+						// 	d_item.isSelected = false
+						// }
 					}
 				}
 				return arr;
@@ -241,7 +247,7 @@
 					}
 				}
 
-				this.$refs.popupRef.close()
+				// this.$refs.popupRef.close()
 				if (obj.isReset) {
 					
 				} else{

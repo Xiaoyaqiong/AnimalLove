@@ -107,6 +107,8 @@
 				</view>
 			</view>
 		</view>
+		<button @click="openURL">阿牛</button>
+		<!-- <web-view src="https://www.chongshe.cn/arc26367"></web-view> -->
 	</view>
 
 </template>
@@ -148,6 +150,19 @@ import titleBar from '../../components/titleBar.vue'
 
 		},
 		methods: {
+			// 跳转URL
+			openURL() {
+				// id 1      url:''      image
+				// #ifdef APP-PLUS
+				plus.runtime.openURL('https://baijiahao.baidu.com/s?id=1763635443424664321&wfr=spider&for=pc')
+			
+				console.log(1)
+				// #endif
+				// #ifdef H5
+				window.open('https://baijiahao.baidu.com/s?id=1763635443424664321&wfr=spider&for=pc')
+				console.log(2)
+				// #endif
+			},
 			getadoptCenter(){
 				myhttp.get('/adoptCenter').then(({data})=>{
 					this.adoptData=data

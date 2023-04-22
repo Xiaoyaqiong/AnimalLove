@@ -16,19 +16,27 @@
 						<text>{{item.detailTitle}}</text>
 					</view>
 					<view class="filter-content-detail">
+						<view :class="menuIndex==0?'appear':'hidden'">
+							<text>选择城市</text>
+							<view class="current-city">
+								<text>当前定位:{{currentCity}}</text>
+								<u-icon name="map" size="1.5rem"></u-icon>
+							</view>
+						</view>
 						<text v-for="(detailItem,idx) in selectDetailList" :key="idx" class='filter-content-detail-item-default' :style="{'background-color':detailItem.isSelected?themeColor:'#FFFFFF','color':detailItem.isSelected?'#FFFFFF':'#666666'}"
 						 @tap="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
 							{{detailItem.title}}
 						</text>
 					</view>
-					<view class="filter-content-footer">
+					<!-- <view class="filter-content-footer">
 						<view class="filter-content-footer-item" style="color: #777777; background-color: #FFFFFF;" @tap="resetClick(selectDetailList,item.key)">
 							<text>重置</text>
 						</view>
 						<view class="filter-content-footer-item" :style="{'color': '#FFFFFF', 'background-color': themeColor}" @tap="sureClick">
 							<text>确定</text>
 						</view>
-					</view>
+					</view> -->
+					<button @click="newresult1">newresult</button>
 				</view>
 			</view>
 		</view>
@@ -42,16 +50,23 @@
 			return {
 				selectArr: [],
 				result: {},
+				// currentCity:'',
+				newnewresult:{},
 				menuIndex: 0,
 				selectDetailList: [],
 				independenceObj: {},
 				selectedKey: '',
 				cacheSelectedObj: {},
-				defaultSelectedTitleObj: {},
+				defaultSelectedTitleObj: {},//默认选项
 				control:false
 			};
 		},
 		props: {
+			newresult:{
+				// default(){
+				// 	return Object.assign(this.result)
+				// }
+			},
 			themeColor: {
 				type: String,
 				default () {
@@ -67,10 +82,18 @@
 			independence: {
 				type: Boolean,
 				default: false
-			}
+			},
+			currentCity:{
+				type:String,
+				default(){
+					return ''
+				}
+			},
 		},
+		
 		computed: {
-			selectedTitleObj() {
+			
+			selectedTitleObj() {//已选条件
 				let obj = {}
 				for (let i = 0; i < this.menuList.length; i++) {
 					let item = this.menuList[i];
@@ -78,50 +101,63 @@
 				}
 				return obj;
 			},
-			defaultSelectedObj() { // 保存初始状态
-				return this.getSelectedObj()
-			},
+			// defaultSelectedObj() { // 保存初始状态
+			// 	return this.getSelectedObj()
+			// },
 			selectedObj: {
 				get() {
 					return this.getSelectedObj()
 				},
-				set(newObj) {
-					return newObj;
-				}
+				// set(newObj) {
+				// 	return newObj;
+				// }
 
 			}
 		},
 		methods: {
+			newresult1(){
+				console.log(this.newresult);
+			},
 			getSelectedObj() {
 				let obj = {}
 				for (let i = 0; i < this.menuList.length; i++) {
+					// console.log(this.menuList[i],'menulistitem');
 					let item = this.menuList[i];
-					if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) { // 处理并列菜单默认值
+					// if (!this.independence && item.defaultSelectedIndex != null && item.defaultSelectedIndex.toString().length > 0) { // 处理并列菜单默认值
 
-						if (item.isMutiple) {
+					// 	if (item.isMutiple) {
+					// 		obj[item.key] = [];
+					// 		// item.detailList[0].isSelected = false;
+					// 		// console.log('进入设置第一个为true');
+					// 		if (!Array.isArray(item.defaultSelectedIndex)) { // 如果默认值不是数组
+					// 			item.defaultSelectedIndex = [item.defaultSelectedIndex];
+					// 		}
+					// 		for (let j = 0; j < item.defaultSelectedIndex.length; j++) { // 将默认选中的值放入selectedObj
+					// 			// item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
+					// 			obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value)
+					// 		}
+					// 		// console.log(obj[item.key],'obj[item.key]1');
+					// 	} else {
+					// 		obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
+					// 		this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+					// 		this.defaultSelectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
+					// 		// item.detailList[0].isSelected = false;
+					// 		// console.log('进入设置第一个为true');
+					// 		item.detailList[item.defaultSelectedIndex].isSelected = true;
+					// 		// console.log(obj[item.key],'obj[item.key]2');
+					// 	}
+					// } 
+					if(1) {
+						
+						// if (!item.isMutiple) {
 							obj[item.key] = [];
-							item.detailList[0].isSelected = false;
-							if (!Array.isArray(item.defaultSelectedIndex)) { // 如果默认值不是数组
-								item.defaultSelectedIndex = [item.defaultSelectedIndex];
-							}
-							for (let j = 0; j < item.defaultSelectedIndex.length; j++) { // 将默认选中的值放入selectedObj
-								item.detailList[item.defaultSelectedIndex[j]].isSelected = true;
-								obj[item.key].push(item.detailList[item.defaultSelectedIndex[j]].value)
-							}
-
-						} else {
-							obj[item.key] = item.detailList[item.defaultSelectedIndex].value;
-							this.selectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
-							this.defaultSelectedTitleObj[item.key] = item.detailList[item.defaultSelectedIndex].title;
-							item.detailList[0].isSelected = false;
-							item.detailList[item.defaultSelectedIndex].isSelected = true;
-						}
-					} else {
-						if (item.isMutiple) {
-							obj[item.key] = [];
-						} else {
-							obj[item.key] = '';
-						}
+							console.log(obj[item.key],'obj[item.key]hh');
+						// } 
+						// else {
+						// 	// obj[item.key] = '';
+							
+						// }
+						
 					}
 				}
 				this.result = obj;
@@ -143,47 +179,47 @@
 				callback(this.result);
 			},
 			// 重置选项为设置的默认值，并更新result
-			resetSelectToDefault(callback) {
-				for (let i = 0; i < this.menuList.length; i++) {
-					this.selectDetailList = this.menuList[i].detailList;
+			// resetSelectToDefault(callback) {
+			// 	for (let i = 0; i < this.menuList.length; i++) {
+			// 		this.selectDetailList = this.menuList[i].detailList;
 
-					if (this.menuList[i].defaultSelectedIndex) {
-						if (Array.isArray(this.menuList[i].defaultSelectedIndex)) { // 把所有默认的为false的点为true
-							for (let j = 0; j < this.menuList[i].defaultSelectedIndex.length; j++) {
-								if (this.selectDetailList[this.menuList[i].defaultSelectedIndex[j]].isSelected == false) {
-									this.itemTap(this.menuList[i].defaultSelectedIndex[j], this.selectDetailList, this.menuList[i].isMutiple, this
-										.menuList[i].key)
-								}
-							}
-						} else {
-							this.itemTap(this.menuList[i].defaultSelectedIndex, this.selectDetailList, this.menuList[i].isMutiple, this.menuList[
-								i].key)
-						}
+			// 		if (this.menuList[i].defaultSelectedIndex) {
+			// 			if (Array.isArray(this.menuList[i].defaultSelectedIndex)) { // 把所有默认的为false的点为true
+			// 				for (let j = 0; j < this.menuList[i].defaultSelectedIndex.length; j++) {
+			// 					if (this.selectDetailList[this.menuList[i].defaultSelectedIndex[j]].isSelected == false) {
+			// 						this.itemTap(this.menuList[i].defaultSelectedIndex[j], this.selectDetailList, this.menuList[i].isMutiple, this
+			// 							.menuList[i].key)
+			// 					}
+			// 				}
+			// 			} else {
+			// 				this.itemTap(this.menuList[i].defaultSelectedIndex, this.selectDetailList, this.menuList[i].isMutiple, this.menuList[
+			// 					i].key)
+			// 			}
 
-						// 获取非默认项的下标
-						let unDefaultSelectedIndexArr = this.getUnDefaultSelectedIndex(this.menuList[i])
-						// 把所有不是默认的为true的点为false
-						for (let j = 0; j < unDefaultSelectedIndexArr.length; j++) {
-							if (this.selectDetailList[unDefaultSelectedIndexArr[j]].isSelected == true) {
-								this.itemTap(unDefaultSelectedIndexArr[j], this.selectDetailList, this.menuList[i].isMutiple, this
-										.menuList[i].key)
-							}
-						}
-					}
+			// 			// 获取非默认项的下标
+			// 			let unDefaultSelectedIndexArr = this.getUnDefaultSelectedIndex(this.menuList[i])
+			// 			// 把所有不是默认的为true的点为false
+			// 			for (let j = 0; j < unDefaultSelectedIndexArr.length; j++) {
+			// 				if (this.selectDetailList[unDefaultSelectedIndexArr[j]].isSelected == true) {
+			// 					this.itemTap(unDefaultSelectedIndexArr[j], this.selectDetailList, this.menuList[i].isMutiple, this
+			// 							.menuList[i].key)
+			// 				}
+			// 			}
+			// 		}
 
 
-				}
+			// 	}
 
-				this.selectedObj = this.defaultSelectedObj;
-				this.result = this.defaultSelectedObj;
-				let obj = {
-					'result': this.result,
-					'titles': this.defaultSelectedTitleObj,
-					'isReset': true
-				}
-				this.$emit("confirm", obj);
-				callback(this.result)
-			},
+			// 	this.selectedObj = this.defaultSelectedObj;
+			// 	this.result = this.defaultSelectedObj;
+			// 	let obj = {
+			// 		'result': this.result,
+			// 		'titles': this.defaultSelectedTitleObj,
+			// 		'isReset': true
+			// 	}
+			// 	this.$emit("confirm", obj);
+			// 	callback(this.result)
+			// },
 			getUnDefaultSelectedIndex(menuListItem) { // 获取非默认项
 				let tempDefault = menuListItem.defaultSelectedIndex;
 				if (!Array.isArray(tempDefault)) {
@@ -207,6 +243,7 @@
 				this.$emit('update:menuList', val)
 			},
 			menuTabClick(index) {
+				console.log(index,'index');
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
 				this.selectedKey = this.menuList[index].key;
@@ -253,7 +290,7 @@
 
 
 				// #ifdef H5
-				this.selectedObj = this.selectedObj;
+				// this.selectedObj = this.selectedObj;
 				this.$forceUpdate();
 				// #endif
 			},
@@ -266,68 +303,61 @@
 				}
 			},
 			itemTap(index, list, isMutiple, key) {
-				console.log(list[index].isSelected+'未进入isMutiple');
-					if (isMutiple == true) {
+				// console.log(index,'index');
+				// console.log(this.independence,'independence');
+					if(1)
+					{
 						
-						list[index].isSelected = !list[index].isSelected;
-						console.log(list[index].isSelected+'进入isMutiple');
-						if (index == 0) {
-							this.resetSelected(list, key)
-							if (!this.independence) {
-								this.selectedTitleObj[key] = list[index].title;
-							}
-						} else {
-							list[0].isSelected = false
-							if (list[index].isSelected) {
-								if (this.independence) {
-									this.independenceObj[this.selectedKey].push(list[index].value);
-								} else {
-									this.selectedObj[key].push(list[index].value);
-								}
-							} else {
-								list[index].isSelected = false;
-								if (this.independence) {
-									var idx = this.independenceObj[this.selectedKey].indexOf(list[index].value);
-									this.independenceObj[this.selectedKey].splice(idx, 1);
-								} else {
-									var idx = this.selectedObj[key].indexOf(list[index].value);
-									this.selectedObj[key].splice(idx, 1);
-								}
-					
-							}
-							if (this.independence) {
-								this.result = this.independenceObj;
-							} else {
-								this.result = this.selectedObj;
-							}
-					
-						}
-					} else {
-						if (index == 0) {
-							this.resetSelected(list, key)
-							if (!this.independence) {
-								this.selectedTitleObj[key] = list[index].title;
-							}
-						} else {
-							list[0].isSelected = false
-							if (this.independence) {
+						
+							console.log('进入不多选的不限以外');
+							
+							// list[0].isSelected = false
+							if (this.independence) {//未进入
 								this.independenceObj[this.selectedKey] = list[index].value;
 								this.result = this.independenceObj;
-							} else {
-								this.selectedObj[key] = list[index].value;
-								this.result = this.selectedObj;
-								this.selectedTitleObj[key] = list[index].title;
+								
+							} else {//key是三个菜单的值
+								console.log('进入第二个判断');
+								// if(list[index].isSelected){
+									// this.selectedObj[key].push(list[index].value)
+								// }else{
+								// 	this.selectedObj[key].splice(list[index].value,1)
+								// }
+								
+								// this.selectedObj[key] = list[index].value;
+								// this.result = this.selectedObj;
+								// this.selectedTitleObj[key] = list[index].title;
+								console.log(this.selectedObj[key],'selectobj');
 							}
 					
 							for (let i = 0; i < list.length; i++) {
 								if (index == i) {
-									list[i].isSelected = true
-								} else {
-									list[i].isSelected = false
-								}
+									
+									list[i].isSelected = !list[i].isSelected
+									
+								} 
+								// else {
+									// list[i].isSelected = false
+								// }
 							}
-						}
+							console.log(list[index].isSelected,'list[index].isSelected');
+							if(list[index].isSelected){
+								this.selectedObj[key].push(list[index].value)
+							}else{
+								console.log(list[index].value,'sclipe');
+								var idx = this.selectedObj[key].indexOf(list[index].value);
+								this.selectedObj[key].splice(idx, 1);
+							}
+							
+						
+						// console.log(list[1],'没');
+						this.newnewresult=this.result
+						console.log(this.result,'result');
 					}
+					let obj = {
+						'result': this.result,
+					}
+					this.$emit("confirm", obj);
 					// #ifdef H5
 					this.$forceUpdate();
 					// #endif
@@ -393,6 +423,17 @@
 </script>
 
 <style>
+	.appear {
+		display: flex;
+		margin: 1.25rem 0 0 0.625rem;
+	}
+	.hidden{
+		display: none;
+	}
+	.current-city {
+		display: flex;
+		margin-left: 2.8rem;
+	}
 	.filter-content {
 		background-color: #F6F7F8;
 	}
