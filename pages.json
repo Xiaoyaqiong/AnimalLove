@@ -25,8 +25,72 @@
 			"style": {
 				// "navigationStyle": "custom"
 			}
+		},
+		
+		
+		// tabbar页面
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+				// "titleNView":true
+			}
+		},
+		{
+			"path": "pages/sameCity/sameCity",
+			"style": {
+				"navigationStyle": "custom"
+				// "titleNView":true
+			}
+		},
+		{
+			"path": "pages/petquan/petquan",
+			"style": {
+				"navigationStyle": "custom"
+				// "titleNView":true
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationStyle": "custom"
+				// "titleNView":true
+			}
 		}
 	],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+		"pagePath": "pages/index/index",
+		"selectedIconPath": "static/tab/Discover-PitchOn.png",
+		"iconPath": "static/tab/Discover.png",
+		"text": "首页"
+	},
+			{
+				"pagePath": "pages/sameCity/sameCity",
+				"selectedIconPath": "static/tab/AttendClass-PitchOn.png",
+				"iconPath": "static/tab/AttendClass.png",
+				"text": "同城"
+			},
+			{
+				"pagePath": "pages/petquan/petquan",
+				"selectedIconPath": "static/tab/Chat-PitchOn.png",
+				"iconPath": "static/tab/Chat.png",
+				"text": "宠圈"
+			},
+			{
+				"pagePath": "pages/profile/profile",
+				"selectedIconPath": "static/tab/My-PitchOn.png",
+				"iconPath": "static/tab/My.png",
+				"text": "我的"
+			}
+		]
+
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
