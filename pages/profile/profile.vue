@@ -1,25 +1,52 @@
 <template>
 	<view>
 		<u-toast ref="uToast"></u-toast>
-		<view class="toolBar">
-			<view class="scanner">
-				<u-image :width="iconWidth" :height="iconWidth" src="../../static/logo.png"></u-image>
+		
+		<view class="ProfileCard">
+			<view class="content">
+				<u-avatar style="display: inline-block;" size="6rem" src="http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg"></u-avatar>
+				<view class="username">{{$store.state.user.username}}</view>
+				<view class="level">
+					<u-icon style="display: inline-block;" name="photo"></u-icon>
+						{{$store.state.user.level}}
+				</view>
 			</view>
-			<view class="night">
-				<u-image :width="iconWidth" :height="iconWidth" src="../../static/logo.png"></u-image>
-			</view>
-
+			
+		
 		</view>
 
 		
 		<!-- 我的宠物档案 -->
-		<view class="WhiteBox box1">
+		<view class="prof">
+			<view class="t1"> 
+				<view>
+					<u-icon style="display: inline-block;" name="photo"></u-icon>
+					<span class="t1-1">我的宠物档案</span>
+				</view>
+				
+				<span class="t1-2">添加宠物</span>
+			</view>
 			
-
+		</view>
+		
+		<!-- 个人宠物信息 -->
+		<view class="pet-profile WhiteBox">
+			<view class="PetName">
+				{{Firstpet.petName}}	
+				<u-icon style="display: inline-block;" name="photo"></u-icon>
+				<u-icon style="display: inline-block;" name="photo"></u-icon>
+			
+			</view>
+			
+			<view>
+				 <u-badge v-for="tag in Firstpet.tags" bgColor="#" :value="value"></u-badge>
+				
+			</view>
+			<view></view>
 		</view>
 
 		<!-- 功能菜单 -->
-		<view class="WhiteBox box1">
+		<view class="WhiteBox">
 			<view class="SettingItem" v-for="(item,index) in list1" :key="index" @click="onClick(item)">
 				<view> 
 					<view class="p-left">
@@ -59,6 +86,14 @@
 				screenHeight: 0, // 移动端屏幕高度
 				screenWidth: 0, // 移动端屏幕宽度
 				iconWidth: 43, // 控制icon大小
+				Firstpet:{
+					petName:'小黄',
+					tags:[
+						'1岁以内',
+						'未绝育'
+					]
+				},
+				
 				// 工具栏
 				toolbar: [{
 						name: '扫码',

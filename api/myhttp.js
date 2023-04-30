@@ -143,23 +143,22 @@ function checkUrl(url) {
 	return true
 }
 
-uni.addInterceptor('request', {
-  invoke(e) {
-    // request 触发前拼接 url 
-    // args.url = config.baseUrl+args.url
-  },
-  success(e) {
-	  console.log('不做拦截');
-    
-  }
-})
-
-uni.addInterceptor({
-  returnValue(res) {
-	  console.log(res,'args2');
+uni.addInterceptor('request',{
+  returnValue(args) {
+	  // console.log(args,'args2');
     // 只返回 data 字段
-    // return args.data
-  }
+    return args.data
+  },
+  
+  // 拦截前触发
+  invoke(args) {
+  	// request触发前添加token
+  	args.header = {
+  		'token': uni.getStorageSync('token')
+  	}
+  	data: args.data || {}
+  	// console.log(args)
+  },
 })
 // // module.exports = myhttp
 export default myhttp

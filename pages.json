@@ -26,7 +26,13 @@
 				// "navigationStyle": "custom"
 			}
 		},
-		
+		// 登陆模块
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
 		
 		// tabbar页面
 		{

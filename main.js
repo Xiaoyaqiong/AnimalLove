@@ -3,9 +3,10 @@ import App from './App'
 // #ifndef VUE3
 import Vue from 'vue'
 import uView from '@/uni_modules/uview-ui'
-
+import store from '@/store/index.js'
 import myhttp from './api/myhttp.js'
 Vue.prototype.$myhttp=myhttp
+Vue.prototype.$store = store
 Vue.use(uView)
 Vue.config.productionTip = false
 App.mpType = 'app'
@@ -36,7 +37,9 @@ try {
       });
     },
   });
-} catch (error) { }
+} catch (error) { 
+	console.log('Promise Error',error)	
+}
 
 const app = new Vue({
   ...App

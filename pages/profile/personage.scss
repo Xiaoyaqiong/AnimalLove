@@ -1,43 +1,64 @@
-
 page{
-	background-color: #eeeeee;
+	background-color: #fff;
 	font-family: 'Times New Roman',SimHei,'黑体'; 
 }
 
-.toolBar
-{ 
-		display:flex;
-		align-items: center;
-		// outline: 1px solid;
-		justify-content: flex-end;
-		margin-right:69rpx;
-		margin-top: calc( 111 / #{$Basehigth}  * 100vh);
-		.scanner{
-			margin-right: calc( 50 /  #{$Basewidth} * 100vw);
+// 黄色圆角卡片
+.ProfileCard
+{ 		
+		
+		// position: sticky;
+		// top: 0;
+		width: 100%;
+		height: 23vh;
+		background: #ffb600;
+		border-radius: 0px 0px 200rpx 200rpx;
+		.content{
+			padding-top: 2vh;
+			text-align: center;
+			.username{
+				margin-top: 1vh;
+			}
+			.level{
+				margin-top: 0.2vh;
+			}
 		}
 	}
-	.profile
-	{
-		margin-top: 5vh;
-		text-align:center;
-		color: #ABABAB;
-		.Steam
-		{
-			font-family: ysbth; 
-			font-size: 1.4rem;
-		}
-		.fun{ 
-			font-size: 0.7rem;
-			letter-spacing:0.42rem;
+	
+	
+	.prof{
+		width: 90vw;
+		margin: 0 auto;
+		.t1{
+			margin-top: 3vh;
+			display: flex;
+			justify-content: space-between;
+			.t1-1{
+				margin-left: 1vw;
+				font-size: 1.02rem;
+				font-weight: bold;
+				line-height: 20px;
+			}
+			.t1-2{
+				font-size: 0.8rem;
+				color: #225ffb;
+			}
 		}
 	}
+	
+	// 宠物信息
+	.pet-profile {
+		width: 85vw;
+		height: 95px;
+		padding: 2vh 3vw;
+		margin: 2vh auto;
+		background: #ffffff;
+		border: 1px solid #e8efff;
+		border-radius: 1rem;
+		color: #333333;
+		line-height: 20px;
+		box-shadow: 0px 0px 2px 0px #d3cec2;
 
-	.box1 {
-		border-radius: 20rpx;
-		display: flex;
-		margin: 0 calc(47 / #{$Basewidth} * 100vw);
-		flex-direction: column;
-		margin-bottom: calc(28 / #{$Basehigth} * 100vh);	// 盒子下方间距
 	}
 
 
