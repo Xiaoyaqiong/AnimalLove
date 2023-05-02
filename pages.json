@@ -80,26 +80,26 @@
 		"list": [
 			{
 		"pagePath": "pages/index/index",
-		"selectedIconPath": "static/tab/Discover-PitchOn.png",
-		"iconPath": "static/tab/Discover.png",
+		"selectedIconPath": "static/icon/tabbar/pets.png",
+		"iconPath": "static/icon/tabbar/pets.png",
 		"text": "首页"
 	},
 			{
 				"pagePath": "pages/sameCity/sameCity",
-				"selectedIconPath": "static/tab/AttendClass-PitchOn.png",
-				"iconPath": "static/tab/AttendClass.png",
+				"selectedIconPath": "static/icon/tabbar/suozaichengshi.png",
+				"iconPath": "static/icon/tabbar/suozaichengshi.png",
 				"text": "同城"
 			},
 			{
 				"pagePath": "pages/petquan/petquan",
-				"selectedIconPath": "static/tab/Chat-PitchOn.png",
-				"iconPath": "static/tab/Chat.png",
+				"selectedIconPath": "static/icon/tabbar/social.png",
+				"iconPath": "static/icon/tabbar/social.png",
 				"text": "宠圈"
 			},
 			{
 				"pagePath": "pages/profile/profile",
-				"selectedIconPath": "static/tab/My-PitchOn.png",
-				"iconPath": "static/tab/My.png",
+				"selectedIconPath": "static/icon/tabbar/user.png",
+				"iconPath": "static/icon/tabbar/user.png",
 				"text": "我的"
 			}
 		]

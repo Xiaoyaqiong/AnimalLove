@@ -1,0 +1,39 @@
+.btnGroup{
+	
+	width: 90vw;
+	display: flex;
+	margin: 0 auto;
+	margin-top: 8.5vh;	// 距离顶部距离
+	justify-content: space-between;
+		.btn{
+			
+			width: 15vw;
+			height: 15vw;
+			background: #ffb600;
+			border-radius: 12px;
+			box-shadow: 0px 3px 3px 0px #ffb600; 
+		}
+}
+
+.QQQun{
+	display: flex;
+	align-items: center;
+	margin: 5vh auto;
+	padding: 1vh 1vw;
+	width: 90vw;
+	height: 6.5vh;
+	background: #e5eee5;
+	border-radius: 10px;
+	p{
+		padding: 0 1rem;
+		color: #FF6900;
+	}
+	.joinInbtn{
+
+	}
+}
+
+.Middleswiper{
+	margin: 0 auto;
+	width: 92%;
+}
