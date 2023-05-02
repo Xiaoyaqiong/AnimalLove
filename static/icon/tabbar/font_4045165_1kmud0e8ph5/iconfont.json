@@ -1,0 +1,37 @@
+{
+  "id": "4045165",
+  "name": "tabbar",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "7551429",
+      "name": "所在城市",
+      "font_class": "suozaichengshi",
+      "unicode": "e68d",
+      "unicode_decimal": 59021
+    },
+    {
+      "icon_id": "12664885",
+      "name": "社交",
+      "font_class": "social",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "12664887",
+      "name": "宠物",
+      "font_class": "pets",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "12739244",
+      "name": "用户",
+      "font_class": "user",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    }
+  ]
+}

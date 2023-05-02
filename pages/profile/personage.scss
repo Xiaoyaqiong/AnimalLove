@@ -48,17 +48,51 @@ page{
 	
 	// 宠物信息
 	.pet-profile {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
 		width: 85vw;
-		height: 95px;
+		height: 10vh;
 		padding: 2vh 3vw;
 		margin: 2vh auto;
 		background: #ffffff;
 		border: 1px solid #e8efff;
 		border-radius: 1rem;
 		color: #333333;
-		line-height: 20px;
 		box-shadow: 0px 0px 2px 0px #d3cec2;
-
+		.PetName{
+			width: 50vw;
+			// outline: 1px solid;
+			align-items: center;
+			// flex: 1.2;
+			font-size: 1.2rem;
+			font-weight: bold;
+			span{
+				margin-right: 1.5vw;
+			}
+		}
+		.tags{
+			margin-top: 2vh;
+			display: flex;
+			width: 60vw;
+			// outline: 1px solid;
+			height: 3vh;
+			gap: 1rem;
+			overflow: hidden;
+			.tag{
+				align-items: center;
+				padding: 0 5vw;
+			}
+				
+			
+		}
+		.PetAvatar{
+			position: absolute;
+			right: 10vw;
+			// outline: 1px solid;
+			// float: right;
+			// position: relative;
+		}
 	}
 
 
@@ -85,7 +119,7 @@ page{
 	}
 	
 	.p-right-icon {
-		padding: 0 10rpx;
+		// padding: 0 10rpx;
 	}
 
 	.item-bottom-solid {

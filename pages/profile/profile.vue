@@ -32,17 +32,21 @@
 		<!-- 个人宠物信息 -->
 		<view class="pet-profile WhiteBox">
 			<view class="PetName">
-				{{Firstpet.petName}}	
+				<span>{{Firstpet.petName}}	</span>
 				<u-icon style="display: inline-block;" name="photo"></u-icon>
 				<u-icon style="display: inline-block;" name="photo"></u-icon>
 			
 			</view>
 			
-			<view>
-				 <u-badge v-for="tag in Firstpet.tags" bgColor="#" :value="value"></u-badge>
+			<view class="tags">
+				 <u-badge class="tag" v-for="tag in Firstpet.tags" bgColor="#F5DCA6" color="#AF8982" :value="tag"></u-badge>
 				
 			</view>
-			<view></view>
+			
+			<view class="PetAvatar">
+				<u--image shape="circle" radius="50%" src="https://cdn.uviewui.com/uview/album/1.jpg" height="10vh" width="10vh"   :lazy-load="true" :fade="true" duration="450"></u--image>
+			</view>
+			
 		</view>
 
 		<!-- 功能菜单 -->
@@ -133,7 +137,7 @@
 				},
 				{
 					name: '设置',
-					id: 'coupon',
+					id: 'Setting',
 					path: '../../static/logo.png',
 				
 				}
@@ -146,8 +150,9 @@
 
 			// 点击跳转功能
 			onClick(item) {
+				console.log(item)
 				let that = this
-				let url = '/pages/personage/SecondPages/' + item.id
+				let url = '/pages/profile/SecondPages/' + item.id
 				if (item.id == 'Nice') {
 					that.$refs.uToast.show({
 						type: 'default',

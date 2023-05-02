@@ -1,10 +1,16 @@
 <template>
 	<view class="">
-		同城
+		<MyBar> </MyBar>
 	</view>
 </template>
 
 <script>
+	import MyBar from '@/components/MyNavbar.vue'
+	export default {
+		components:{
+			MyBar
+		}
+	}
 </script>
 
 <style>

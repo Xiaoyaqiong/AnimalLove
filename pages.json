@@ -34,6 +34,14 @@
 			}
 		},
 		
+		// 二级页面
+		{
+			"path": "pages/profile/SecondPages/Setting",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		
 		// tabbar页面
 		{
 			"path": "pages/index/index",
@@ -66,7 +74,7 @@
 	],
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#3cc51f",
+		"selectedColor": "#FFB600",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [

@@ -1,0 +1,65 @@
+{
+  "id": "4043515",
+  "name": "我的",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8045416",
+      "name": "勋章",
+      "font_class": "xunzhang",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "24848380",
+      "name": "编辑",
+      "font_class": "bianji",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "23942995",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "f90c",
+      "unicode_decimal": 63756
+    },
+    {
+      "icon_id": "23943070",
+      "name": "信息",
+      "font_class": "xinxi",
+      "unicode": "f932",
+      "unicode_decimal": 63794
+    },
+    {
+      "icon_id": "23943079",
+      "name": "钱包",
+      "font_class": "qianbao",
+      "unicode": "f93a",
+      "unicode_decimal": 63802
+    },
+    {
+      "icon_id": "23943084",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "f93f",
+      "unicode_decimal": 63807
+    },
+    {
+      "icon_id": "23943461",
+      "name": "宠物",
+      "font_class": "chongwu1",
+      "unicode": "fa45",
+      "unicode_decimal": 64069
+    },
+    {
+      "icon_id": "28855813",
+      "name": "我的发布",
+      "font_class": "wodefabu",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    }
+  ]
+}

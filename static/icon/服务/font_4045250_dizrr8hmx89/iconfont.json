@@ -1,0 +1,37 @@
+{
+  "id": "4045250",
+  "name": "服务",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "551475",
+      "name": "同行互助",
+      "font_class": "cooperation",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "16395250",
+      "name": "附近",
+      "font_class": "biaoqiankuozhan_fujin-282",
+      "unicode": "eb8b",
+      "unicode_decimal": 60299
+    },
+    {
+      "icon_id": "17660858",
+      "name": "计时收费",
+      "font_class": "timeCharge",
+      "unicode": "e6b5",
+      "unicode_decimal": 59061
+    },
+    {
+      "icon_id": "35312611",
+      "name": "查询-copy",
+      "font_class": "-search-copy",
+      "unicode": "eb8c",
+      "unicode_decimal": 60300
+    }
+  ]
+}

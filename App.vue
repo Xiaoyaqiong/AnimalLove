@@ -8,7 +8,7 @@
 			} else {
 			
 				uni.switchTab({
-					url:'/pages/profile/profile'
+					url:'/pages/sameCity/sameCity'
 				});
 			} 
 		},
