@@ -1,31 +1,48 @@
+// 按钮组
 .btnGroup{
-	
+
 	width: 90vw;
 	display: flex;
 	margin: 0 auto;
-	margin-top: 8.5vh;	// 距离顶部距离
+	margin-top: 8.5vh;		// 距离顶部距离
 	justify-content: space-between;
 		.btn{
-			
+			text-align: center;
 			width: 15vw;
 			height: 15vw;
 			background: #ffb600;
 			border-radius: 12px;
 			box-shadow: 0px 3px 3px 0px #ffb600; 
+			.btnContent{
+				// outline: 1px solid;
+				position: relative;
+				font-size: 0.8rem;
+				top: 5vh;
+			}
+		}
+		.btn:nth-child(2){
+			.btnContent{
+				display: inline-block;
+				text-align: left;
+				// outline: 1px solid;
+				width: 20vw;
+			}
 		}
 }
 
 .QQQun{
 	display: flex;
 	align-items: center;
-	margin: 5vh auto;
-	padding: 1vh 1vw;
+	margin: 6vh auto;
+	padding: 0vh 1vw;
 	width: 90vw;
 	height: 6.5vh;
 	background: #e5eee5;
 	border-radius: 10px;
+	margin-bottom: 3vh;
 	p{
 		padding: 0 1rem;
+		font-size: .8rem;
 		color: #FF6900;
 	}
 	.joinInbtn{
@@ -36,4 +53,78 @@
 .Middleswiper{
 	margin: 0 auto;
 	width: 92%;
+	
+	.Mapicon{
+		display: flex;
+		align-items: center;
+		gap: .6rem;
+		margin-top: 2vh;
+	}
 }
+
+.NearList{
+	// 附近列表里的每一个商家
+	padding: 3vw;
+	padding-top: 0;
+	.Nearitem{
+		// outline: 1px solid;
+		display: flex;
+		flex-wrap: wrap;
+		padding: 1vw;
+		padding-top: 0;
+		width: 95vw;
+		height: 20vh;
+		background: #ffffff;
+		border-radius: 12px;
+		font-size: .8rem;
+		font-family: Microsoft YaHei, Microsoft YaHei-Normal;
+		text-align: CENTER;
+		// color: #af8982;
+		line-height: 20px;
+		box-shadow: 0px 0px 1px 0px #e1e1e1; 
+		// 商家图片
+		.shopImg{
+			margin: 0 2vw;
+			align-self: center;
+		}
+		
+		.mid{
+			margin-left: 5vw;
+			align-items: flex-start;
+			justify-content: center;
+			// align-content: flex-start;
+			display: flex;
+			gap: 0.4rem;
+			flex-direction: column;
+			// outline: 1px solid;
+			flex: 1;
+			.content{
+				color: #8b8b8b;
+				.address{
+					margin-right: 2rem;
+				}
+			}
+		}
+		
+		// 商品列表
+		.shopList{
+			width: 90%;
+			margin: 0 auto;
+			.shopItem{
+				display: flex;
+				border-top: 1px solid #E8EFFF;
+				border-bottom: 1px solid #E8EFFF;
+				
+				.cost{
+					margin-right: 1rem;
+					color: #FF6900;
+				}
+				.mealName{
+					color: #8B8B8B;
+				}
+			}
+		}
+		
+	}
+}
+
