@@ -5,8 +5,10 @@
 			<view class="filter-content" v-for="(item, index) in menuList" :key="index" v-if="menuIndex == index">
 				<view v-if="item.isSort">
 					<view class="filter-content-list">
-						<view v-for="(detailItem,idx) in selectDetailList" :key="idx" :class="detailItem.isSelected?'filter-content-list-item-active':'filter-content-list-item-default'"
-						 :style="{'color': detailItem.isSelected?themeColor:'#666666'}" @tap="sortTap(idx,selectDetailList,item.key)">
+						<view v-for="(detailItem,idx) in selectDetailList" :key="idx"
+							:class="detailItem.isSelected?'filter-content-list-item-active':'filter-content-list-item-default'"
+							:style="{'color': detailItem.isSelected?themeColor:'#666666'}"
+							@tap="sortTap(idx,selectDetailList,item.key)">
 							<text>{{detailItem.title}}</text>
 						</view>
 					</view>
@@ -15,19 +17,28 @@
 					<view class="filter-content-title" v-if="item.detailTitle && item.detailTitle.length">
 						<text>{{item.detailTitle}}</text>
 					</view>
-					<view class="filter-content-detail">
+					<view class="">
 						<view :class="menuIndex==0?'appear':'hidden'">
 							<text>选择城市</text>
 							<view class="current-city">
 								<text>当前定位:{{currentCity}}</text>
-								<u-icon name="map" size="1.5rem"></u-icon>
+								<u-icon name="map" size="1.5rem" :color="$topicColor"></u-icon>
 							</view>
 						</view>
-						<text v-for="(detailItem,idx) in selectDetailList" :key="idx" class='filter-content-detail-item-default' :style="{'background-color':detailItem.isSelected?themeColor:'#FFFFFF','color':detailItem.isSelected?'#FFFFFF':'#666666'}"
-						 @tap="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
-							{{detailItem.title}}
-						</text>
+						<view class="filter-content-detail">
+							<view class="filter-content-detail-div" v-for="(detailItem,idx) in selectDetailList" :key="idx">
+								<view 
+									class='filter-content-detail-item-default'
+									:style="{'border-color':detailItem.isSelected?$topicColor:'#F0F0F0','color':detailItem.isSelected?$topicColor:'#000000'}"
+									@tap="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
+									{{detailItem.title}}
+								</view>
+							</view>
+						
+						</view>
 					</view>
+					
+					
 					<!-- <view class="filter-content-footer">
 						<view class="filter-content-footer-item" style="color: #777777; background-color: #FFFFFF;" @tap="resetClick(selectDetailList,item.key)">
 							<text>重置</text>
@@ -36,7 +47,7 @@
 							<text>确定</text>
 						</view>
 					</view> -->
-					<button @click="newresult1">newresult</button>
+
 				</view>
 			</view>
 		</view>
@@ -51,18 +62,18 @@
 				selectArr: [],
 				result: {},
 				// currentCity:'',
-				newnewresult:{},
+				newnewresult: {},
 				menuIndex: 0,
 				selectDetailList: [],
 				independenceObj: {},
 				selectedKey: '',
 				cacheSelectedObj: {},
-				defaultSelectedTitleObj: {},//默认选项
-				control:false
+				defaultSelectedTitleObj: {}, //默认选项
+				control: false
 			};
 		},
 		props: {
-			newresult:{
+			newresult: {
 				// default(){
 				// 	return Object.assign(this.result)
 				// }
@@ -70,7 +81,7 @@
 			themeColor: {
 				type: String,
 				default () {
-					return '#D1372C'
+					return '#FFB600'
 				}
 			},
 			menuList: {
@@ -83,17 +94,17 @@
 				type: Boolean,
 				default: false
 			},
-			currentCity:{
-				type:String,
-				default(){
+			currentCity: {
+				type: String,
+				default () {
 					return ''
 				}
 			},
 		},
-		
+
 		computed: {
-			
-			selectedTitleObj() {//已选条件
+
+			selectedTitleObj() { //已选条件
 				let obj = {}
 				for (let i = 0; i < this.menuList.length; i++) {
 					let item = this.menuList[i];
@@ -115,9 +126,7 @@
 			}
 		},
 		methods: {
-			newresult1(){
-				console.log(this.newresult);
-			},
+
 			getSelectedObj() {
 				let obj = {}
 				for (let i = 0; i < this.menuList.length; i++) {
@@ -147,17 +156,17 @@
 					// 		// console.log(obj[item.key],'obj[item.key]2');
 					// 	}
 					// } 
-					if(1) {
-						
+					if (1) {
+
 						// if (!item.isMutiple) {
-							obj[item.key] = [];
-							console.log(obj[item.key],'obj[item.key]hh');
+						obj[item.key] = [];
+						console.log(obj[item.key], 'obj[item.key]hh');
 						// } 
 						// else {
 						// 	// obj[item.key] = '';
-							
+
 						// }
-						
+
 					}
 				}
 				this.result = obj;
@@ -167,7 +176,7 @@
 			resetAllSelect(callback) {
 				let titles = [];
 				for (let i = 0; i < this.menuList.length; i++) {
-					this.resetSelected(this.menuList[i].detailList,this.menuList[i].key);
+					this.resetSelected(this.menuList[i].detailList, this.menuList[i].key);
 					titles[this.menuList[i].key] = this.menuList[i].title;
 				}
 				let obj = {
@@ -243,7 +252,7 @@
 				this.$emit('update:menuList', val)
 			},
 			menuTabClick(index) {
-				console.log(index,'index');
+				console.log(index, 'index');
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
 				this.selectedKey = this.menuList[index].key;
@@ -305,64 +314,63 @@
 			itemTap(index, list, isMutiple, key) {
 				// console.log(index,'index');
 				// console.log(this.independence,'independence');
-					if(1)
-					{
-						
-						
-							console.log('进入不多选的不限以外');
-							
-							// list[0].isSelected = false
-							if (this.independence) {//未进入
-								this.independenceObj[this.selectedKey] = list[index].value;
-								this.result = this.independenceObj;
-								
-							} else {//key是三个菜单的值
-								console.log('进入第二个判断');
-								// if(list[index].isSelected){
-									// this.selectedObj[key].push(list[index].value)
-								// }else{
-								// 	this.selectedObj[key].splice(list[index].value,1)
-								// }
-								
-								// this.selectedObj[key] = list[index].value;
-								// this.result = this.selectedObj;
-								// this.selectedTitleObj[key] = list[index].title;
-								console.log(this.selectedObj[key],'selectobj');
-							}
-					
-							for (let i = 0; i < list.length; i++) {
-								if (index == i) {
-									
-									list[i].isSelected = !list[i].isSelected
-									
-								} 
-								// else {
-									// list[i].isSelected = false
-								// }
-							}
-							console.log(list[index].isSelected,'list[index].isSelected');
-							if(list[index].isSelected){
-								this.selectedObj[key].push(list[index].value)
-							}else{
-								console.log(list[index].value,'sclipe');
-								var idx = this.selectedObj[key].indexOf(list[index].value);
-								this.selectedObj[key].splice(idx, 1);
-							}
-							
-						
-						// console.log(list[1],'没');
-						this.newnewresult=this.result
-						console.log(this.result,'result');
+				if (1) {
+
+
+					console.log('进入不多选的不限以外');
+
+					// list[0].isSelected = false
+					if (this.independence) { //未进入
+						this.independenceObj[this.selectedKey] = list[index].value;
+						this.result = this.independenceObj;
+
+					} else { //key是三个菜单的值
+						console.log('进入第二个判断');
+						// if(list[index].isSelected){
+						// this.selectedObj[key].push(list[index].value)
+						// }else{
+						// 	this.selectedObj[key].splice(list[index].value,1)
+						// }
+
+						// this.selectedObj[key] = list[index].value;
+						// this.result = this.selectedObj;
+						// this.selectedTitleObj[key] = list[index].title;
+						console.log(this.selectedObj[key], 'selectobj');
 					}
-					let obj = {
-						'result': this.result,
+
+					for (let i = 0; i < list.length; i++) {
+						if (index == i) {
+
+							list[i].isSelected = !list[i].isSelected
+
+						}
+						// else {
+						// list[i].isSelected = false
+						// }
 					}
-					this.$emit("confirm", obj);
-					// #ifdef H5
-					this.$forceUpdate();
-					// #endif
-					
-				
+					console.log(list[index].isSelected, 'list[index].isSelected');
+					if (list[index].isSelected) {
+						this.selectedObj[key].push(list[index].value)
+					} else {
+						console.log(list[index].value, 'sclipe');
+						var idx = this.selectedObj[key].indexOf(list[index].value);
+						this.selectedObj[key].splice(idx, 1);
+					}
+
+
+					// console.log(list[1],'没');
+					this.newnewresult = this.result
+					console.log(this.result, 'result');
+				}
+				let obj = {
+					'result': this.result,
+				}
+				this.$emit("confirm", obj);
+				// #ifdef H5
+				this.$forceUpdate();
+				// #endif
+
+
 			},
 			resetSelected(list, key) {
 				if (typeof this.result[key] == 'object') {
@@ -424,51 +432,73 @@
 
 <style>
 	.appear {
+		
 		display: flex;
-		margin: 1.25rem 0 0 0.625rem;
+		padding:20px 0 0 17px;
 	}
-	.hidden{
+
+	.hidden {
 		display: none;
 	}
+
 	.current-city {
 		display: flex;
 		margin-left: 2.8rem;
 	}
+
 	.filter-content {
 		background-color: #F6F7F8;
 	}
 
 	.filter-content-title {
-		border-bottom: #EEEEEE 1px solid;
+		/* border-bottom: #EEEEEE 1px solid; */
 		padding: 10px 15px;
 		font-size: 13px;
 		color: #999999;
 	}
 
 	.filter-content-detail {
-		padding: 5px 15px;
+		padding: 18px 30px;
+		display: flex;
+		flex-flow: row wrap;
+		align-content: flex-start;
+	}
+
+	.filter-content-detail-div {
+		 width: 33.3%;
 	}
 
 	.filter-content-detail-item-active {
 		background-color: #D1372C;
 		color: #FFFFFF;
-		padding: 5px 15px;
-		border-radius: 20px;
-		margin-right: 10px;
-		margin-top: 10px;
+		width: 100px;
+		height: 34px;
+		line-height: 34px;
+		border-radius: 10px;
+		text-align: center;
+		/* margin-right: 10px; */
+		margin-top: 20px;
 		display: inline-block;
 		font-size: 14px;
+		
+
 	}
 
 	.filter-content-detail-item-default {
+		background-color: #F0F0F0;
+		text-align: center;
+		border: 1px solid;
 		background-color: #FFFFFF;
 		color: #666666;
-		padding: 5px 15px;
-		border-radius: 20px;
-		margin-right: 10px;
-		margin-top: 10px;
-		display: inline-block;
+		width: 100px;
+		height: 34px;
+		line-height: 34px;
+		border-radius: 10px;
+		/* margin-right: 10px; */
+		margin-top: 20px;	
+		display:inline-block;
 		font-size: 14px;
+	
 	}
 
 	.filter-content-footer {

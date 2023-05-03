@@ -21,11 +21,20 @@
 			}
 		},
 		{
+			"path": "pages/zadopt/setup",
+			"style": {
+				"navigationStyle": "custom"
+				// "titleNView":true
+
+			}
+		},
+		{
 			"path": "pages/askdoc/askdoc",
 			"style": {
 				// "navigationStyle": "custom"
 			}
 		},
+
 		// 登陆模块
 		{
 			"path": "pages/login/login",
@@ -33,7 +42,7 @@
 				"navigationStyle": "custom"
 			}
 		},
-		
+
 		// 二级页面
 		{
 			"path": "pages/profile/SecondPages/Setting",
@@ -41,7 +50,7 @@
 				"navigationStyle": "custom"
 			}
 		},
-		
+
 		// tabbar页面
 		{
 			"path": "pages/index/index",
@@ -70,46 +79,52 @@
 				"navigationStyle": "custom"
 				// "titleNView":true
 			}
+		},
+		{
+		"path": "pages/profile/profile",
+		"style": {
+			"navigationStyle": "custom"
+			// "titleNView":true
 		}
-	],
-	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#FFB600",
-		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
-		"list": [
-			{
-		"pagePath": "pages/index/index",
-		"selectedIconPath": "static/icon/tabbar/pets.png",
-		"iconPath": "static/icon/tabbar/pets.png",
-		"text": "首页"
-	},
-			{
-				"pagePath": "pages/sameCity/sameCity",
-				"selectedIconPath": "static/icon/tabbar/suozaichengshi.png",
-				"iconPath": "static/icon/tabbar/suozaichengshi.png",
-				"text": "同城"
-			},
-			{
-				"pagePath": "pages/petquan/petquan",
-				"selectedIconPath": "static/icon/tabbar/social.png",
-				"iconPath": "static/icon/tabbar/social.png",
-				"text": "宠圈"
-			},
-			{
-				"pagePath": "pages/profile/profile",
-				"selectedIconPath": "static/icon/tabbar/user.png",
-				"iconPath": "static/icon/tabbar/user.png",
-				"text": "我的"
-			}
-		]
+	}
+],
+"tabBar": {
+	"color": "#7A7E83",
+	"selectedColor": "#FFB600",
+	"borderStyle": "black",
+	"backgroundColor": "#ffffff",
+	"list": [{
+			"pagePath": "pages/index/index",
+			"selectedIconPath": "static/icon/tabbar/pets.png",
+			"iconPath": "static/icon/tabbar/pets.png",
+			"text": "首页"
+		},
+		{
+			"pagePath": "pages/sameCity/sameCity",
+			"selectedIconPath": "static/icon/tabbar/suozaichengshi.png",
+			"iconPath": "static/icon/tabbar/suozaichengshi.png",
+			"text": "同城"
+		},
+		{
+			"pagePath": "pages/petquan/petquan",
+			"selectedIconPath": "static/icon/tabbar/social.png",
+			"iconPath": "static/icon/tabbar/social.png",
+			"text": "宠圈"
+		},
+		{
+			"pagePath": "pages/profile/profile",
+			"selectedIconPath": "static/icon/tabbar/user.png",
+			"iconPath": "static/icon/tabbar/user.png",
+			"text": "我的"
+		}
+	]
 
-	},
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"uniIdRouter": {}
+},
+"globalStyle": {
+	"navigationBarTextStyle": "black",
+	"navigationBarTitleText": "uni-app",
+	"navigationBarBackgroundColor": "#F8F8F8",
+	"backgroundColor": "#F8F8F8"
+},
+"uniIdRouter": {}
 }

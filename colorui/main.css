@@ -1,0 +1,18 @@
+.flex .text-cut {
+	max-width: 510upx
+}
+.padding {
+	padding: 30upx;
+}
+.justify-center{
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
+}
+.align-center {
+	align-items: center;
+}
+.topic{
+	color: #F4AE3E;
+}

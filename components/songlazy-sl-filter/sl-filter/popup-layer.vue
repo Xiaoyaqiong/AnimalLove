@@ -3,7 +3,9 @@
 		<view ref="popRef" class="popup-content" @tap.stop="stopEvent" :style="_location">
 			<slot></slot>
 		</view>
+		<!-- <button @click="test">test</button> -->
 	</scroll-view>
+	
 </template>
 
 <script>
@@ -67,9 +69,15 @@
 			}
 		},
 		methods: {
+			// test(){
+			// 	console.log(this.autoClose,'autoClose');
+			// },
 			show() {
 				let _this = this;
 				this.ifshow = true;
+				var box=function(e){passive: false ;};
+					document.body.style.overflow='hidden';
+					document.addEventListener("touchmove",box,false);
 				let _open = setTimeout(() => {
 					this.translateValue = 0;
 					_open = null;
@@ -87,12 +95,16 @@
 
 				this.timer = setTimeout(() => {
 					this.ifshow = false;
+					var box=function(e){passive: false };
+						document.body.style.overflow=''; // 出现滚动条
+						document.removeEventListener("touchmove",box,false);
 					this.timer = null;
 					this.iftoggle = false;
 				}, 300);
 				this.$emit("close")
 			},
 			ableClose() {
+				
 				if (this.autoClose) {
 					this.close();
 				}
