@@ -1,5 +1,6 @@
 <template>
 	<view class="content">
+		<MyBar></MyBar>
 		<view class="nav">
 			<view class="nav-list" v-for="(item,index) in list" :key="item.id" @tap="changeAct(item)">
 				<!-- 激活样式名字是红色 判断act==index 和act==item.id都行-->
@@ -63,6 +64,7 @@
 				        </u-grid>
 				        <u-toast ref="uToast" />
 				    </view>
+			<articles></articles>
 			</view>
 		</view>
 
@@ -70,8 +72,13 @@
 </template>
 
 <script>
-	
+	import articles from '../../components/articles.vue'
+	import MyBar from '@/components/MyNavbar.vue'
 	export default {
+		components:{
+			articles,
+			MyBar
+		},
 		data() {
 			return {
 				typelist: [{
@@ -264,7 +271,9 @@
 					// }
 	}}
 	.content {
-		margin-top: 60px;
+		margin-top: 8.5vh;
+		margin-left: 12px;
+		margin-right: 14px;
 	}
 
 
