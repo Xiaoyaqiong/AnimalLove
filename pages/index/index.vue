@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		
-		
+		<MyBar></MyBar>
 		<!-- <view class="NAVBAR">
 			<MyNav 
 					>
@@ -95,7 +95,8 @@
 		</view>
 	
 		<!-- 推荐文章 -->
-		<title-bar :title="title2" :name="name2" :control="false"></title-bar>
+		<articles></articles>
+		<!-- <title-bar :title="title2" :name="name2" :control="false"></title-bar>
 		<view class="passage">
 			<view class="passage-content" v-for="(item,index) in 3" :key="index">
 				<view class="psg-word">
@@ -109,18 +110,22 @@
 		</view>
 		<button @click="openURL">阿牛</button>
 		<!-- <web-view src="https://www.chongshe.cn/arc26367"></web-view> -->
-	</view>
+	</view> 
 
 </template>
 
 <script>
 	// import { log } from 'console'
+	import MyBar from '@/components/MyNavbar.vue'
+	import articles from '../../components/articles.vue'
 import myhttp from '../../api/myhttp'
 import titleBar from '../../components/titleBar.vue'
 	// import MyNav from '../../uni_modules/uview-ui/components/u-navbar/MyNavBar.vue'
 	export default {
 		components: {
 			titleBar,
+			articles,
+			MyBar
 			// MyNav
 		},
 		data() {
@@ -258,7 +263,7 @@ import titleBar from '../../components/titleBar.vue'
 	}
 
 	.content {
-		margin-top: 65px;
+		margin-top: 8.5vh;
 		margin-left: 12px;
 		margin-right: 14px;
 	}
