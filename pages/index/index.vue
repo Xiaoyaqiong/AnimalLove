@@ -164,7 +164,7 @@ import titleBar from '../../components/titleBar.vue'
 				// #endif
 			},
 			getadoptCenter(){
-				myhttp.get('/adoptCenter').then(({data})=>{
+				myhttp.get('/users/pets/AdoptList').then(({data})=>{
 					this.adoptData=data
 					console.log(this.adoptData,'adoptData');
 				})

@@ -115,30 +115,30 @@
 					{
 					name: '我的发布',
 					id: 'UserDetail',
-					path: '../../static/logo.png',
+					path: '../../static/icon/user/wodefabu.png',
 				},
 				{
 					name: '我的收藏',
 					id: 'Favorite',
-					path: '../../static/logo.png',
+					path: '../../static/icon/user/shoucang.png',
 				
 				},
 				{
 					name: '我的聊天',
 					id: 'coupon',
-					path: '../../static/logo.png',
+					path: '../../static/icon/user/xinxi.png',
 				
 				},
 				{
 					name: '我的订单',
 					id: 'coupon',
-					path: '../../static/logo.png',
+					path: '../../static/icon/user/qianbao.png',
 				
 				},
 				{
 					name: '设置',
 					id: 'Setting',
-					path: '../../static/logo.png',
+					path: '../../static/icon/user/shezhi.png',
 				
 				}
 				],

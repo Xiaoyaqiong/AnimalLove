@@ -1,6 +1,10 @@
 <script>
+	import {
+		reqInterceptor
+	} from '@/api/message.js'
 	export default {
 		onLaunch: function() {
+			reqInterceptor()
 			if (uni.getStorageSync('token') == null || uni.getStorageSync('token') == "") {
 				uni.redirectTo({
 					url: '/pages/login/login'
@@ -8,7 +12,7 @@
 			} else {
 			
 				uni.switchTab({
-					url:'/pages/sameCity/sameCity'
+					// url:'/pages/sameCity/sameCity'
 				});
 			} 
 		},

@@ -143,22 +143,5 @@ function checkUrl(url) {
 	return true
 }
 
-uni.addInterceptor('request',{
-  returnValue(args) {
-	  // console.log(args,'args2');
-    // 只返回 data 字段
-    return args.data
-  },
-  
-  // 拦截前触发
-  invoke(args) {
-  	// request触发前添加token
-  	args.header = {
-  		'token': uni.getStorageSync('token')
-  	}
-  	data: args.data || {}
-  	// console.log(args)
-  },
-})
 // // module.exports = myhttp
 export default myhttp
