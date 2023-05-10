@@ -1,7 +1,7 @@
 <template>
 	<!-- 自定义导航组件 -->
 	<view class="Mynav">
-		<u-navbar :fixed="true" :placeholder="true" :bgColor="MyColor" :leftIconSize="40" :leftClick="backInfo"
+		<u-navbar :fixed="true" :placeholder="true" :bgColor="MyColor"  :leftClick="backInfo"
 			:autoBack="autoback">
 			<view class="u-nav-slot" slot="center">
 				{{CenterSlot}}

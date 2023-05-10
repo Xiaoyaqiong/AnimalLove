@@ -5,7 +5,7 @@ uni.addInterceptor('request',{
 	invoke(args) {
 		// request触发前添加token
 		args.header = {
-			'Token': uni.getStorageSync('token')
+			'token': uni.getStorageSync('token')
 		}
 		data: args.data || {}
 		// console.log(args)

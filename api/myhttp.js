@@ -9,15 +9,11 @@ var myhttp = {
 		return new Promise((resolve, reject) => {
 			var url = (otherUrl || config.baseUrl) + path
 			if (!checkUrl(url)) {
-				rej('请求失败')
+				reject('请求失败')
 			}
 			uni.request({
 				method: 'POST',
 				url,
-				header: {
-					"Content-Type": contentType === 'json' ? "application/json" :
-						"application/x-www-form-urlencoded"
-				},
 				data: params,
 				success: (res) => {
 					console.log('request:POST请求' + config.baseUrl + path + ' 成功', res.data)
@@ -40,10 +36,6 @@ var myhttp = {
 			uni.request({
 				method: 'PUT',
 				url,
-				header: {
-					"Content-Type": contentType === 'json' ? "application/json" :
-						"application/x-www-form-urlencoded"
-				},
 				data: params,
 				success: (res) => {
 					console.log('request:PUT请求' + config.baseUrl + path + ' 成功', res.data)

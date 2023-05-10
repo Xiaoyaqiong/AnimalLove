@@ -10,7 +10,6 @@
 					url: '/pages/login/login'
 				})
 			} else {
-			
 				uni.switchTab({
 					// url:'/pages/sameCity/sameCity'
 				});

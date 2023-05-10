@@ -6,7 +6,6 @@ import uView from '@/uni_modules/uview-ui'
 import store from '@/store/index.js'
 import myhttp from './api/myhttp.js'
 
-Vue.prototype.$myhttp=myhttp
 Vue.prototype.$store = store
 
 Vue.prototype.$myhttp=myhttp

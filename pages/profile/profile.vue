@@ -7,7 +7,7 @@
 				<u-avatar style="display: inline-block;" size="6rem" src="http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg"></u-avatar>
 				<view class="username">{{$store.state.user.username}}</view>
 				<view class="level">
-					<u-icon style="display: inline-block;" name="photo"></u-icon>
+					<u-icon style="display: inline-block;" name="../../static/icon/user/xunzhang.png"></u-icon>
 						{{$store.state.user.level}}
 				</view>
 			</view>
@@ -19,8 +19,8 @@
 		<!-- 我的宠物档案 -->
 		<view class="prof">
 			<view class="t1"> 
-				<view>
-					<u-icon style="display: inline-block;" name="photo"></u-icon>
+				<view class="line">
+					<image src="../../static/icon/user/chongwu1.png" mode="scaleToFill" ></image>
 					<span class="t1-1">我的宠物档案</span>
 				</view>
 				
@@ -33,8 +33,8 @@
 		<view class="pet-profile WhiteBox">
 			<view class="PetName">
 				<span>{{Firstpet.petName}}	</span>
-				<u-icon style="display: inline-block;" name="photo"></u-icon>
-				<u-icon style="display: inline-block;" name="photo"></u-icon>
+				<image style="width: 30rpx;height: 30rpx;" src="../../static/icon/user/bianji.png"></image>
+				<u-icon style="display: inline-block;" :name="Firstpet.sex" :color="Firstpet.sex=='man'?'#11A1F8':'#ffaaff'"></u-icon>
 			
 			</view>
 			
@@ -92,6 +92,7 @@
 				iconWidth: 43, // 控制icon大小
 				Firstpet:{
 					petName:'小黄',
+					sex:'man',
 					tags:[
 						'1岁以内',
 						'未绝育'

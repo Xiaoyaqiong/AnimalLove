@@ -29,6 +29,15 @@ page{
 	.prof{
 		width: 90vw;
 		margin: 0 auto;
+		.line{
+			display: flex;
+			align-items: center;
+			// outline: 1px solid;
+			image{
+				width: 60rpx;
+				height: 60rpx;
+			}
+		}
 		.t1{
 			margin-top: 3vh;
 			display: flex;
