@@ -1,5 +1,17 @@
-.flex .text-cut {
+/* .flex .text-cut {
 	max-width: 510upx
+} */
+.blod{
+	font-weight: bold;
+}
+.flex{
+	display: flex;
+}
+.fontsamll{
+	font-size: 14px;
+}
+.radius{
+	border-radius: 10px;
 }
 .padding {
 	padding: 30upx;
