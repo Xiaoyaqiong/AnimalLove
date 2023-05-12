@@ -5,158 +5,139 @@
 				<img class="icon" :src="src" alt="" srcset="" @click="test()">
 			</u-col>
 			<u-col span="12">
-				<view class="title">
+				<view class="blod">
 					推荐文章
 				</view>
 			</u-col>
 
 		</u-row>
-		<uni-list>
-			<!-- title、note设置标题和小文字 -->
-			<uni-list-item direction="row" v-for="item in info" :key="item.id" :title="item.title"
-				:note="item.user_name + ' '+item.last_modify_date">
-				<!-- 通过v-slot:header插槽定义列表左侧的图片显示，其他内容通过List组件内置属性实现-->
-				<template v-slot:footer>
-					<!-- 当前判断长度只为简单判断类型，实际业务中，根据逻辑直接渲染即可 -->
-					<image class="image-1" :src="item.avatar" mode="aspectFill"></image>
-				</template>
-			</uni-list-item>
-		</uni-list>
-		<u-loadmore :status="status" @loadmore="test2()" />
+
+		<!-- <u-list lowerThreshold="0" @scrolltolower="scrolltolower">
+			<u-list-item v-for="(item,index) in articlelist" :key="item.id">
+				<view class="">
+					<view class="">
+						————{{item.articleTitle}}
+					</view>
+					<view class="">
+						{{item.articleContent}}
+					</view>
+				</view>
+			</u-list-item>
+			<u-loadmore :status="status" />
+		</u-list> -->
+
+		<view class="">
+			<view>
+				<u-row class="articleItem" v-for="(item,index) in articlelist" :key="index" @click="gotoDetail(item.articleUrl)">
+					<u-col span="8">
+						<view class="title">
+							{{item.articleTitle}}
+						</view>
+						<view class="secondtitle">
+							{{item.articleTitle}}
+						</view>
+
+					</u-col>
+					<u-col span="4">
+						<view class="articleImg">
+							<img :src="item.coverUrl" alt="">
+						</view>
+					</u-col>
+				</u-row>
+			</view>
+			<u-loadmore :status="status" />
+		</view>
+		
 	</view>
 </template>
 
 <script>
+	
+	import myhttp from '../api/myhttp.js'
 	export default {
+		props: {
+			currentPage: {
+				type: Number,
+				default: 0,
+			},
+			pages: {
+				type: Number,
+				default: 0,
+			},
+			status: {
+				type: String,
+				default: 0,
+			},
+			totalCount: {
+				type: Number,
+				default: 0,
+			},
+			pageSize: {
+				type: Number,
+				default: 4,
+			},
+			articlelist: {
+				type: Array,
+				default: []
+			}
+		},
 		data() {
 			return {
-
-				status: 'loadmore',
-				list: [],
-				page: 1, //第几页
-				suo: true,
-				info: [{
-						"user_name": "未来汽车日报",
-						"title": "为什么自动驾驶诉讼不断？",
-						"avatar": "https://img.36krcdn.com/20200410/v2_9c3331af67e64994aa97a27fffb1a380_img_png?x-oss-process=image/resize,m_mfit,w_520,h_300/crop,w_520,h_300,g_center",
-						"last_modify_date": "2020-04-11 17:11:09",
-					},
-					{
-						"user_name": "36氪深度服务",
-						"title": "2020数字中国创新大赛-数字政府赛道21强出炉，四大赛题紧贴政府数字化发展需求",
-						"avatar": "https://img.36krcdn.com/20200411/v2_16417a06088947debe0450950f8fc813_img_png",
-						"last_modify_date": "2020-04-11 17:03:18",
-					}, {
-						"user_name": "未来汽车日报",
-						"title": "地方政府救市哪家强？广州补贴上万元，广深杭新增指标超5万",
-						"avatar": "https://img.36krcdn.com/20200410/v2_6905947498bc4ec0af228afed409f771_img_png?x-oss-process=image/resize,m_mfit,w_520,h_300/crop,w_520,h_300,g_center",
-						"last_modify_date": "2020-04-11 16:11:11",
-					},
-					{
-						"user_name": "未来汽车日报",
-						"title": "为什么自动驾驶诉讼不断？",
-						"avatar": "https://img.36krcdn.com/20200410/v2_9c3331af67e64994aa97a27fffb1a380_img_png?x-oss-process=image/resize,m_mfit,w_520,h_300/crop,w_520,h_300,g_center",
-						"last_modify_date": "2020-04-11 17:11:09",
-					},
-				],
+				
 				src: "../static/icon/index/book.png"
 			}
 		},
 		onLoad() {
-			// this.requestnotice()
-			// this.test()
+			
 		},
 		onShow() {
-			// this.requestnotice()
-			// this.test()
+
 		},
-mounted(){
-	this.requestnotice()
-},
+
 		methods: {
-			test2(){
-				console.log('');
+			gotoDetail(articlesUrl) {
+				uni.navigateTo({
+				
+				url: `../article/articlesDetail?articlesUrl=${articlesUrl}`
+				
+				})
+			// 	// #ifdef APP-PLUS
+			// 	plus.runtime.openURL(url)
+			
+			// 	console.log(1)
+			// 	// #endif
+			// 	// #ifdef H5
+			// 	window.open(url)
+			// 	console.log(2)
+			// 	// #endif
 			},
-			// test() {
-			// 	this.requestnotice()
-			// },
-			// 第一次请求全部通知列表
-			requestnotice() {
-				uni.request({
-
-					url: 'https://www.fastmock.site/mock/2f01a1768165cca2e530abf1c65d5ec1/api/articles', //仅为示例，并非真实接口地址。
-					method: "GET",
-					data: {
-						page: 1,
-						limit: 10
-					},
-					success: (res) => {
-						console.log("初始请求通知列表", res.data);
-						this.list.push()
-						
-					}
-				});
-			},
-			loadnotice() {
-				uni.request({
-					url: 'https://www.fastmock.site/mock/2f01a1768165cca2e530abf1c65d5ec1/api/articles', //仅为示例，并非真实接口地址。
-					method: "GET",
-					data: {
-
-						page: this.page,
-						limit: 10
-					},
-					success: (res) => {
-						console.log("上拉请求通知列表", res.data);
-						this.list = this.list.concat(res.data.data)
-						//在这里要进行一个判断，当后端传给我的数据小于每页的数据时就显示没有更多了
-						if (res.data.data.length == '') {
-							this.status = 'nomore';
-							this.suo = false
-						} else if (res.data.data.length < 10) {
-							this.status = 'nomore';
-							this.suo = false
-						} else if (res.data.data.length = 10) {
-							this.status = 'loadmore';
-							this.suo = true
-						}
-					}
-				});
-			},
-
 		},
-		// computed() {
-		// 	this.requestnotice()
-		// },
-		onReachBottom() {
-							console.log("上拉加载更多")
-							// 显示加载中
-							this.statusLoadMore = "loading"
-							var that = this
-
-							setTimeout(function() {	
-								// 显示没有更多数据了
-								that.statusLoadMore = "nomore"
-							}, 2000)
-			// if (this.suo) { //定义个小锁，当没有数据时锁住suo
-			// 	this.status = 'loading';
-			// 	this.page = ++this.page;
-			// 	setTimeout(() => {
-			// 		this.loadnotice()
-			// 	}, 1000)
-			// }
-		},
-
 	}
 </script>
 
-<style>
-	/* .content {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-		} */
+<style lang="scss" scoped>
+	.articleItem {
+		border-radius: 10px;
+		box-shadow: 0px 0px 1px 0px #e1e1e1;
+		padding: 1vh 3vw;
+		.title{
+			margin-bottom: 1.5vh;
+			font-size: 0.8rem;
+		}
+		margin-bottom: 12px;
+	}
+
+	.articleImg {
+		width: 30vw;
+		height:10vh;
+		border-radius: 10px;
+		
+		img {
+			width: 100%;
+			height: 100%;
+			border-radius: 10px;
+		}
+	}
 
 	.image-1 {
 		flex-shrink: 0;

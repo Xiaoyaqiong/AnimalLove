@@ -3,8 +3,9 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"enablePullDownRefresh": false,
+				"enablePullDownRefresh": true,
 				"navigationStyle": "custom",
+				"onReachBottomDistance": 150,
 				// "titleNView":false,
 				"navigationBarTextStyle": "white",
 				"app-plus": {
@@ -36,12 +37,12 @@
 		},
 
 		// 登陆模块
-		// {
-		// 	"path": "pages/login/login",
-		// 	"style": {
-		// 		"navigationStyle": "custom"
-		// 	}
-		// },
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
 
 		// 二级页面
 		{
@@ -50,8 +51,16 @@
 				"navigationStyle": "custom"
 			}
 		},
+			// 话题详情
 		{
 			"path": "pages/petquan/SecondPages/TopicDetail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+			// 文章详情
+		{
+			"path": "pages/article/articlesDetail",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -131,7 +140,7 @@
 	"navigationBarTitleText": "uni-app",
 	"navigationBarBackgroundColor": "#F8F8F8",
 	"backgroundColor": "#F8F8F8",
-	"onReachBottomDistance":20
+	"onReachBottomDistance": 150
 },
 "uniIdRouter": {}
 }
