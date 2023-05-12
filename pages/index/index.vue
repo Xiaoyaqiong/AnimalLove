@@ -30,7 +30,7 @@
 			</view>
 		</view>
 		<!-- 宠物领养 -->
-		<title-bar :page="page1"></title-bar>
+		<title-bar :src="src1" :page="page1"></title-bar>
 
 		<view class="adopt-content">
 			<u-row justify="space-between" gutter="10">
@@ -43,28 +43,28 @@
 						</view>
 						<view class="ani-info">
 							<view class="info1">
-								<text>{{item.name}}</text>
-								<u-icon :name="item.sex?'man':'woman'" size="1.5rem"></u-icon>
+								<text>大黑</text>
+								<u-icon :name="item.sex?'man':'woman'" :color="item.sex?'#11A1F8':'#ffaaff'" size="1.5rem"></u-icon>
 							</view>
 							<view>{{item.breed}}</view>
-							<view>{{item.ageyear}}年{{item.agemonth}}月</view>
+							<view>{{item.ageYear}}年{{item.ageMonth}}月</view>
 						</view>
 					</view>
 				</u-col>
 			</u-row>
 		</view>
 		<!-- 问医生 -->
-		<title-bar :page="page2" :title="title1" :name="name1"></title-bar>
+		<title-bar :page="page2" :title="title1" :src="src2"></title-bar>
 		<view class="doctor-content">
 			<u-row justify="space-between" gutter="10">
 				<u-col span="4" v-for="(item,index) in 3" :key="index">
 					<view class="doctor-card">
 						<view class="doctor-img">
-							<u-avatar :src="src"></u-avatar>
+							<u-avatar :src="src3"></u-avatar>
 						</view>
 						<view class="doctor-name">
-							<u-icon name="man" size="1.5rem"></u-icon>
-							<text>张三</text>
+							<img class="icon" :src="src3" alt="" srcset="">
+							<text class="docName">张三</text>
 						</view>
 						<view class="doctor-skill">
 							<text>猫病|</text>
@@ -130,6 +130,9 @@ import titleBar from '../../components/titleBar.vue'
 		},
 		data() {
 			return {
+				src1:"../static/icon/index/xiaomaochushou.png",
+				src2:"../static/icon/index/wenzhen.png",
+				src3:"../static/icon/index/renzhen.png",
 				src:"",
 				keyword:'',
 				list3: [{
@@ -143,9 +146,9 @@ import titleBar from '../../components/titleBar.vue'
 					title: '谁念西风独自凉，'
 				}],
 				title1: "问医生",
-				name1: "photo",
+				
 				title2:"推荐文章",
-				name2:"photo",
+				
 				page1:1,
 				page2:2,
 				adoptData:[]
@@ -182,6 +185,13 @@ import titleBar from '../../components/titleBar.vue'
 </script>
 
 <style scoped>
+	.docName{
+		line-height: 19px;
+	}
+	.icon{
+		width: 19px;
+		height: 19px;
+	}
 	.passage-content{
 		display: flex;
 		width: 350px;
@@ -259,7 +269,7 @@ import titleBar from '../../components/titleBar.vue'
 		text-align: center;
 		color: #333333;
 		line-height: 20px;
-		box-shadow: 0px 0px 1px 0px #e1e1e1;
+		box-shadow: 0px 0px 1px 0px #8B8B8B;
 	}
 
 	.content {

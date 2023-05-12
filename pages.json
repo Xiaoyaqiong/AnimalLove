@@ -36,16 +36,22 @@
 		},
 
 		// 登陆模块
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
+		// {
+		// 	"path": "pages/login/login",
+		// 	"style": {
+		// 		"navigationStyle": "custom"
+		// 	}
+		// },
 
 		// 二级页面
 		{
 			"path": "pages/profile/SecondPages/Setting",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/petquan/SecondPages/TopicDetail",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -124,7 +130,8 @@
 	"navigationBarTextStyle": "black",
 	"navigationBarTitleText": "uni-app",
 	"navigationBarBackgroundColor": "#F8F8F8",
-	"backgroundColor": "#F8F8F8"
+	"backgroundColor": "#F8F8F8",
+	"onReachBottomDistance":20
 },
 "uniIdRouter": {}
 }

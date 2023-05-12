@@ -6,8 +6,9 @@
 			<view class="u-nav-slot" slot="center">
 				{{CenterSlot}}
 			</view>
-			<view class="u-nav-slot" slot="right">
-				<u-icon style="width: 54rpx;height: 54rpx;" :name="RightIcon"></u-icon>
+			<view class="u-nav-slot flex" slot="right">
+				<u-icon style="width: 54rpx;height: 54rpx;" :name="RightIcon1"></u-icon>
+				<u-icon style="width: 54rpx;height: 54rpx;" :name="RightIcon2"></u-icon>
 			</view>
 		</u-navbar>
 	</view>
@@ -36,7 +37,11 @@
 				type: String,
 				require: false
 			},
-			"RightIcon": {
+			"RightIcon1": {
+				type: String,
+				require: false
+			},
+			"RightIcon2": {
 				type: String,
 				require: false
 			}

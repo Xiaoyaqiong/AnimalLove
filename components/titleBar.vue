@@ -1,8 +1,9 @@
 <template>
 	<view class="titleBar">
-		<u-row justify="space-between" gutter="10">
+		<u-row justify="space-between" gutter="">
 			<u-col span="1">
-				<u-icon :name="name" size="1.5rem"></u-icon>
+				<img class="icon" :src="src" alt="" srcset="">
+				<!-- <u-icon :name="name" size="1.5rem"></u-icon> -->
 			</u-col>
 			<u-col span="9">
 				<view class="title">
@@ -12,7 +13,7 @@
 			<u-col span="3">
 				<view data-control="control" :data-page="page" @click="goPage($event)" :class="control?'action':'none'">
 					<text class="more">更多</text>
-					<u-icon name="arrow-right" color="#2979ff" size="1.5rem"></u-icon>
+					<u-icon name="arrow-right" color="#8B8B8B" size="1.5rem"></u-icon>
 				</view>
 			</u-col>
 		</u-row>
@@ -32,9 +33,9 @@
 				type: String, //定义属性类型
 				default: "宠物领养", //属性的默认值
 			},
-			name: {
+			src: {
 				type: String, //定义属性类型
-				default: "level", //属性的默认值
+				default: "../static/logo.png", //属性的默认值
 			},
 			control: {
 				type: Boolean,
@@ -67,12 +68,17 @@
 </script>
 
 <style>
+	.icon{
+		width: 32px;
+		height: 32px;
+	}
 	.titleBar{
 		margin-top: 1.25rem;
 	}
 	.title {
-		font-size: 1rem;
+		font-size: 16px;
 		font-weight: bold;
+		margin-left: 5px;
 	}
 
 	.action {
@@ -84,6 +90,7 @@
 	}
 
 	.more {
-		font-size: 0.875rem;
+		font-size: 14px;
+		color:#8B8B8B;
 	}
 </style>
