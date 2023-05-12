@@ -50,6 +50,13 @@
 				"navigationStyle": "custom"
 			}
 		},
+		
+		{
+			"path": "pages/profile/SecondPages/Favorite",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
 
 		// tabbar页面
 		{
