@@ -51,6 +51,13 @@
 				"navigationStyle": "custom"
 			}
 		},
+			// 收藏页面
+		{
+			"path": "pages/profile/SecondPages/Favorite",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
 			// 话题详情
 		{
 			"path": "pages/petquan/SecondPages/TopicDetail",
