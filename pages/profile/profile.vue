@@ -1,10 +1,50 @@
 <template>
 	<view>
 		<u-toast ref="uToast"></u-toast>
-		
+		<!-- 添加宠物模态框 -->
+		<u-popup class="popup" :show="showAddPet" :round="10"  @close="close" @open="open" closeable>
+				<view style="padding: 5%;">
+						<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
+						<u-form labelPosition="left"  :model="PetModal" :rules="rules"
+							errorType="message" ref="form1">
+						
+						<u-form-item label="类型" :border-bottom="true" >
+							
+								<u-button :style="PetModal.petType=='喵喵'? 'border:1px solid #11A1F8':''" text="喵喵" shape="circle"  style="color: #000;"color="#e8efff"  @click="setPet('petType','喵喵')"></u-button>
+								<u-button :style="PetModal.petType=='汪汪'? 'border:1px solid #11A1F8':''" text="汪汪" shape="circle" style="color: #000;" color="#e8efff"  @click="PetModal.petType='汪汪'"></u-button>
+								<u-button :style="PetModal.petType=='其他'? 'border:1px solid #11A1F8':''" text="其他" shape="circle" style="color: #000;" color="#e8efff"  @click="PetModal.petType='其他'"></u-button>
+							
+						
+							
+						</u-form-item>
+						
+							<u-form-item label="性别" :border-bottom="true">
+								<u-button :style="PetModal.petSex=='man'? 'border:1px solid #11A1F8':''" icon="man" shape="circle" iconColor="#11A1F8"   color="#e8efff" @click="setPet('petSex','man')"></u-button>
+								<u-button  :style="PetModal.petSex=='woman'? 'border:1px solid #E793CF':''" icon="woman" shape="circle" iconColor="#E793CF" color="#e8efff" @click="PetModal.petSex='woman'"></u-button>
+							</u-form-item>
+							
+						
+						
+						
+							<u-form-item label="年龄"  :border-bottom="true">
+								<u-button   text="0~3个月" style="color: #000;" shape="circle" color="#e8efff"></u-button>
+								<u-button   text="0~1岁" style="color: #000;"   shape="circle" color="#e8efff"></u-button>
+								<u-button   text="1~3岁" style="color: #000;"  shape="circle" color="#e8efff"></u-button>
+								<u-button   text="3岁以上" style="color: #000;"  shape="circle" color="#e8efff"></u-button>
+							</u-form-item>
+
+						
+						<u-form-item label="昵称" prop="PetModal.petName" :border-bottom="true">
+							<u-input v-model="PetModal.petName" placeholder="请输入您的爱宠昵称"></u-input>
+						</u-form-item>
+
+						</u-form>
+						<u-button class="u-margin-center-auto" style="width: 80%;margin-top: 2vh;" @click="addPet" color="#F4AE3E" text="保存"></u-button>
+					</view>
+			</u-popup>
 		<view class="ProfileCard">
 			<view class="content">
-				<u-avatar style="display: inline-block;" size="6rem" src="http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg"></u-avatar>
+				<u-avatar style="display: inline-block;" size="5.5rem" :src="$store.state.user.avatar"></u-avatar>
 				<view class="username">{{$store.state.user.username}}</view>
 				<view class="level">
 					<u-icon style="display: inline-block;" name="../../static/icon/user/xunzhang.png"></u-icon>
@@ -24,7 +64,7 @@
 					<span class="t1-1">我的宠物档案</span>
 				</view>
 				
-				<span class="t1-2">添加宠物</span>
+				<span class="t1-2" @tap="showAddPet = true">添加宠物</span>
 			</view>
 			
 		</view>
@@ -81,12 +121,57 @@
 </template>
 
 <script>
+import myhttp from '../../api/myhttp';
 	export default {
 		computed:{
 			
 		},
 		data() {
 			return {
+				
+				// 宠物模型
+				PetModal:{
+					petType:'',
+					petAge:'',
+					petSex:'',
+					petName:''
+				},
+				// 宠物表单规则
+				rules: {
+					'petName':[{
+						type: 'string',
+						required: true,
+						message: '请填写昵称',
+						trigger: ['blur', 'change']
+					},{
+							// 自定义验证函数
+							validator: (rule, value, callback) => {
+								
+								return uni.$u.test.chinese(value) && uni.$u.test.rangeLength(value, [2,8]);
+							},
+							message: '姓名不正确或过长',
+							// 触发器可以同时用blur和change
+							trigger: ['change', 'blur'],
+						}
+					] ,
+					'phoneNumber': [{
+							required: true,
+							trigger: ['change', 'blur'],
+						},
+						{
+							// 自定义验证函数，见上说明
+							validator: (rule, value, callback) => {
+								// 上面有说，返回true表示校验通过，返回false表示不通过
+								// uni.$u.test.mobile()就是返回true或者false的
+								return uni.$u.test.mobile(value);
+							},
+							message: '手机号码不正确',
+							// 触发器可以同时用blur和change
+							trigger: ['change', 'blur'],
+						}
+					],
+				},
+				showAddPet:false,
 				screenHeight: 0, // 移动端屏幕高度
 				screenWidth: 0, // 移动端屏幕宽度
 				iconWidth: 43, // 控制icon大小
@@ -126,7 +211,7 @@
 				},
 				{
 					name: '我的聊天',
-					id: 'coupon',
+					id: 'chat',
 					path: '../../static/icon/user/xinxi.png',
 				
 				},
@@ -148,32 +233,52 @@
 			}
 		},
 		methods: {
-
+			// 增加宠物
+			addPet(){
+				
+				let petdata = this.PetModal
+				myhttp.post('/users/pets/updatePet',petdata).then(res=>{
+					console.log()
+				})
+			},
+			// 设置宠物信息
+			setPet(type,value){
+				console.log(type,value)
+				if(type == 'petType'){
+					this.PetModal.petType = value
+				}
+				else if(type == 'petSex'){
+					this.PetModal.petSex = value
+				}
+				else if(type == 'petAge'){
+					
+				}
+				
+				console.log(this.PetModal.petType=='喵喵')
+			},
+			
+			  open() {
+			        console.log('open');
+					
+			      },
+			      close() {
+			        this.showAddPet = false
+			        // console.log('close');
+			      },
 			// 点击跳转功能
 			onClick(item) {
 				console.log(item)
 				let that = this
 				let url = '/pages/profile/SecondPages/' + item.id
-				if (item.id == 'Nice') {
+				if (item.id == 'chat') {
 					that.$refs.uToast.show({
 						type: 'default',
 						title: '默认主题',
-						message: "此功能正在开发哦",
+						message: "此功能正在开发哦~",
 						iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/default.png'
 					})
 				}
-				else if (item.id == 'UserDetail') { 		// 判断是否填写资料
-						let flag = that.$store.state.student.IsComplete
-						console.log(flag)
-						if(flag){
-							 url = '/pages/personage/SecondPages/UserDetail'
-						}else{
-
-							 url = '/pages/personage/SecondPages/EditInfo'
-						}
-						
-						
-				}
+				
 				
 				
 				
@@ -218,6 +323,12 @@
 
 	}
 </script>
+
+<style>
+	uni-button:after{
+		border:none;
+	}
+</style>
 
 <style lang="scss" scoped>
 	$Basewidth : 1080;

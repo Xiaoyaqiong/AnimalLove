@@ -25,22 +25,22 @@ try {
   }
 
   // 统一 vue2 API Promise 化返回格式与 vue3 保持一致
-  uni.addInterceptor({
-    returnValue(res) {
-      if (!isPromise(res)) {
-        return res;
-      }
-      return new Promise((resolve, reject) => {
-        res.then((res) => {
-          if (res[0]) {
-            reject(res[0]);
-          } else {
-            resolve(res[1]);
-          }
-        });
-      });
-    },
-  });
+  // uni.addInterceptor({
+  //   returnValue(res) {
+  //     if (!isPromise(res)) {
+  //       return res;
+  //     }
+  //     return new Promise((resolve, reject) => {
+  //       res.then((res) => {
+  //         if (res[0]) {
+  //           reject(res[0]);
+  //         } else {
+  //           resolve(res[1]);
+  //         }
+  //       });
+  //     });
+  //   },
+  // });
 } catch (error) { 
 	console.log('Promise Error',error)	
 }

@@ -1,0 +1,96 @@
+	$Cardgap:calc(35 / 2340 * 100vh);
+	$CardPadding:28rpx;
+	.main1{
+		
+		position: absolute;
+		      left: 0;
+		      top: 50%;
+		      right: 0;
+		      bottom: 0;
+		      margin: auto;
+	}
+// 课程列表
+	// 课程
+	.content{
+		// height: calc( 500/ 2340 * 100vh);
+		box-shadow: 0rpx 0rpx 5rpx 0rpx rgba(90,160,199,0.19); 
+		display: flex;
+		width: 92%;
+		margin: 0 auto;
+		margin-bottom: 30rpx;
+		flex-direction: column;
+		background: #fff;
+		padding: 25rpx;
+		border-radius: 0.75rem;
+		gap: 14rpx;
+		.content-title{
+			color: #000;
+			font-size: 1.1rem;
+			
+		}
+		.word p{
+			font-size: 0.75rem;
+			margin-bottom: calc(14 / 2340 * 100vh);
+			
+		}
+
+		.Date{
+			color: #707070;
+		}
+		.address   {
+			display: flex;
+			align-items: center;
+			color: #707070;
+			.badge{
+				color: #4BABFA;
+				border: 1px solid #4BABFA;
+				width:2.5rem;
+				font-size: 0.6rem;
+				text-align: center;
+				border-radius: 20px;
+				margin-right: 20rpx;
+			}
+		}
+		.tAvatar{
+					margin-right: 23rpx;
+				}
+		.teachers{
+			color: #707070;
+			display: flex;
+			align-items: center;
+			
+			// flex: 1;
+			// outline: 1px solid;
+			// margin-top:  calc( 31 / 2340 * 100vh);
+			// .teacherDetail{
+			// 	// outline: 1px solid;
+			// }
+			// .t1 {
+			// 	margin-bottom: calc( 6 / 2340 * 100vh);
+			// 	font-size: 27rpx;
+			// }
+			.teacherDetail{
+							.t1 {
+								margin-bottom: 0.1vh;
+								font-size: 0.7rem;
+							}
+							.Tname{
+								font-size: 0.85rem;
+							}
+						}
+			
+		}
+		.teacher2{
+			display: flex;
+			margin-left: 36rpx;
+			
+		}
+		.yen{
+			flex: 1;		// 调整flex比例
+						color: #CF4A77;
+						text-align: right;
+						align-self: flex-end;
+						font-size: 1.35rem;
+		}
+	}
+	

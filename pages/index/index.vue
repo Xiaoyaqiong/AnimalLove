@@ -93,9 +93,10 @@
 				</u-col>
 			</u-row>
 		</view>
-	
 		<!-- 推荐文章 -->
-		<articles></articles>
+		<articles :articlelist="articlelist" :currentPage="currentPage" 
+		:pages="pages" :totalCount="totalCount" :status="status" :pageSize="pageSize"
+		></articles>
 		<!-- <title-bar :title="title2" :name="name2" :control="false"></title-bar>
 		<view class="passage">
 			<view class="passage-content" v-for="(item,index) in 3" :key="index">
@@ -130,6 +131,12 @@ import titleBar from '../../components/titleBar.vue'
 		},
 		data() {
 			return {
+				currentPage: 1, //当前页码
+				pages: 0, //总页数
+				totalCount: 0, //总条数
+				status: '',
+				pageSize: 4, //一个个数
+				articlelist: [],
 				src1:"../static/icon/index/xiaomaochushou.png",
 				src2:"../static/icon/index/wenzhen.png",
 				src3:"../static/icon/index/renzhen.png",
@@ -158,6 +165,32 @@ import titleBar from '../../components/titleBar.vue'
 
 		},
 		methods: {
+			// 获取文章列表
+			loadarticles: function() {
+				myhttp.get('/articles/list/' + this.currentPage + '/' + this.pageSize).then(res => {
+					console.log(res.data.total, 'res.data.records');
+					if (res.resultCode == 200) {
+						res.data.records.forEach(e => {
+							this.articlelist.push(e)
+						})
+						this.pages = res.data.pages
+						this.currentPage = res.data.current
+						this.totalCount = res.data.total
+			
+					} else if (res.resultCode == 401) {
+						uni.navigateTo({
+							url: "../login/login"
+						})
+			
+					} else {
+						uni.showToast({
+							title: "加载错误",
+							icon: "none",
+						})
+					}
+				})
+			
+			},
 			// 跳转URL
 			openURL() {
 				// id 1      url:''      image
@@ -179,7 +212,23 @@ import titleBar from '../../components/titleBar.vue'
 			}
 		},
 		mounted:function(){
-			this.getadoptCenter()
+			this.getadoptCenter(),
+			this.loadarticles()
+		},
+		onReachBottom() {
+			if (this.currentPage >= this.pages) return;
+			console.log('进入');
+			this.status = 'loading';
+			this.currentPage = ++this.currentPage;
+			setTimeout(() => {
+				this.loadarticles()
+				if (this.currentPage >= this.pages) {
+					this.status = 'nomore'
+				} else {
+			
+					this.status = 'loading'
+				}
+			}, 5000)
 		}
 	}
 </script>
