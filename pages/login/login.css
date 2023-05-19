@@ -4,10 +4,16 @@ page{
 
 .btn-row{
 	position: fixed;
-	bottom: 2vh;
+	bottom: 60%;
+	/* outline: 1px solid; */
 	width: 100%;
+	
+	
 }
-
+loginbtn{
+		width: 90%;
+		margin: 0 auto ;
+	}
 .header{
 	margin: 30rpx;
 }

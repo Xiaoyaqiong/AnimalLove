@@ -62,13 +62,14 @@
 
 		</view>
 		<view class="btn-row">
-			<button type="primary" class="primary" :loading="loginBtnLoading" @click="bindLogin">登录</button>
+			<button class="loginbtn" type="primary" :loading="loginBtnLoading" @click="bindLogin">登录</button>
 		</view>
 <u-notify ref="uNotify" message="Hi uView"></u-notify>
 	</view>
 </template>
 
 <script>
+import store from '../../store';
 	export default {
 		data() {
 			return {
@@ -144,16 +145,29 @@
 
 			},
 			bindLogin() {
-				switch (this.loginType) {
-					case 0:
-						this.loginByEmail()
-						break;
-					case 1:
-						this.loginByPwd()
-						break;
-					default:
-						break;
+				if (!this.CheckEmail) {
+					this.$refs.uNotify.show({
+						top: '6vh',
+						type: 'error',
+						message: '邮箱格式有误',
+						duration: 2000,
+						fontSize: 12,
+						safeAreaInsetTop: true
+					})
 				}
+				else{
+					switch (this.loginType) {
+						case 0:
+							this.loginByEmail()
+							break;
+						case 1:
+							this.loginByPwd()
+							break;
+						default:
+							break;
+					}
+				}
+
 			},
 			// 邮箱登陆
 			loginByEmail() {
@@ -161,10 +175,10 @@
 				// console.log(that.code)
 				that.$myhttp.post('/api/user/login',
 					   {
-						// email: that.email,
-						// verifyCode:that.code
-						email: "826697618@qq.com",
-						verifyCode:"221916"
+						email: that.email,
+						verifyCode:that.code
+						// email: "826697618@qq.com",
+						// verifyCode:"221916"
 						},
 						
 					).then(res=>{
@@ -172,7 +186,7 @@
 						// 保存用户token
 						
 						uni.setStorageSync('token', res.data.token); 
-						
+						this.$store.commit('getUserInfo',res.data)
 						
 						// 保存用户信息
 						// uni.setStorageSync('userInfo', res.data.data.user); 
@@ -196,7 +210,7 @@
 					password:that.password
 				}).then(res=>{
 					uni.setStorageSync('token', res.data.token);
-					
+					this.$store.commit('getUserInfo',res.data)
 					
 					// 保存用户信息
 					// uni.setStorageSync('userInfo', res.data.data.user); 

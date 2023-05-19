@@ -17,10 +17,10 @@ page{
 			padding-top: 2vh;
 			text-align: center;
 			.username{
-				margin-top: 1vh;
+				margin-top: 1.2vh;
 			}
 			.level{
-				margin-top: 0.2vh;
+				margin-top: 0.5vh;
 			}
 		}
 	}
@@ -42,6 +42,7 @@ page{
 			margin-top: 3vh;
 			display: flex;
 			justify-content: space-between;
+			align-items: center;
 			.t1-1{
 				margin-left: 1vw;
 				font-size: 1.02rem;
@@ -49,7 +50,7 @@ page{
 				line-height: 20px;
 			}
 			.t1-2{
-				font-size: 0.8rem;
+				font-size: 0.9rem;
 				color: #225ffb;
 			}
 		}
@@ -162,4 +163,19 @@ page{
 	.p-right-main-name {
 		font-size: 1.05rem;
 		font-weight: 500;
+	}
+	.popup{
+		uni-button{
+			width: 15vw;
+			text-align: center;
+		}
+	}
+	
+	.default{
+		color: #000;
+	}
+	
+	.active{
+		color: #000;
+		border:1px solid #11A1F8
 	}
