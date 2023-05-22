@@ -2,8 +2,8 @@
 	<view>
 		<u-toast ref="uToast"></u-toast>
 		<!-- 添加宠物模态框 -->
-		<u-popup class="popup"  :show="showAddPet" :round="10"  @close="close" @open="open" closeable>
-				<view style="padding: 5%;padding-top: 9%;">
+		<u-popup  zIndex="998" class="popup"  :show="showAddPet" :round="10"  @close="close" @open="open" closeable>
+				<view style="padding: 5%;margin: 10% 0;margin-bottom: 6vh;">
 						<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
 						<u-form labelPosition="left"  :model="PetModal" :rules="rules"
 							errorType="message" ref="form1">
@@ -127,9 +127,6 @@
 <script>
 import myhttp from '../../api/myhttp';
 	export default {
-		computed:{
-			
-		},
 		data() {
 			return {
 				
@@ -239,10 +236,25 @@ import myhttp from '../../api/myhttp';
 		methods: {
 			// 增加宠物
 			addPet(){
-				
-				let petdata = this.PetModal
+				let petdata = {
+					 "avatar": 'http://img.touxiangkong.com/uploads/allimg/20203301301/2020/3/YvMJri.jpg',
+					  "birthday": "2023-05-22T13:27:48.462Z",
+					  "gender": this.PetModal.petSex,
+					  "id": 0,
+					  "insectRepellentStatus": "string",
+					  "nickName": this.PetModal.petName,
+					  "petVarietyId": 0,
+					  "sterilizationStatus": "string",
+					  "type":this.PetModal.petType,
+					  "vaccineStatus": "string"
+				}
 				myhttp.post('/users/pets/updatePet',petdata).then(res=>{
-					console.log()
+					uni.showToast({
+						
+						title:res.msg+'!'
+					})
+					
+					
 				})
 			},
 			// 设置宠物信息
@@ -339,6 +351,10 @@ import myhttp from '../../api/myhttp';
 	$Basewidth : 1080;
 	$Basehigth : 2340;
 	@import 'personage.scss';
+	
+	/deep/ .u-transition.u-fade-enter-to.u-fade-enter-active {
+	    z-index: 997 !important;
+	}
 	/* // 添加宠物 模态框 */
 	.u-form-item{
 		
