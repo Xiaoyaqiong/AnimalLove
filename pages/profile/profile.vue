@@ -2,35 +2,39 @@
 	<view>
 		<u-toast ref="uToast"></u-toast>
 		<!-- 添加宠物模态框 -->
-		<u-popup class="popup" :show="showAddPet" :round="10"  @close="close" @open="open" closeable>
-				<view style="padding: 5%;">
+		<u-popup class="popup"  :show="showAddPet" :round="10"  @close="close" @open="open" closeable>
+				<view style="padding: 5%;padding-top: 9%;">
 						<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
 						<u-form labelPosition="left"  :model="PetModal" :rules="rules"
 							errorType="message" ref="form1">
 						
 						<u-form-item label="类型" :border-bottom="true" >
-							
-								<u-button :style="PetModal.petType=='喵喵'? 'border:1px solid #11A1F8':''" text="喵喵" shape="circle"  style="color: #000;"color="#e8efff"  @click="setPet('petType','喵喵')"></u-button>
-								<u-button :style="PetModal.petType=='汪汪'? 'border:1px solid #11A1F8':''" text="汪汪" shape="circle" style="color: #000;" color="#e8efff"  @click="PetModal.petType='汪汪'"></u-button>
-								<u-button :style="PetModal.petType=='其他'? 'border:1px solid #11A1F8':''" text="其他" shape="circle" style="color: #000;" color="#e8efff"  @click="PetModal.petType='其他'"></u-button>
-							
-						
+								<view class="flex u-flex-around btn-group">
+									<button :style="PetModal.petType=='喵喵'? 'border:1px solid #11A1F8':''" text="喵喵" shape="circle"  style="color: #000;"color="#e8efff"  @click="setPet('petType','喵喵')">喵喵</button>
+									<button :style="PetModal.petType=='汪汪'? 'border:1px solid #11A1F8':''" text="汪汪" shape="circle" style="color: #000;" color="#e8efff"  @click="setPet('petType','汪汪')">汪汪</button>
+									<button :style="PetModal.petType=='其他'? 'border:1px solid #11A1F8':''" text="其他" shape="circle" style="color: #000;" color="#e8efff"  @click="setPet('petType','其他')">其他</button>
+								</view>
+								
 							
 						</u-form-item>
 						
 							<u-form-item label="性别" :border-bottom="true">
-								<u-button :style="PetModal.petSex=='man'? 'border:1px solid #11A1F8':''" icon="man" shape="circle" iconColor="#11A1F8"   color="#e8efff" @click="setPet('petSex','man')"></u-button>
-								<u-button  :style="PetModal.petSex=='woman'? 'border:1px solid #E793CF':''" icon="woman" shape="circle" iconColor="#E793CF" color="#e8efff" @click="PetModal.petSex='woman'"></u-button>
-							</u-form-item>
+								<view class="flex btn3">
+									<button :style="PetModal.petSex=='man'? 'border:1px solid #11A1F8':''" icon="man" shape="circle" iconColor="#11A1F8"   color="#e8efff" @click="setPet('petSex','man')">男</button>
+									<button  :style="PetModal.petSex=='woman'? 'border:1px solid #E793CF':''" icon="woman" shape="circle" iconColor="#E793CF" color="#e8efff" @click="setPet('petSex','woman')">女</button>
+								</view>
+								</u-form-item>
 							
 						
 						
 						
 							<u-form-item label="年龄"  :border-bottom="true">
-								<u-button   text="0~3个月" style="color: #000;" shape="circle" color="#e8efff"></u-button>
-								<u-button   text="0~1岁" style="color: #000;"   shape="circle" color="#e8efff"></u-button>
-								<u-button   text="1~3岁" style="color: #000;"  shape="circle" color="#e8efff"></u-button>
-								<u-button   text="3岁以上" style="color: #000;"  shape="circle" color="#e8efff"></u-button>
+								 <view class="flex btn3">
+									 <button   :style="PetModal.petAge=='0~3个月'? 'border:1px solid #11A1F8':''" shape="circle" color="#e8efff" @click="setPet('petAge','0~3个月')"> 0~3个月</button>
+									 <button   :style="PetModal.petAge=='0~1岁'? 'border:1px solid #11A1F8':''"   shape="circle" color="#e8efff" @click="setPet('petAge','0~1岁')"> 0~1岁</button>
+									 <button   :style="PetModal.petAge=='1~3岁'? 'border:1px solid #11A1F8':''"  shape="circle" color="#e8efff" @click="setPet('petAge','1~3岁')"> 1~3岁</button>
+									 <button   :style="PetModal.petAge=='3岁以上'? 'border:1px solid #11A1F8':''"  shape="circle" color="#e8efff" @click="setPet('petAge','3岁以上')"> 3岁以上</button>
+								</view>
 							</u-form-item>
 
 						
@@ -251,7 +255,7 @@ import myhttp from '../../api/myhttp';
 					this.PetModal.petSex = value
 				}
 				else if(type == 'petAge'){
-					
+					this.PetModal.petAge = value
 				}
 				
 				console.log(this.PetModal.petType=='喵喵')
@@ -328,11 +332,40 @@ import myhttp from '../../api/myhttp';
 	uni-button:after{
 		border:none;
 	}
+
 </style>
 
 <style lang="scss" scoped>
 	$Basewidth : 1080;
 	$Basehigth : 2340;
 	@import 'personage.scss';
+	/* // 添加宠物 模态框 */
+	.u-form-item{
+		
+		uni-button{
+			text-align: center;
+			background: transparent;
+		}
+		
+		.btn-group{
+			
+			width: 100%;
+			button{
+				
+				font-size: 0.9rem;
+				width: 25vw;
+			}
+		}
+		
+		.btn3{
+			// outline: 1px solid;
+			width: 100%;
+			button{
+				font-size:0.9rem;
+				padding: 0;
+			}
+			
+		}
+	}
 </style>
 
