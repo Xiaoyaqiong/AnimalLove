@@ -17,7 +17,7 @@
 				</view>
 			</view> -->
 			<view class="adoptList">
-				<custom-waterfalls-flow :value="data.list">
+				<custom-waterfalls-flow :value="data.list" >
 
 					<!-- #ifndef MP-WEIXIN -->
 					<template v-slot:default="item">
@@ -234,6 +234,11 @@
 			// this.stop()
 		},
 		methods: {
+			gotoDetail(){
+				uni.navigateTo({
+					url:'/pages/zadopt/petdetail'
+				})
+			},
 			goBackIndex(){
 				uni.switchTab({
 					url:"/pages/index/index"

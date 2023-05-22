@@ -108,8 +108,8 @@
 					<img class="psgimage" src="https://img2.baidu.com/it/u=3202947311,1179654885&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="">
 				</view>
 			</view>
-		</view>
-		<button @click="openURL">阿牛</button>
+		</view> -->
+		<!-- <!-- <button @click="openURL">阿牛</button> -->
 		<!-- <web-view src="https://www.chongshe.cn/arc26367"></web-view> -->
 	</view> 
 
@@ -165,6 +165,7 @@ import titleBar from '../../components/titleBar.vue'
 
 		},
 		methods: {
+			
 			// 获取文章列表
 			loadarticles: function() {
 				myhttp.get('/articles/list/' + this.currentPage + '/' + this.pageSize).then(res => {
@@ -192,18 +193,18 @@ import titleBar from '../../components/titleBar.vue'
 			
 			},
 			// 跳转URL
-			openURL() {
-				// id 1      url:''      image
-				// #ifdef APP-PLUS
-				plus.runtime.openURL('https://baijiahao.baidu.com/s?id=1763635443424664321&wfr=spider&for=pc')
+			// openURL() {
+			// 	// id 1      url:''      image
+			// 	// #ifdef APP-PLUS
+			// 	plus.runtime.openURL('https://baijiahao.baidu.com/s?id=1763635443424664321&wfr=spider&for=pc')
 			
-				console.log(1)
-				// #endif
-				// #ifdef H5
-				window.open('https://baijiahao.baidu.com/s?id=1763635443424664321&wfr=spider&for=pc')
-				console.log(2)
-				// #endif
-			},
+			// 	console.log(1)
+			// 	// #endif
+			// 	// #ifdef H5
+			// 	window.open('https://baijiahao.baidu.com/s?id=1763635443424664321&wfr=spider&for=pc')
+			// 	console.log(2)
+			// 	// #endif
+			// },
 			getadoptCenter(){
 				myhttp.get('/users/pets/AdoptList').then(({data})=>{
 					this.adoptData=data
@@ -233,140 +234,6 @@ import titleBar from '../../components/titleBar.vue'
 	}
 </script>
 
-<style scoped>
-	.docName{
-		line-height: 19px;
-	}
-	.icon{
-		width: 19px;
-		height: 19px;
-	}
-	.passage-content{
-		display: flex;
-		width: 350px;
-		height: 103px;
-		background: #ffffff;
-		border-radius: 12px;
-		font-size: 14px;
-		font-family: Microsoft YaHei, Microsoft YaHei-Normal;
-		font-weight: normal;
-		text-align: CENTER;
-		color: #af8982;
-		line-height: 20px;
-		box-shadow: 0px 0px 1px 0px #e1e1e1; 
-	}
-	.psg-word{
-		width: 11rem;
-		margin: 0.6rem;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		
-	}
-	.psg-title,.psg-detail{
-		overflow:hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
-	
-	.psg-image {
-		width: 7.4rem;
-		height: 4.9rem;
-		border-radius: 8px;
-		margin: 0.75rem 0.5rem 0.75rem 1rem;
-	}
-	
-	.psgimage {
-		width: 100%;
-		height: 100%;
-		border-radius: 8px;
-	}
-	
-	.title{
-		font-weight: bold;
-		padding: 0.5rem;
-	}
-	.tag{
-		margin: 0.15rem;
-	}
-	.tag-info{
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.question {
-		margin: 0.75rem 0 0.75rem 0;
-		/* width: 23.5rem;
-		height: 6.4rem;
-		background: #ffffff;
-		border-radius: 12px;
-		box-shadow: 0px 0px 1px 0px #e1e1e1; */
-	}
-
-	.doctor-card {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: center;
-		padding: 10px 0 10px 0;
-		width: 108px;
-		height: 137px;
-		background: #ffffff;
-		border-radius: 12px;
-		font-size: 14px;
-		font-family: Microsoft YaHei, Microsoft YaHei-Normal;
-		font-weight: normal;
-		text-align: center;
-		color: #333333;
-		line-height: 20px;
-		box-shadow: 0px 0px 1px 0px #8B8B8B;
-	}
-
-	.content {
-		margin-top: 8.5vh;
-		margin-left: 12px;
-		margin-right: 14px;
-	}
-	.animal-card {
-		display: flex;
-		width: 11.3rem;
-		height: 5.8rem;
-		background: #ffffff;
-		border-radius: 12px;
-		font-size: 14px;
-		font-family: Microsoft YaHei, Microsoft YaHei-Normal;
-		font-weight: normal;
-		text-align: CENTER;
-		color: #333333;
-		line-height: 20px;
-		box-shadow: 0px 0px 1px 0px #e1e1e1;
-	}
-
-	.ani-img {
-		width: 5.6rem;
-		height: 4.7rem;
-		border-radius: 8px;
-		margin: 0.5rem;
-	}
-
-	.info-img {
-		width: 100%;
-		height: 100%;
-		border-radius: 8px;
-	}
-
-	.info1 {
-		display: flex;
-	}
-
-	.ani-info {
-		margin: 0.5rem 0 0.5rem 0;
-		text-align: left;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-	}
-
-	.doctor-name {
-		display: flex;
-	}
+<style scoped lang="scss">
+@import 'index.scss';
 </style>

@@ -2,7 +2,7 @@
 	<!-- 自定义导航组件 -->
 	<view class="Mynav">
 		<u-navbar :fixed="true" :placeholder="true" :bgColor="MyColor"  :leftClick="backInfo"
-			:autoBack="autoback">
+			:autoBack="autoback" >
 			<view class="u-nav-slot" slot="center">
 				{{CenterSlot}}
 			</view>
@@ -17,6 +17,10 @@
 <script>
 	export default {
 		props: {
+			
+			"RightOne":{
+				type: Function,
+			},
 			"CenterSlot": {
 				type: String,
 				require: true
@@ -47,6 +51,7 @@
 			}
 		},
 		methods: {
+			
 			// backInfo() {
 			// 	// TODO
 			// 	console.log('back')
