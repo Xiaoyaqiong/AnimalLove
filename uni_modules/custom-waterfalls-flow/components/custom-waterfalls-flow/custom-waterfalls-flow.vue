@@ -1,7 +1,7 @@
 <template>
 	<view class="waterfalls-flow">
 		<view v-for="(item,index) in data.column" :key="index" class="waterfalls-flow-column" :id="`waterfalls_flow_column_${index+1}`" :msg="msg" :style="{'width':w,'margin-left':index==0?0:m}">
-			<view :class="['column-value',{'column-value-show':item2.o}]" v-for="(item2,index2) in columnValue(index)" :key="index2" :style="[s1]" @click="gotoDetail">
+			<view :class="['column-value',{'column-value-show':item2.o}]" v-for="(item2,index2) in columnValue(index)" :key="index2" :style="[s1]" >
 				<view class="inner" v-if="data.seat==1">
 					<!-- #ifdef MP-WEIXIN -->
 					<!-- #ifdef VUE2 -->

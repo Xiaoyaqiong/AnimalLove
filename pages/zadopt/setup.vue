@@ -47,6 +47,48 @@
 			<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaAInput" placeholder=""
 				v-model="articleContent"></textarea>
 		</view>
+		<view class="chooseinfo">
+			<u-form labelPosition="left" :model="PetModal" errorType="message" ref="form1" >
+
+				<u-form-item label="类型" :border-bottom="true">
+					<view class="flex u-flex-around btn-group">
+						<button :style="PetModal.petType==1? 'border:1px solid #11A1F8':''" text="喵喵" shape="circle"
+							style="color: #000;" color="#e8efff" @click="setPet('petType',1)">喵喵</button>
+						<button :style="PetModal.petType==2? 'border:1px solid #11A1F8':''" text="汪汪" shape="circle"
+							style="color: #000;" color="#e8efff" @click="setPet('petType',2)">汪汪</button>
+						<button :style="PetModal.petType==3? 'border:1px solid #11A1F8':''" text="其他" shape="circle"
+							style="color: #000;" color="#e8efff" @click="setPet('petType',3)">其他</button>
+					</view>
+
+
+				</u-form-item>
+
+				<u-form-item label="性别" :border-bottom="true">
+					<view class="flex btn3">
+						<button :style="PetModal.petSex==0? 'border:1px solid #11A1F8':''" icon="man" shape="circle"
+							iconColor="#11A1F8" color="#e8efff" @click="setPet('petSex',0)">男</button>
+						<button :style="PetModal.petSex==1? 'border:1px solid #E793CF':''" icon="woman" shape="circle"
+							iconColor="#E793CF" color="#e8efff" @click="setPet('petSex',1)">女</button>
+					</view>
+				</u-form-item>
+
+				<u-form-item label="年龄" :border-bottom="true">
+					<view class="flex btn3">
+						<button :style="PetModal.petAge=='0~3个月'? 'border:1px solid #11A1F8':''" shape="circle"
+							color="#e8efff" @click="setPet('petAge','0~3个月')"> 0~3个月</button>
+						<button :style="PetModal.petAge=='0~1岁'? 'border:1px solid #11A1F8':''" shape="circle"
+							color="#e8efff" @click="setPet('petAge','0~1岁')"> 0~1岁</button>
+						<button :style="PetModal.petAge=='1~3岁'? 'border:1px solid #11A1F8':''" shape="circle"
+							color="#e8efff" @click="setPet('petAge','1~3岁')"> 1~3岁</button>
+						<button :style="PetModal.petAge=='3岁以上'? 'border:1px solid #11A1F8':''" shape="circle"
+							color="#e8efff" @click="setPet('petAge','3岁以上')"> 3岁以上</button>
+					</view>
+				</u-form-item>
+			</u-form>
+			
+		</view>
+
+
 	</view>
 
 </template>
@@ -58,25 +100,59 @@
 		data() {
 			return {
 				modalName: null,
-				imagesUrl: [],
+				imagesUrl: [], //本地图片地址
 				articleContent: "",
 				createTime: '',
 				coverUrl: '',
-				title: ''
+				title: '',
+				// 宠物模型
+				PetModal: {
+					petType: null,
+					petAge: '',
+					petSex: null,
+
+				},
+				picture: [] //后端图片地址
+
 			}
 		},
 		methods: {
+
+			//  设置领养的宠物信息
+			setPet(type, value) {
+				console.log(type, value)
+				if (type == 'petType') {
+					this.PetModal.petType = value
+				} else if (type == 'petSex') {
+					this.PetModal.petSex = value
+				} else if (type == 'petAge') {
+					this.PetModal.petAge = value
+				}
+			},
+			
 			// //判断指定字段是否为空，若存在为空返回true
 			checkNull() {
-				if (this.articleContent == '' && this.title == '') {
-					uni.showToast({
-						title: '内容不能为空',
-						icon: 'fail'
-					});
-					return true;
-				}
-				//判断到最后说明都不为空，返回false
-				return false;
+				if (this.articleContent != '' && this.title != '' && this.PetModal.petType !== null 
+				&&this.PetModal.petAge !== ''&& this.PetModal.petSex !== null
+				 ) {
+					
+					return false;
+				} 
+				uni.showToast({
+					title: '请检查是否筛选且内容是否为空',
+					icon: 'error'
+				});
+				return true;
+				
+				// return this.PetModal.petSex === null
+				
+				// Object.keys(this.PetModal).forEach((i) => {
+				// 	if(typeof(this.PetModal[i])==null){
+				// 		this.PetModal[i] != null
+				// 	}
+				// 	isEmpty=this.PetModal[i] != null && this.PetModal[i].length!==0
+				// })
+				// return isEmpty
 			},
 			// 获取输入内容
 			textareaAInput(e) {
@@ -84,60 +160,72 @@
 			},
 			// 选择照片上传
 			ChooseImage() {
-				let that=this
+				let that = this
 				uni.chooseImage({
 					count: 4, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
+						// console.log(res.tempFilePaths, 'tempFilePaths');
 						if (that.imagesUrl.length != 0) {
 							that.imagesUrl = that.imagesUrl.concat(res.tempFilePaths)
-							console.log(that.imagesUrl);
-							uni.uploadFile({
-								url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
-								filePath: that.imagesUrl[0],
-								name: 'file',
-								formData: '123456@qq.com',
-								success: (uploadFileRes) => {
-									console.log(3333);
-									console.log(uploadFileRes.data);
-								}
-							});
-							
 						} else {
-							
 							that.imagesUrl = res.tempFilePaths
-							console.log(that.imagesUrl);
-							
-							uni.uploadFile({
-								url: 'http://10.23.83.140:8080/file/uploads/'+'123456@qq.com', //仅为示例，非真实的接口地址
-								filePath: that.imagesUrl[0],
-								name: 'file',
-								// header: {},
-								formData: res.tempFiles[0],
-								success: (result) => {
-									console.log(3333);
-									console.log(result.data);
-								}
-							});
 						}
 					}
-				});
+				}, );
+			},
+			// 照片上传
+			uploadFile() {
+				let that = this;
+				console.log(that.imagesUrl, 'that.imagesUrl[0]');
+				if (that.checkNull()) {
+					return
+				}
+				that.imagesUrl.forEach((item) => {
+					uni.uploadFile({
+						url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
+						filePath: item,
+						name: 'file',
+						success: (res) => {
+							// console.log(res,'resfir');//返回两条object
+							if (res.statusCode == 200) {
+								// that.picture=res.data
+								that.picture.push(res.data)
+								console.log(that.picture, 'picin');
+								return that.picture
+							}
+						}
+					});
+				})
+				// that.picture=that.picture.toString()
+				// that.picture.JSON.stringify()
+				// 先执行了这个
+				// console.log(that.picture,'picup');//所以是空的
 			},
 			// 上传图片
-			// uploadFile(){
-			// 	let that=this
+			// uploadFile() {
+			// 	// let files = []
+			// 	// this.picture.tempFiles.forEach(item => {
+			// 	// 	console.log(item.path);
+			// 	// 	files.push({
+			// 	// 		"name": item.name,
+			// 	// 		"uri":item.path
+			// 	// 	})
+			// 	// })
+			// 	let pictureList
+			// 	this.picture2=this.picture.tempFiles
+			// 	pictureList = JSON.stringify(this.picture2);
+			// 	console.log(this.picture2,'pictureList');
 			// 	uni.uploadFile({
 			// 		url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
-			// 		filePath: that.imagesUrl[0],
-			// 		name: 'file',
-			// 		formData: '123456@qq.com',
-			// 		success: (uploadFileRes) => {
-			// 			console.log(3333);
-			// 			console.log(uploadFileRes.data);
+			// 		files:files,
+			// 		// formData:
+			// 		success: (res) => {
+			// 			console.log(res);
 			// 		}
 			// 	});
-			// }
+			// },
 			// 取消图片上传
 			DelImg(e) {
 				uni.showModal({
@@ -164,6 +252,7 @@
 				uni.navigateBack({
 					delta: 1
 				})
+				this.$store.dispatch("adoptListasync")
 			},
 			// 弹出是否发布框
 			showModal(e) {
@@ -171,27 +260,42 @@
 			},
 			// 发布框确认
 			hideModal(str) {
+				let that = this
 				// console.log(str);
-				this.modalName = null
-				if (str === 'yes') this.addArticle();
-				console.log(this.imagesUrl.join(", "));
-				console.log(this.articleContent);
-				console.log(this.title);
+				that.modalName = null
+				if (str === 'yes') {
+					async function waitload() {
+						await that.uploadFile()
+						// await that.picture!=''
+						that.addArticle()
+					}
+					waitload()
+					that.imagesUrl = []
+					that.picture = []
+				};
+
 			},
 			// 添加文本内容
 			addArticle: function(e) {
-				// console.log('11111'); 
-				let that = this;
-				if (that.checkNull()) {
-					return
-				}
-				that.$myhttp.post('/user/article/publish', {
-					context: this.articleContent,
-					imageUrl: this.imagesUrl.join(", "),
-					title: this.title
-				}).then(res => {
-					console.log(res);
-				})
+				setTimeout(() => {
+					let that = this;
+					if (that.checkNull()) {
+						return
+					}
+					console.log(that.picture, 'picture2');
+					that.$myhttp.post('/users/pets/Adopt/insertAdoptPet', {
+						"ageYear": that.PetModal.petAge,
+						"gender": that.PetModal.petSex,
+						"image": that.picture,
+						"introduce": that.articleContent,
+						"petName": that.PetModal.petName,
+						"petVarietyId": that.PetModal.petType,
+						"title": that.title
+					}).then(res => {
+						console.log(res);
+					})
+				}, 5000)
+
 				// uni.request({
 				// 	url: that.$baseUrl + "/users/articles/addArticle",
 				// 	method: 'POST',

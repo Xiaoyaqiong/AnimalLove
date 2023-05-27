@@ -82,8 +82,8 @@
 			
 			</view>
 			
-			<view class="tags">
-				 <u-badge class="tag" v-for="tag in Firstpet.tags" bgColor="#F5DCA6" color="#AF8982" :value="tag"></u-badge>
+			<view class="tags1">
+				 <u-badge class="tag1" v-for="tag in Firstpet.tags" bgColor="#F5DCA6" color="#AF8982" :value="tag"></u-badge>
 				
 			</view>
 			
@@ -351,6 +351,10 @@ import myhttp from '../../api/myhttp';
 	$Basewidth : 1080;
 	$Basehigth : 2340;
 	@import 'personage.scss';
+	
+	uni-view{
+		box-sizing: content-box;
+	}
 	
 	/deep/ .u-transition.u-fade-enter-to.u-fade-enter-active {
 	    z-index: 997 !important;

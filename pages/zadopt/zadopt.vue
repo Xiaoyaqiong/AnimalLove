@@ -1,8 +1,9 @@
 <template>
 	<view>
 		<view>
-			<u-navbar title="领养中心" titleStyle="color:#FFFFFF" :safeAreaInsetTop="true" :bgColor="$topicColor" :is-fixed="true">
-				<view class="u-nav-slot" slot="left" >
+			<u-navbar title="领养中心" titleStyle="color:#FFFFFF" :safeAreaInsetTop="true" :bgColor="$topicColor"
+				:is-fixed="true">
+				<view class="u-nav-slot" slot="left">
 					<u-icon name="arrow-left" size="19" color="#FFFFFF" @click="goBackIndex"></u-icon>
 				</view>
 			</u-navbar>
@@ -16,16 +17,18 @@
 					<text>{{item.addr}}</text>
 				</view>
 			</view> -->
+
+
 			<view class="adoptList">
-				<custom-waterfalls-flow :value="data.list" >
+				<custom-waterfalls-flow :value="$store.state.adopt.adoptList" @imageClick="gotoDetail()">
 
 					<!-- #ifndef MP-WEIXIN -->
 					<template v-slot:default="item">
 						<view class="item">
 							<view class="title">{{item.title}}</view>
 							<view class="desc">
-								<text>{{item.type}}|{{item.age}}个月</text>
-								<text>{{item.time}}天前</text>
+								<text>{{item.petVariety}}|{{item.ageYear}}</text>
+								<text>{{item.registrationTime}}</text>
 							</view>
 						</view>
 					</template>
@@ -40,183 +43,89 @@
 
 <script>
 	import slFilter from '../../components/songlazy-sl-filter/sl-filter/sl-filter.vue';
+	import myhttp from '../../api/myhttp.js'
+	import moment from 'moment';
 	export default {
 		data() {
 			return {
-				data: {
-					list: [{
-							image: 'https://via.placeholder.com/200x500.png/ff0000',
-							title: '德文卷毛，求领养~',
-							type: '德文卷毛',
-							age: '2',
-							time: '3'
-
-						},
-						{
-							image: 'https://via.placeholder.com/200x500.png/ff0000',
-							title: '德文卷毛，求领养德文卷毛，求领养~~',
-							type: '德文卷毛',
-							age: '2',
-							time: '3'
-
-						},
-						{
-							image: 'https://via.placeholder.com/200x200.png/2878ff',
-							title: '德文卷毛，求领养~',
-							type: '德文卷毛',
-							age: '2',
-							time: '3'
-
-						},
-						{
-							image: 'https://via.placeholder.com/200x500.png/ff0000',
-							title: '德文卷毛，求领养~',
-							type: '德文卷毛',
-							age: '2',
-							time: '3'
-
-						},
-						{
-							image: 'https://via.placeholder.com/200x200.png/2878ff',
-							title: '德文卷毛，求领养~',
-							type: '德文卷毛',
-							age: '2',
-							time: '3'
-
-						},
-					]
-				},
+				adoptList1: [],
 				currentCity: '广州市',
-				//待筛序列
-				animal: [{
-						name: "小美",
-						age: 'val_2_1',
-						addr: "汕头市"
-					},
-					{
-						name: "小白",
-						age: 'val_2_1',
-						addr: "汕头市"
-					},
-					{
-						name: "小绿",
-						age: 'val_2_2',
-						addr: "广州市"
-					},
-					{
-						name: "小白",
-						age: 'val_2_2',
-						addr: "广州市"
-					}
-				],
 				//选中筛选条件
 				filterResult: '',
 				//未选中筛选条件
-				menuList: [{
-						'title': '菜单1',
+				menuList: [
+					{
+						'title': '种类',
 						'value': 0,
 						'isShow': true,
-						'key': 'key_1',
-						'detailList': [{
-								'title': '小美',
-								'value': '小美',
-								'isSelect': false
-							},
-							{
-								'title': '小美2',
-								'value': '小美',
-								'isSelect': false
-							},
-							{
-								'title': '小美3',
-								'value': '小美',
-								'isSelect': false
-							},
-							{
-								'title': '小美4',
-								'value': '小美',
-								'isSelect': false
-							},
-							{
-								'title': '小白',
-								'value': '小白',
-								'isSelect': false
-							},
-							{
-								'title': '小绿',
-								'value': '小绿',
-								'isSelect': false
-							}
-						]
+						'key': 'petVarity',
+						'detailList': [
+						    {
+							  "title":"喵喵",
+						      "value": "喵喵",
+							  'isSelect': false
+						    },
+						    {
+						      "title":"汪汪",
+						      "value": "汪汪",
+						      'isSelect': false
+						    },
+						    {
+						      "title":"其他",
+						      "value": "其他",
+						      'isSelect': false
+						    }
+						  ],
 					},
 					{
-						'title': '菜单2',
+						'title': '性别',
 						'value': 1,
-						'key': 'key_2',
+						'key': 'petGender',
 						'isShow': false,
-						'detailList': [{
-								'title': '我是菜单2的',
-								'value': '222',
-								'isSelect': false
-							},
-							{
-								'title': 1,
-								'value': 'val_2_1',
-								'isSelect': false
-							},
-							{
-								'title': 2,
-								'value': 'val_2_2',
-								'isSelect': false
-							}
-						]
+						"detailList":[
+						    {
+						      "title":"男",
+						      "value": 0,
+						      'isSelect': false
+						    },
+						    {
+						     "title":"女",
+						     "value": 1,
+						     'isSelect': false
+						    }
+						  ],
 					},
 					{
-						'title': '菜单2',
-						'value': 1,
-						'key': 'key_2',
-						'isShow': false,
-						'detailList': [{
-								'title': '我是菜单2的',
-								'value': '222',
-								'isSelect': false
-							},
-							{
-								'title': 1,
-								'value': 'val_2_1',
-								'isSelect': false
-							},
-							{
-								'title': 2,
-								'value': 'val_2_2',
-								'isSelect': false
-							}
-						]
-					},
-					{
-						'title': '菜单3',
+						'title': '年龄',
 						'value': 2,
-						'key': 'key_3',
+						'key': "petAge" ,
 						'isShow': false,
-						'detailList': [{
-								'title': '我是菜单3的',
-								'value': 'val_3_1',
-								'isSelect': false
-							},
+						"detailList": [
+						    {
+						     "title":"0~3个月",
+						     "value": "0~3个月",
+						     'isSelect': false
+						    },
+						    {
+						      "title":"0~1岁",
+						      "value": "0~1岁",
+						      'isSelect': false
+						    },
+						    {
+						      "title":"1~3岁",
+						      "value": "1~3岁",
+						      'isSelect': false
+						    },
 							{
-								'title': '广州市',
-								'value': '广州市',
-								'isSelect': false
+							  "title":"3岁以上",
+							  "value": "3岁以上",
+							  'isSelect': false
 							},
-							{
-								'title': '汕头市',
-								'value': '汕头市',
-								'isSelect': false
-							}
-						]
+						  ]
 					}
 				],
-
+				
+				
 			};
 		},
 		reset() {
@@ -230,18 +139,60 @@
 		components: {
 			slFilter
 		},
+		onMounted(){
+			this.adoptList()
+			
+		},
+		
 		onLoad() {
 			// this.stop()
+			this.adoptList()
+			
+		},
+		onShow() {
+			console.log(this.$store.state.adopt.adoptList,'store');
 		},
 		methods: {
-			gotoDetail(){
+			// 跳转领养详情
+			gotoDetail() {
 				uni.navigateTo({
-					url:'/pages/zadopt/petdetail'
+					url: '/pages/zadopt/petdetail'
 				})
 			},
-			goBackIndex(){
+			// 领养信息
+			adoptList(){
+				this.$store.dispatch("adoptListasync")
+			},
+			// 2023-05-23T08:34:18.000+00:00
+			
+			// adoptList() {
+			// 	this.$store.getters.getadoptList
+			// 	// let that = this
+			// 	// myhttp.get('/users/pets/Adopt/AdoptListSift').then(res => {
+			// 	// 	that.adoptList1 = res.data
+			// 	// 	that.adoptList1.forEach((item) => {
+			// 	// 		item.image = 'http://10.23.83.140:8080' + item.image;
+			// 	// 		if (moment(item.registrationTime, 'YYYYMMDDTHH:mm:ss.SSS+Z ZZ').fromNow().match(
+			// 	// 				/hour/) == null) {
+			// 	// 			item.registrationTime = moment(item.registrationTime,
+			// 	// 				'YYYYMMDDTHH:mm:ss.SSS+Z ZZ').fromNow().replace(/[^0-9]/g, "") + "天前"
+			// 	// 		} else {
+			// 	// 			item.registrationTime = moment(item.registrationTime,
+			// 	// 				'YYYYMMDDTHH:mm:ss.SSS+Z ZZ').fromNow().replace(/[^0-9]/g, "") + "小时前"
+			// 	// 		}
+
+			// 	// 	})
+			// 	// })
+			// 	// console.log(that.adoptList1, 'res');
+			// },
+			gotoDetail() {
+				uni.navigateTo({
+					url: '/pages/zadopt/petdetail'
+				})
+			},
+			goBackIndex() {
 				uni.switchTab({
-					url:"/pages/index/index"
+					url: "/pages/index/index"
 				})
 			},
 			fabClick() {
@@ -261,6 +212,10 @@
 			}
 		},
 		computed: {
+			// adoptList(){
+			// 	this.$store.getters.getadoptList
+			// },
+
 			selectContent() {
 				let filterResultArr = [] // 最终过滤结果
 				let filterResultCopy = this.filterResult
