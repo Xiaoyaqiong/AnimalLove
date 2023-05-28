@@ -2,7 +2,7 @@
 	<view class="articles">
 		<u-row justify="space-between" gutter="10">
 			<u-col span="1">
-				<img class="icon" :src="src" alt="" srcset="" @click="test()">
+				<img class="icon" :src="src" alt="" srcset="" >
 			</u-col>
 			<u-col span="12">
 				<view class="blod">
@@ -28,7 +28,7 @@
 
 		<view class="">
 			<view>
-				<u-row class="articleItem" v-for="(item,index) in articlelist" :key="index" @click="gotoDetail(item.articleUrl)">
+				<u-row class="articleItem" v-for="(item,index) in articlelist" :key="index" @click="gotoDetail(item)">
 					<u-col span="8">
 						<view class="title">
 							{{item.articleTitle}}
@@ -95,10 +95,13 @@
 		},
 
 		methods: {
-			gotoDetail(articlesUrl) {
+			
+			gotoDetail(item) {
 				uni.navigateTo({
 				
-				url: `../article/articlesDetail?articlesUrl=${articlesUrl}`
+				// url: `../article/articlesDetail?articlesUrl=${articlesUrl}`
+				url: '../article/articlesDetail?item=' + encodeURIComponent(JSON.stringify(item))
+				// url:'/pages/article/articlesDetail'
 				
 				})
 			// 	// #ifdef APP-PLUS

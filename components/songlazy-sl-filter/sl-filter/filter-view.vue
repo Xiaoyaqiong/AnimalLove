@@ -360,7 +360,9 @@
 
 					// console.log(list[1],'没');
 					this.newnewresult = this.result
-					console.log(this.result, 'result');
+					// console.log(this.result, 'result');
+					this.$store.commit("changeFilterList",this.result)
+					console.log(this.$store.state.adopt.filterList,'filterList');
 				}
 				let obj = {
 					'result': this.result,

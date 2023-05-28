@@ -1,7 +1,7 @@
 <template>
 	<view class="waterfalls-flow">
 		<view v-for="(item,index) in data.column" :key="index" class="waterfalls-flow-column" :id="`waterfalls_flow_column_${index+1}`" :msg="msg" :style="{'width':w,'margin-left':index==0?0:m}">
-			<view :class="['column-value',{'column-value-show':item2.o}]" v-for="(item2,index2) in columnValue(index)" :key="index2" :style="[s1]" @click.stop="wapperClick(item2)">
+			<view :class="['column-value',{'column-value-show':item2.o}]" v-for="(item2,index2) in columnValue(index)" :key="index2" :style="[s1]" >
 				<view class="inner" v-if="data.seat==1">
 					<!-- #ifdef MP-WEIXIN -->
 					<!-- #ifdef VUE2 -->
@@ -15,7 +15,7 @@
 					<slot v-bind="item2"></slot>
 					<!-- #endif -->
 				</view>
-				<image :class="['img',{'img-hide':item2[hideImageKey]==true||item2[hideImageKey]==1},{'img-error':!item2[data.imageKey]}]" :src="item2[data.imageKey]" mode="widthFix" @load="imgLoad(item2,index+1)" @error="imgError(item2,index+1)" @click.stop="imageClick(item2)"></image>
+				<image :class="['img',{'img-hide':item2[hideImageKey]==true||item2[hideImageKey]==1},{'img-error':!item2[data.imageKey]}]" :src="item2[data.imageKey]" mode="widthFix" @load="imgLoad(item2,index+1)" @error="imgError(item2,index+1)"></image>
 				<view class="inner" v-if="data.seat==2">
 					<!-- #ifdef MP-WEIXIN -->
 					<!-- #ifdef VUE2 -->
@@ -63,7 +63,7 @@
 			},
 			listStyle: { // 单个展示项的样式：eg:{'background':'red'}
 				type: Object
-			}
+			},
 		},
 		data() {
 			return {
@@ -109,6 +109,12 @@
 			this.refresh();
 		},
 		methods: {
+			// 进入领养详情页
+			gotoDetail(){
+				uni.navigateTo({
+					url:'/pages/zadopt/petdetail'
+				})
+			},
 			// 预加载图片
 			loadImages(idx = 0) {
 				let count = 0;
@@ -251,6 +257,7 @@
 			// 单项点击事件
 			wapperClick(item) {
 				this.$emit('wapperClick', item);
+				console.log('我被点击了');
 			},
 			// 图片点击事件
 			imageClick(item) {

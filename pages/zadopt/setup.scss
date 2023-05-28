@@ -1,0 +1,58 @@
+.chooseinfo{
+	padding: 5%;
+}
+.release{
+	height: 30px;
+	width: 64px;
+	border-radius: 50px;
+	background-color: #B3D3F9;
+	color: #FFFFFF;
+	font-size: 30rpx;
+	font-family: 黑体;
+}
+.idea {
+		color: #BEBEBE;
+		font-size: 30rpx;
+		font-family: 黑体;
+		margin-left: 20px;
+		margin-top: 20px;
+	}
+// textarea{
+// 	height: 400upx;
+// }
+.btn3{
+			// outline: 1px solid;
+			width: 100%;
+			button{
+				font-size:0.9rem;
+				padding: 0;
+			}
+			
+		}
+		.chooseinfo{
+			uni-button{
+				width: 15vw;
+				text-align: center;
+			}
+		}
+		
+.btn-group{
+			
+			width: 100%;
+			button{
+				
+				font-size: 0.9rem;
+				width: 25vw;
+			}
+		}
+.plus{
+	position: absolute;    
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	// margin: auto;
+	// display: flex;
+	justify-content: center;
+	// align-items: center;
+}

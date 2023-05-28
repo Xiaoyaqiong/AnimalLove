@@ -58,9 +58,9 @@
 				"navigationStyle": "custom"
 			}
 		},
-			// 话题详情
+			// 宠物领养详情
 		{
-			"path": "pages/petquan/SecondPages/TopicDetail",
+			"path": "pages/zadopt/petdetail",
 			"style": {
 				"navigationStyle": "custom"
 			}

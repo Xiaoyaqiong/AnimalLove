@@ -5,7 +5,11 @@ import Vue from 'vue'
 import uView from '@/uni_modules/uview-ui'
 import store from '@/store/index.js'
 import myhttp from './api/myhttp.js'
+import config from './api/config.js'
+import moment from 'moment'
+Vue.prototype.$moment = moment
 
+Vue.prototype.$baseUrl=config.baseUrl
 Vue.prototype.$store = store
 
 Vue.prototype.$myhttp=myhttp

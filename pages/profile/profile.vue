@@ -352,6 +352,10 @@ import myhttp from '../../api/myhttp';
 	$Basehigth : 2340;
 	@import 'personage.scss';
 	
+	uni-view{
+		box-sizing: content-box;
+	}
+	
 	/deep/ .u-transition.u-fade-enter-to.u-fade-enter-active {
 	    z-index: 997 !important;
 	}

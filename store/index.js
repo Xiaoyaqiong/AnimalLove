@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex' 
 import user from './user.js'
+import adopt from './adopt.js'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,7 @@ Vue.use(Vuex)
 	actions:{},
 	modules:{
 		user,
-
+		adopt
 	}
 }
 )
