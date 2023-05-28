@@ -82,8 +82,8 @@
 			
 			</view>
 			
-			<view class="tags">
-				 <u-badge class="tag" v-for="tag in Firstpet.tags" bgColor="#F5DCA6" color="#AF8982" :value="tag"></u-badge>
+			<view class="tags1">
+				 <u-badge class="tag1" v-for="tag in Firstpet.tags" bgColor="#F5DCA6" color="#AF8982" :value="tag"></u-badge>
 				
 			</view>
 			
