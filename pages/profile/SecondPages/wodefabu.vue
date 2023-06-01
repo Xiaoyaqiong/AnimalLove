@@ -4,14 +4,14 @@
 		<!-- 自定义导航栏 -->
 		<Mynav CenterSlot="我的发布" MyColor="#eee"  autoback></Mynav>
 		
-					<view class="main1 " v-if="this.list.length == 0">
+					<view class="main1 " v-if="fabulist.length == 0">
 						<view class="justify-center align-center  padding text-center">
-							<view style="color: #0f1418;font-size: 1.26rem;margin-bottom: 1rem;">你还没上过课</view>
-							<view style="color: #5b7083;font-size: 0.9rem;">在这里，你将有机会学习到最新的少年代码技术和理念。</view>
+							<view style="color: #0f1418;font-size: 1.26rem;margin-bottom: 1rem;">你还没发布过内容</view>
+							<view style="color: #5b7083;font-size: 0.9rem;">在这里，你将和数千万宠物主交流养宠心得。</view>
 						</view>
 					</view>
 		
-		<view class="BOX" v-else v-for="(item,index) in list" :key="index" style="margin-top: 30rpx;" @tap="ClickToDetail(item.courseId)">
+		<view class="BOX" v-else v-for="(item,index) in fabulist" :key="index" style="margin-top: 30rpx;" @tap="ClickToDetail(item.courseId)">
 	
 					<view class="content">
 						<p class="content-title">{{item.courseName}}</p>
@@ -51,12 +51,13 @@
 
 <script>
 	import Mynav from '@/components/Mynav.vue'
+import myhttp from '../../../api/myhttp'
 	export default {
 		data() {
 
 			return {
-				list:[
-					
+				fabulist:[
+					{}
 				],
 				
 				
@@ -89,18 +90,9 @@
 		onLoad(data) {
 			// 加载选课历史列表
 			let that = this
-			let url = this.$baseUrl + '/users/getMyCourses'
-			uni.request({
-				url:url,
-				method:'GET',
-				header:{
-					'token':uni.getStorageSync('token')
-				},
-				success(res) {
-					console.log(res.data.data)
-					that.list = res.data.data
-					
-				}
+			let url = '/user/article/getListByUser'
+			myhttp.get(url).then(res=>{
+				that.fabulist = res.data
 			})
 			
 			
