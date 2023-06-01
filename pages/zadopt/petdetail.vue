@@ -8,11 +8,11 @@
 					<u-icon class="align-center" name="arrow-left" size="1.2rem" ></u-icon>
 				</view>
 				<view class="tu">
-					<u-avatar :src="src" shape="circle"></u-avatar>
+					<u-avatar :src="petDetail.userAvatar" shape="circle"></u-avatar>
 				</view>
 				<view class="signed">
 					<view>
-						<text class="title1">不可思议</text>
+						<text class="title1">{{petDetail.userName}}</text>
 					</view>
 					<view><text class="title2">宠物博主，爱宠人士</text></view>
 				</view>
@@ -23,82 +23,108 @@
 			</view>
 		</view>
 		
-		<view>
-			<view class="swiper-top">
-				<swiper class="swiper" :indicator-dots='true' indicator-color="rgba(0, 0, 0, .3)"
-					indicator-active-color="#013BD4" :autoplay="false">
-					<block v-for="(item,index) in 6" :key="index">
-						<swiper-item>
-							<view class="swiper-item">
-								<image :src="tu1url" mode="aspectFill"></image>
-							</view>
-						</swiper-item>
-					</block>
-				</swiper>
-			</view>
-		</view>
-		<view class="content"><text>当然要拍照记录啊~
-				希望我的宝宝每天都开开心心哒~
-			</text></view>
-		<view class="time ">
-			<text>发布于</text>
-			<text class="time1">05-21</text>
-		</view>
-		<view class="solid"></view>
-		<view class="comment">
-			<text>6</text>
-			<text class="num">条评论</text>
-		</view>
-		<view v-for="(item,index) in 6">
-			<view class="tu2">
-				<image class="tu3" :src="tuurl"></image>
-			</view>
-			<view class="signed1">
-				<view>
-					<text class="title3">小音箱</text>
+		<view class="">
+			<view>
+					<view class="swiper-top">
+						<swiper class="swiper" :indicator-dots='true' indicator-color="rgba(0, 0, 0, .3)"
+							indicator-active-color="#013BD4" :autoplay="false">
+							<block v-for="(item,index) in petDetail.image" :key="index">
+								<swiper-item>
+									<view class="swiper-item">
+										<image :src="$baseUrl+item" ></image>
+									</view>
+								</swiper-item>
+							</block>
+						</swiper>
+					</view>
 				</view>
-				<view><text class="title4">毛茸茸的，我好想亲秃它啊哈哈哈哈</text></view>
+				<view class="content"><text>当然要拍照记录啊~
+						{{petDetail.title}}
+					</text></view>
+				<view class="time ">
+					<text>发布于</text>
+					<text class="time1">{{petDetail.registrationTime}}</text>
+				</view>
+				<view class="solid"></view>
+				<view class="comment">
+					<text>0</text>
+					<text class="num">条评论</text>
+				</view>
+				<view v-if="commentFlag" class="content">
+					暂未开放此功能~
+				</view>
+				<view v-else class="">
+					<view v-for="(item,index) in 0">
+						<view class="tu2">
+							<image class="tu3" :src="tuurl"></image>
+						</view>
+						<view class="signed1">
+							<view>
+								<text class="title3">小音箱</text>
+							</view>
+							<view><text class="title4">毛茸茸的，我好想亲秃它啊哈哈哈哈</text></view>
+						</view>
+						<view class="time2"><text>05-21</text></view>
+						<view class="apprecy flex  align-center justify-end"><text class="cuIcon-appreciate"></text>
+							<text class="appnum">88</text>
+						</view>
+								
+					</view>
+				</view>
+				
+				<view class="cu-bar foot input" :style="[{bottom:InputBottom+'px'}]">
+					<view class="send  flex  padding align-center justify-center text-left">
+						<input :adjust-position="false" :focus="false" maxlength="300" cursor-spacing="10" placeholder="说点什么"
+							@focus="InputFocus" @blur="InputBlur">
+						</input>
+					</view>
+					<view class="all ">
+						<view class="apprecy1 "><text class="cuIcon-appreciate"></text></view>
+						<text class="appnum3">88</text>
+					</view>
+					<view class="fav">
+					<view class="apprecy1 "><text class="cuIcon-favor"></text></view>
+					<text class="appnum3">127</text>
+					</view>
+				</view>
 			</view>
-			<view class="time2"><text>05-21</text></view>
-			<view class="apprecy flex  align-center justify-end"><text class="cuIcon-appreciate"></text>
-				<text class="appnum">88</text>
-			</view>
-
 		</view>
-		<view class="cu-bar foot input" :style="[{bottom:InputBottom+'px'}]">
-			<view class="send  flex  padding align-center justify-center text-left">
-				<input :adjust-position="false" :focus="false" maxlength="300" cursor-spacing="10" placeholder="说点什么"
-					@focus="InputFocus" @blur="InputBlur">
-				</input>
-			</view>
-			<view class="all ">
-				<view class="apprecy1 "><text class="cuIcon-appreciate"></text></view>
-				<text class="appnum3">88</text>
-			</view>
-			<view class="fav">
-			<view class="apprecy1 "><text class="cuIcon-favor"></text></view>
-			<text class="appnum3">127</text>
-			</view>
-		</view>
-	</view>
+		
 	</view>
 </template>
 
 <script>
+	import myhttp from '../../api/myhttp.js'
+	import moment from 'moment';
 	export default {
 		data() {
 			return {
+				id:null,//点击对应的id
 				tuurl: '/static//chat/头像.png',
 				tu1url: '/static//order/宠物.png',
 				InputBottom: 0,
-				src: 'https://cdn.uviewui.com/uview/album/1.jpg'
+				src: 'https://cdn.uviewui.com/uview/album/1.jpg',
+				petDetail:{},
+				commentFlag:false
 			}
 		},
 		methods: {
+			getpetDetail(){
+				myhttp.get(`/users/pets/Adopt/List/${this.id}`).then((res)=>{
+					this.petDetail= res.data
+					this.petDetail.registrationTime=moment(this.petDetail.registrationTime).format("MMMM Do YYYY"); 
+					if(this.petDetail.comment==null){
+						this.commentFlag=true
+					}else{
+						this.commentFlag=false
+					}
+				})
+			},
 			goBackadopt(){
+				console.log(1);
 				uni.navigateBack({
-					delta: 1
-				});
+					delta:1
+				})
 			},
 			InputFocus(e) {
 				this.InputBottom = e.detail.height
@@ -112,6 +138,18 @@
 		created() {
 
 		},
+		computed:{
+			// getpetDetail(){
+			// 	myhttp.get(`/users/pets/Adopt/List/${this.id}`).then((res)=>{
+			// 		this.petDetail= res.data.title
+			// 	})
+			// }
+		},
+		onLoad(option){
+			this.id = JSON.parse(decodeURIComponent(option.id))
+			console.log(this.id,'id')
+			this.getpetDetail()
+		}
 	}
 </script>
 

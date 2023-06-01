@@ -209,17 +209,18 @@
 				})
 			},
 			async initValue(i, from) {
-				this.isLoaded = false;
-				if (i >= this.data.list.length || this.refreshDatas.length) {
-					this.msg++;
-					this.loaded();
+				let that=this
+				that.isLoaded = false;
+				if (i >= that.data.list.length || that.refreshDatas.length) {
+					that.msg++;
+					that.loaded();
 					return false;
 				}
-				const minHeightRes = await this.getMinColumnHeight();
-				const c = this.data[`column_${minHeightRes.column}_values`];
-				this.data.list[i].column = minHeightRes.column;
-				c.push({ ...this.data.list[i], cIndex: c.length, index: i, o: 0 });
-				this.msg++;
+				const minHeightRes = await that.getMinColumnHeight();
+				const c = that.data[`column_${minHeightRes.column}_values`];
+				that.data.list[i].column = minHeightRes.column;
+				c.push({ ...that.data.list[i], cIndex: c.length, index: i, o: 0 });
+				that.msg++;
 			},
 			// 图片加载完成
 			imgLoad(item, c) {

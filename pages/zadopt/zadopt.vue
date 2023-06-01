@@ -17,10 +17,10 @@
 					<text>{{item.addr}}</text>
 				</view>
 			</view> -->
-
+			<button @click="thisAsyncIncrement" >按钮adoptlist</button>
 
 			<view class="adoptList">
-				<custom-waterfalls-flow :value="$store.state.adopt.adoptList" @imageClick="gotoDetail()">
+				<custom-waterfalls-flow ref="waterfallsFlowRef" :value="Obj" @imageClick="gotoDetail()">
 
 					<!-- #ifndef MP-WEIXIN -->
 					<template v-slot:default="item">
@@ -45,6 +45,7 @@
 	import slFilter from '../../components/songlazy-sl-filter/sl-filter/sl-filter.vue';
 	import myhttp from '../../api/myhttp.js'
 	import moment from 'moment';
+import { combine } from 'qs/lib/utils';
 	export default {
 		data() {
 			return {
@@ -58,21 +59,21 @@
 						'title': '种类',
 						'value': 0,
 						'isShow': true,
-						'key': 'petVarity',
+						'key': 'petVariety',
 						'detailList': [
 						    {
 							  "title":"喵喵",
-						      "value": "喵喵",
+						      "value": 1,
 							  'isSelect': false
 						    },
 						    {
 						      "title":"汪汪",
-						      "value": "汪汪",
+						      "value": 2,
 						      'isSelect': false
 						    },
 						    {
 						      "title":"其他",
-						      "value": "其他",
+						      "value": 3,
 						      'isSelect': false
 						    }
 						  ],
@@ -129,30 +130,36 @@
 			};
 		},
 		reset() {
-			this.data.list = [{
-				image: 'https://via.placeholder.com/200x500.png/ff0000',
-				title: '我是标题1',
-				desc: '描述描述描述描述描述描述描述描述1'
-			}]
-			this.$refs.waterfallsFlowRef.refresh();
+			
 		},
 		components: {
 			slFilter
 		},
 		onMounted(){
-			this.adoptList()
+			// this.adoptList()
 			
 		},
 		
 		onLoad() {
 			// this.stop()
-			this.adoptList()
-			
+			// this.adoptList()
+			this.thisAsyncIncrement()
 		},
 		onShow() {
-			console.log(this.$store.state.adopt.adoptList,'store');
+			// console.log(this.$store.state.adopt.adoptList,'store');
+		},
+		watch: {
+		    Obj(newVal,oldVal){
+				this.$store.state.adopt.adoptList=newVal
+				console.log(newVal,'newVAL');
+				return newVal
+			}
 		},
 		methods: {
+			thisAsyncIncrement() {
+				this.$store.dispatch('getArticles')
+				this.$refs.waterfallsFlowRef
+			},
 			// 跳转领养详情
 			gotoDetail() {
 				uni.navigateTo({
@@ -160,9 +167,10 @@
 				})
 			},
 			// 领养信息
-			adoptList(){
-				this.$store.dispatch("adoptListasync")
-			},
+			// adoptList(){
+			// 	this.$store.dispatch('getArticles')
+			// },
+			
 			// 2023-05-23T08:34:18.000+00:00
 			
 			// adoptList() {
@@ -208,10 +216,16 @@
 			result(val) {
 				this.filterResult = JSON.stringify(val, null, 2)
 				this.filterResult = JSON.parse(this.filterResult);
-				console.log(this.filterResult, 'json');
+				// console.log(this.filterResult, 'json');
+				this.$store.commit("changeFilterList",this.filterResult)
+				console.log(this.$store.state.adopt.filterList,'filterList');
 			}
 		},
 		computed: {
+			Obj(){
+				console.log(this.$store.state.adopt.adoptList,'obj');
+				return this.$store.state.adopt.adoptList
+			},
 			// adoptList(){
 			// 	this.$store.getters.getadoptList
 			// },

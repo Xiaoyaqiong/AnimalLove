@@ -252,7 +252,9 @@
 				uni.navigateBack({
 					delta: 1
 				})
-				this.$store.dispatch("adoptListasync")
+				this.$store.state.adopt.adoptList=[]
+				this.$store.state.adopt.filterList={}
+				this.$store.dispatch("getArticles")
 			},
 			// 弹出是否发布框
 			showModal(e) {

@@ -52,7 +52,7 @@
 				if(page==1){
 					console.log(page);
 					uni.navigateTo({
-						url:'/pages/zadopt/zadopt'
+						url:'/pages/zadopt/adopt'
 					})
 				}else{
 					console.log(page);

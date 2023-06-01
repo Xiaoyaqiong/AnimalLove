@@ -101,9 +101,12 @@
 				}
 			},
 		},
-
+		// watch: {
+		//     '$store.state.adopt.adoptList'() {
+		//       this.$store.dispatch('getArticles')
+		//     },
+		// },
 		computed: {
-
 			selectedTitleObj() { //已选条件
 				let obj = {}
 				for (let i = 0; i < this.menuList.length; i++) {
@@ -361,8 +364,9 @@
 					// console.log(list[1],'没');
 					this.newnewresult = this.result
 					// console.log(this.result, 'result');
-					this.$store.commit("changeFilterList",this.result)
-					console.log(this.$store.state.adopt.filterList,'filterList');
+					// this.$store.commit("changeFilterList",this.result)
+					console.log(this.$store.state.adopt.filterList,'newfilterList');
+					// this.$store.dispatch('getArticles')
 				}
 				let obj = {
 					'result': this.result,

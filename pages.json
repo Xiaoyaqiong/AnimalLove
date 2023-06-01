@@ -15,7 +15,7 @@
 			}
 		},
 		{
-			"path": "pages/zadopt/zadopt",
+			"path": "pages/zadopt/adopt",
 			"style": {
 				"navigationStyle": "custom"
 				// "titleNView":true
