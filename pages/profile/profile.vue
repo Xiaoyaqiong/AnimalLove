@@ -93,9 +93,9 @@
 		<!-- 个人宠物信息 -->
 		<view class="pet-profile WhiteBox">
 			<view class="nickName">
-				<span>{{Firstpet.nickName}} </span>
-				<image style="width: 30rpx;height: 30rpx;" src="../../static/icon/user/bianji.png"></image>
-				<u-icon style="display: inline-block;" :name="Firstpet.gender"
+				<span>{{Firstpet.nickName}}</span>
+				
+				<u-icon style="display: inline-block;margin-left: 0.3rem;vertical-align: middle;" :name="Firstpet.gender"
 					:color="Firstpet.gender=='man'?'#11A1F8':'#ffaaff'"></u-icon>
 
 			</view>
@@ -205,7 +205,7 @@
 				// 功能菜单1
 				list1: [{
 						name: '我的发布',
-						id: 'UserDetail',
+						id: 'wodefabu',
 						path: '../../static/icon/user/wodefabu.png',
 					},
 					{
@@ -222,7 +222,7 @@
 					},
 					{
 						name: '我的订单',
-						id: 'coupon',
+						id: 'MyOrder',
 						path: '../../static/icon/user/qianbao.png',
 
 					},

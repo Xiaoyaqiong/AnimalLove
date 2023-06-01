@@ -51,6 +51,19 @@
 				"navigationStyle": "custom"
 			}
 		},
+		{
+			"path": "pages/profile/SecondPages/MyOrder",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/SecondPages/wodefabu",
+			"style": {
+				"navigationStyle": "custom"
+				// "titleNView":true
+			}
+		},
 			// 收藏页面
 		{
 			"path": "pages/profile/SecondPages/Favorite",
@@ -109,6 +122,7 @@
 			// "titleNView":true
 		}
 	}
+
 ],
 "tabBar": {
 	"color": "#7A7E83",
