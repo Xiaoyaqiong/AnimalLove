@@ -98,3 +98,14 @@ $Cardgap:calc(35 / 2340 * 100vh);
 		align-self: flex-end;	// 定位右下角主要依靠 text-align 和 align-self
 		}
 	}
+	
+	.main1{
+			
+			position: absolute;
+			      left: 0;
+			      top: 50%;
+			      right: 0;
+			      bottom: 0;
+			      margin: auto;
+		 
+	}

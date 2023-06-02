@@ -2,16 +2,16 @@
 	<view class="">
 
 		<MyBar></MyBar>
-		<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view> -->
+		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<!-- 三个按钮组 -->
-		<view class="btnGroup">
+		<!-- <view class="btnGroup">
 			<view class="btn" v-for="(item,index) in btnGroup">
 					<u-icon top="2vh" size="2rem" labelPos="bottom" 
 					name="red-packet"></u-icon>
 					<span class="btnContent">{{item}}</span>
 			</view>
 			
-		</view>
+		</view> -->
 
 		<!-- 邀请进群 -->
 		<view class="QQQun">
@@ -91,6 +91,40 @@
 				],
 				// 附近商家列表
 				NearList:[
+					{
+						shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
+						shopName:'喵呜阿旺宠物医院（24小时）',
+						rate:5.0,
+						address:'胜桥东路',
+						distance:'1.2km',
+						setMeal:[
+							{
+								cost:'288',
+								mealName:'公猫呼吸麻醉微创绝育手术'
+							},
+							{
+								cost:'188',
+								mealName:'洗牙套餐'
+							}
+						]
+					},
+					{
+						shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
+						shopName:'喵呜阿旺宠物医院（24小时）',
+						rate:5.0,
+						address:'胜桥东路',
+						distance:'1.2km',
+						setMeal:[
+							{
+								cost:'288',
+								mealName:'公猫呼吸麻醉微创绝育手术'
+							},
+							{
+								cost:'188',
+								mealName:'洗牙套餐'
+							}
+						]
+					},
 					{
 						shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
 						shopName:'喵呜阿旺宠物医院（24小时）',

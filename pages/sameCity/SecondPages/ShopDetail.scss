@@ -1,0 +1,228 @@
+$CardPadding:40rpx;
+
+$greenheight:5.3vh;
+.swpier{
+		
+	}
+
+	// 课程内容介绍
+	/* 此处给底部的边距是为了防止滑到底下被脱标的菜单栏
+	    压住，底部边距距离是底部菜单栏的高度高一点点 */
+.content{
+	border-radius: 20px 20px 0 0;		// 下边两个角没圆角
+	padding:1vh 1.3vh;						// 上下 左右 (内收缩)
+	background: #fff;
+	margin-top: -8%;
+	padding-bottom: 6%;
+	z-index: 10;
+	width: 100%;
+	.content-title{
+		// outline: 1px solid;
+		padding-bottom: 0;
+	}
+	// 价格绿色盒子
+	.greenbox{
+		font-size: 1.7rem;
+		width: 90%;
+		height: $greenheight;
+		line-height: $greenheight;
+		background: #60a227;
+		border-radius: 1.5vh;
+		padding-left: 4%;
+		margin: 3% auto;
+		color: #ffffff;
+		.yen{
+			font-size: 0.8rem;
+			color: #ffffff;
+		}
+	}
+	
+
+	// 地址 时间 等信息
+	.detail{
+		display: flex;
+		align-items: center;
+		margin: 1.6vh 0;
+		margin-bottom: 0;
+		.d1{
+			.distance{
+				display: inline-block;
+				width: 75rpx;
+				text-align: center;
+				line-height: 38rpx;
+				background: rgba(230,97,55,0.00);
+				border: 2rpx solid #4babfa;
+				border-radius: 10rpx;
+				font-size: 25rpx;
+				color: #4babfa;
+			}
+			.positon{
+				margin-left: 13rpx;
+				font-size: 0.8rem;
+				color: #707070;
+			}
+		}
+		
+		.d2{
+			flex: 2;
+			display: flex;
+			justify-content: space-around;
+			// outline: 1px solid;
+			margin-left: 30rpx;
+			.d2box{
+				text-align: center;
+				.black{
+					font-size: 1rem;
+				}
+				.gray{
+					font-size: 0.9rem;
+					font-family: '黑体', sans-serif, '黑体', sans-serif-400;
+					font-weight: normal;
+					color: #98a1ab;
+				}
+			}
+			
+		}
+		
+	}
+	
+	.tags{
+		margin-top: 4%;
+		display: inline-block;
+		.tag{
+			margin-right: 20rpx;
+			
+		}
+	}
+}
+
+// 老师内容介绍
+	.teacherbox{
+		// outline: 1px solid;
+		margin-top: 1.5vh;
+		padding: 1.5vh;
+		display: flex;
+		gap: 20rpx;
+		width: 100%;
+		background: #fff;
+		.teachers{
+			color: #707070;
+			display: flex;
+			align-items: center;
+			// flex: 1;
+			// outline: 1px solid;
+			.teacherDetail{
+				.t1 {
+					margin-bottom: 0.1vh;
+					font-size: 0.7rem;
+				}
+				.Tname{
+					font-size: 0.85rem;
+				}
+			}
+			
+			
+		}
+	}
+		
+		
+// 补习机构
+	.institutebox {
+		@extend .teacherbox;
+		.institue p{
+			color: #707070;
+			
+			overflow: hidden;
+				
+			-webkit-line-clamp: 2; //显示几行
+				
+			text-overflow: ellipsis; 
+				
+			display: -webkit-box; 
+				
+			-webkit-box-orient: vertical;
+		}
+
+	}
+	
+	// 用户评价
+	.userComments{
+		display: flex;
+		flex-direction: column;
+		margin-top: 1.5vh;		// 与上一个栏目间隔
+		padding: 1.8vh;
+		gap: 20rpx;
+		width: 100%;
+		background: #fff;
+		.uc{
+			// outline: 1px solid;
+			margin-bottom: 2vh;
+			.UD{
+				// outline: 1px solid;
+				display: flex;
+				.username{
+					color: #131313;
+					font-size: 0.9rem;
+				}
+				.date{
+					color: #707070;
+					font-size: 0.6rem;
+				}
+			}
+			
+			.commentDetail{
+				margin-top: 0.85vh;
+				// 评论内容显示两行
+					color: #131313;
+					font-size: 0.89rem;
+					overflow: hidden;
+						
+					-webkit-line-clamp: 2; //显示几行
+						
+					text-overflow: ellipsis; 
+						
+					display: -webkit-box; 
+						
+					-webkit-box-orient: vertical;
+				
+			}
+		}
+			
+		
+
+		
+	}
+	// 商品图片
+	.shopPic{
+		width: 100%;
+	}
+	
+	// 底部预约栏	(选课单相同)
+	.book{
+		padding: 0 $CardPadding;
+		position: sticky;		// CSS3新增防止滑动
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 8vh;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background: #fff;
+		color: #cf4a77;
+		.yennum{
+			width: 120rpx;
+			height: 91rpx;
+			font-size: 80rpx;
+		}
+		.yen{
+			width: 32rpx;
+			height: 37rpx;
+			font-size: 32rpx;
+			font-weight: normal;
+			
+		}
+		.bookbtn{
+			width: 332rpx;
+		}
+	}

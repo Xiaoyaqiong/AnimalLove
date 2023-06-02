@@ -138,7 +138,7 @@
 				console.log(this.list[item].id,'item');
 				let id=this.list[item].id
 				uni.navigateTo({
-					url: 'petdetail?id='+encodeURIComponent(JSON.stringify(id))
+					url: '/pages/zadopt/petdetail?id='+encodeURIComponent(JSON.stringify(id))
 					// ?item=' + encodeURIComponent(JSON.stringify(item))
 				})
 				

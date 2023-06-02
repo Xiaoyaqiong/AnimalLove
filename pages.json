@@ -52,6 +52,13 @@
 			}
 		},
 		{
+			"path": "pages/sameCity/SecondPages/ShopDetail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		
+		{
 			"path": "pages/profile/SecondPages/MyOrder",
 			"style": {
 				"navigationStyle": "custom"

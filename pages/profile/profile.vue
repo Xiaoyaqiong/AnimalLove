@@ -159,21 +159,11 @@
 				},
 				// 宠物表单规则
 				rules: {
-					'PetModal.nickName': [{
-						type: 'string',
-						required: true,
-						message: '请填写昵称',
-						trigger: ['change']
-					}, {
-						// 自定义验证函数
-						validator: (rule, value, callback) => {
-							
-							return uni.$u.test.chinese(value);
-						},
-						message: '昵称为2-8个汉字',
-						// 触发器可以同时用blur和change
-						trigger: ['change', 'blur'],
-					}]
+					// 'PetModal.nickName': [{
+					// 	type: 'string',
+					// 	required: true,
+					// 	trigger: ['change']
+					// }]
 
 				},
 				showAddPet: false,
@@ -262,15 +252,18 @@
 
 
 				myhttp.post('/users/pets/updatePet', petdata).then(res => {
+					this.close()
 					uni.showToast({
 						title: res.msg + '!'
 					})
 					
-
 				})
-				// #ifdef H5
-						location.reload()
-				// #endif
+				setTimeout(()=>{
+					uni.reLaunch({
+						url:'/pages/profile/profile'
+					})
+				},500)
+				
 				
 					
 				

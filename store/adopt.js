@@ -41,8 +41,9 @@ export default {
 		// }
 		async getArticles({
 			state,
-			commit
-		}) {
+			commit,
+			
+		},url = `/users/pets/Adopt/AdoptListSift`) {
 			// const filters = {...state.filterList} // 将当前过滤器克隆为对象进行运算
 			// state.filterList
 			// let petAge = []
@@ -64,7 +65,7 @@ export default {
 			let params=state.filterList
 			console.log(params,'new');
 			// http: //10.23.83.140:8080/users/pets/Adopt/AdoptListSift?petAge=&petGender=1&petVariety=%22%E5%96%B5%E5%96%B5%22
-				await myhttp.get(`/users/pets/Adopt/AdoptListSift`,params ).then(res => {
+				await myhttp.get(url,params ).then(res => {
 					state.adoptList = res.data
 					state.adoptList.forEach((item) => {
 						item.image = 'http://10.23.83.140:8080' + item.image;

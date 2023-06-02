@@ -195,6 +195,7 @@
 								console.log(that.picture, 'picin');
 								return that.picture
 							}
+
 						}
 					});
 				})
@@ -274,7 +275,9 @@
 					waitload()
 					that.imagesUrl = []
 					that.picture = []
-				};
+					
+				}
+			
 
 			},
 			// 添加文本内容
@@ -295,9 +298,19 @@
 						"title": that.title
 					}).then(res => {
 						console.log(res);
+						uni.showToast({
+							title:res.msg,
+							
+						})
+						
 					})
-				}, 5000)
-
+				}, 1000)
+				setTimeout(()=>{
+					this.goBackToorder()
+					
+				},2000)
+				
+						
 				// uni.request({
 				// 	url: that.$baseUrl + "/users/articles/addArticle",
 				// 	method: 'POST',

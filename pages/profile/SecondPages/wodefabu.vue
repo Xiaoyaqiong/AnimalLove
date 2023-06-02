@@ -11,7 +11,8 @@
 						</view>
 					</view>
 		
-		<view class="BOX" v-else v-for="(item,index) in fabulist" :key="index" style="margin-top: 30rpx;" @tap="ClickToDetail(item.courseId)">
+		<pp-waterfall-flow :value="fabulist" :gap="20" :columns="2" :padding="30" :itemBR="12" imageBR="10rpx"></pp-waterfall-flow>
+		<!-- <view class="BOX" v-else v-for="(item,index) in fabulist" :key="index" style="margin-top: 30rpx;" @tap="ClickToDetail(item.courseId)">
 	
 					<view class="content">
 						<p class="content-title">{{item.courseName}}</p>
@@ -38,7 +39,7 @@
 			
 			</view>
 			
-		</view>
+		</view> -->
 		
 		
 		
@@ -52,12 +53,13 @@
 <script>
 	import Mynav from '@/components/Mynav.vue'
 import myhttp from '../../../api/myhttp'
+import moment from 'moment';
 	export default {
 		data() {
 
 			return {
 				fabulist:[
-					{}
+					
 				],
 				
 				
@@ -88,11 +90,32 @@ import myhttp from '../../../api/myhttp'
 
 		},
 		onLoad(data) {
-			// 加载选课历史列表
+			// 加载我的发布列表
 			let that = this
-			let url = '/user/article/getListByUser'
-			myhttp.get(url).then(res=>{
+			let momentFlag
+			 myhttp.get('/users/pets/AdoptByUser').then(res => {
 				that.fabulist = res.data
+				that.fabulist.forEach((item) => {
+					item.image = 'http://10.23.83.140:8080' + item.image;
+					momentFlag = moment(item.registrationTime, 'YYYYMMDDTHH:mm:ss.SSS+Z ZZ')
+						.fromNow()
+					if (momentFlag.charAt(0) == 'a') {
+					momentFlag = momentFlag.replace('a', 1)
+					}
+					if (momentFlag.match(
+							/hour/)) {
+						item.registrationTime = momentFlag.replace(/[^0-9]/g, "") + "小时前"
+					} else if (momentFlag.match(
+							/day/)) {
+						item.registrationTime = momentFlag.replace(/[^0-9]/g, "") + "天前"
+					} else if (momentFlag.match(
+							/minute/)) {
+						item.registrationTime = momentFlag.replace(/[^0-9]/g, "") + "分钟前"
+					} else {
+						item.registrationTime = momentFlag.replace(/[^0-9]/g, "") + "秒前"
+					}
+				})
+				
 			})
 			
 			
