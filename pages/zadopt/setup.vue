@@ -183,6 +183,7 @@
 					return
 				}
 				that.imagesUrl.forEach((item) => {
+					console.log(item);
 					uni.uploadFile({
 						url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
 						filePath: item,

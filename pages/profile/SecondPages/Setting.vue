@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<Mynav CenterSlot="设置" MyColor="#eee" :backInfo="backInfo"></Mynav>
-
+ 
 		<view class="Account">
 			<u-cell-group :border="false" title="账号" :customStyle="{'fontSize':'8px'}">
 				<u-cell class="whitebox" :border="false" title="账户与安全" isLink size="large"

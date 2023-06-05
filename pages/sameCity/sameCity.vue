@@ -49,7 +49,7 @@
 				
 				<view class="aa">
 					<span class="title">{{item.shopName}}</span>
-					<u-rate :value="item.rate" readonly active-color="#FF6900"></u-rate>
+					<u-rate gutter="3" :value="item.rate" readonly active-color="#FF6900"></u-rate>
 					<view class="content">
 						<span class="address">{{item.address}}</span>
 						<span class="distance">{{item.distance}}</span>
@@ -176,7 +176,6 @@ import myhttp from '../../api/myhttp'
 				res.data.forEach(item=>{
 					this.swiperList.push(item.imageUrl)
 				})
-				console.log(this.swiperList);
 			})
 			
 		}

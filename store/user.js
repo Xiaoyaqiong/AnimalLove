@@ -12,7 +12,7 @@ export default{
 		// 获取用户信息
 		getUserInfo(state,payload)
 		{
-			console.log(payload.avatar)
+			// console.log(payload.avatar)
 			state.username = payload.userName
 			state.avatar = payload.avatar
 			state.level = payload.level + '级铲屎官'

@@ -22,7 +22,7 @@
 
 				<u-swipe-action>
 					<u-swipe-action-item :options="options1" @click="deleteOrder(index,item.id)" :key="index">
-						<view class=" ">
+						<view class=" " @click="ClickDetail(item)">
 							<!-- 课程盒子 -->
 							<view class="content">
 								<p class="content-title">{{item.title}} </p>
@@ -33,7 +33,7 @@
 									<p class="Date">{{item.courseStartTime}}</p>
 								</view>
 
-								<!-- 老师信息盒子 -->
+								<!-- 信息盒子 -->
 								<view style="display: flex;gap: 20rpx;">
 									<view class="teachers">
 										<u-avatar style="margin-right: 23rpx;" :src="item.image"></u-avatar>
@@ -43,7 +43,7 @@
 										</view>
 									</view>
 									<span class="yen">
-										&yen;{{item.price}}
+										&yen;{{item.totalFee}}
 									</span>
 								</view>
 
@@ -64,10 +64,10 @@
 		<view class="book">
 			<span>
 				<span class="yen">&yen;</span>
-				<span class="yennum">{{totalPrice}}</span>
+				<span class="yennum">{{totaltotalFee}}</span>
 			</span>
 			<view class="bookbtn">
-				<u-button shape="circle" text="全部预约" color="linear-gradient(to right, #FD88DD, #549BFF)"
+				<u-button v-if="totaltotalFee!=0" shape="circle" text="结算" color="linear-gradient(to right, #FD88DD, #549BFF)"
 					@click="CommitBook"></u-button>
 			</view>
 		</view>
@@ -93,10 +93,10 @@
 			}
 		},
 		computed: {
-			totalPrice() {
+			totaltotalFee() {
 				let sum = 0
 				this.NearlyList.forEach(item => {
-					sum += item.price
+					sum += item.totalFee
 				})
 				return sum
 			}
@@ -105,6 +105,13 @@
 			Mynav
 		},
 		methods: {
+			
+			ClickDetail(item){
+				console.log(item)
+				uni.navigateTo({
+					url:'/pages/sameCity/SecondPages/ShopDetail?goodsId='+item.goodsId
+				})
+			},
 			// 删除订单
 			deleteOrder(index,id){
 				console.log(id);
@@ -155,6 +162,9 @@
 </script>
 
 <style lang="scss">
+	page{
+		background: #eee;
+	}
 	 .u-page {
 	        padding: 0;
 	    }

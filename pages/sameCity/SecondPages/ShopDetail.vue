@@ -3,11 +3,7 @@
 
 		<!-- 头部导航 -->
 		<u-navbar :fixed="true" :autoBack="true"  :safeAreaInsetTop="true" :bgColor="navColor" leftIconSize="40rpx">
-			<view class="u-nav-slot" slot="right">
-				<u-icon v-if="ShopDetail.isCollect==0" width="40rpx" height="40rpx" name="/static/icon/discover/detail/love1.png" @click="addFav"></u-icon>
-				<u-icon v-else width="40rpx" height="40rpx" name="/static/icon/discover/detail/love2.png" @click="CancelFav"></u-icon>
-				<u-icon width="40rpx" height="40rpx" name="/static/icon/discover/detail/share.png"></u-icon>
-			</view>
+
 
 	</u-navbar>
 		
@@ -18,7 +14,7 @@
 			<u-list-item>
 				<!-- 首页图（此处还是用swiper） -->
 					<view class="swpier">
-						<u-swiper imgMode="aspectFill" height="320" :list="courseCover"></u-swiper>
+						<u-swiper imgMode="aspectFill" height="320" circular :list="ShopDetail.images"></u-swiper>
 					</view>
 			</u-list-item>
 			
@@ -27,7 +23,7 @@
 				<!-- 课程简介 -->
 				<view class="content">
 					<view class="greenbox">
-						<span class="yen">&yen;</span>{{ShopDetail.coursePrice}}
+						<span class="yen">&yen;</span>{{ShopDetail.price}}
 					</view>
 					<u--text :lines="2" size="1.5rem" class="content-title" :text="ShopDetail.courseName"></u--text>
 					
@@ -36,25 +32,21 @@
 							<span class="distance">
 								{{ShopDetail.distance}}
 							</span>
-							<span class="positon">{{ShopDetail.coursePosition}}</span>
+							<span class="positon">{{ShopDetail.address}}</span>
 						</view>
 						
 						<view class="d2">
 							<view class="d2box">
-								<p class="black">{{ShopDetail.courseEnrolment}}</p>
-								<p class="gray">报名人数</p>
+								<p class="black">{{ShopDetail.goodsStocks}}</p>
+								<p class="gray">库存</p>
 							</view>
 							
 							<view class="d2box">
-								<p class="black">{{ShopDetail.courseSectionNumber}}</p>
-								<p class="gray">课时</p>
+								<p class="black">{{ShopDetail.totalQuantity}}</p>
+								<p class="gray">总数量</p>
 							</view>
 							
-							<view class="d2box">
-								
-								<p class="black">{{ShopDetail.courseStartTime}}</p>
-								<p class="gray">开始时间</p>
-							</view>
+
 							
 							
 						</view>
@@ -80,7 +72,7 @@
 			
 			<u-list-item>
 				<!-- 老师简介 -->
-				<view class="teacherbox">
+			<!-- 	<view class="teacherbox">
 							<view class="teachers" v-for="teachers in ShopDetail.teacher">
 							<u-avatar style="margin-right: 23rpx;" size="50" :src="teachers.userAvatar"></u-avatar>
 							<view class="teacherDetail">
@@ -88,17 +80,17 @@
 								<p class="Tname">{{teachers.userName}}</p>
 							</view>
 						</view>
-				</view>
+				</view> -->
 			</u-list-item>
 		
 		
 			<u-list-item>
 				<!-- 机构简介 -->
 				<view class="institutebox">
-					<u-avatar  :src="ShopDetail.institution.userAvatar"></u-avatar>
+					<u-avatar  :src="ShopDetail.shopAvatar"></u-avatar>
 							<view class="institue">
-								<p style="margin-bottom: 0.4rem;">{{ShopDetail.institution.userName}}</p>
-								<p >{{ShopDetail.institution.userIntroduction}}</p>
+								<p style="margin-bottom: 0.4rem;">{{ShopDetail.shopName}}</p>
+								<p >{{ShopDetail.introducation}}</p>
 							</view>
 				</view>
 			</u-list-item>
@@ -108,16 +100,16 @@
 				<!-- 用户评论区 -->
 				<view class="userComments">
 								<p style="margin-bottom: 1vh;font-size: 1rem;">用户评论</p>
-								<view class="uc" v-for="(item,index) in ShopDetail.courseRating" :key="index">
+								<view class="uc" v-for="(item,index) in ShopDetail.goodComment" :key="index">
 									<view class="UD">
-										<u-avatar style="margin-right: 23rpx;"  :src="item.userAvatar"></u-avatar>
+										<u-avatar style="margin-right: 23rpx;"  :src="item.avatar"></u-avatar>
 										<view class="">
 											<p class="username">{{item.userName}}</p>
-											<p class="date">{{item.commentTime}}</p>
+											<p class="date">{{item.createTime}}</p>
 										</view>
 									</view>
 												<view>
-													<p class="commentDetail">{{item.comment}}</p>
+													<p class="commentDetail">{{item.content}}</p>
 												</view>
 											
 									
@@ -157,6 +149,7 @@
 
 <script>
 	import MyBar from '@/components/MyNavbar.vue'
+import { duration } from 'moment'
 import myhttp from '../../../api/myhttp'
 	
 	export default{
@@ -244,45 +237,30 @@ import myhttp from '../../../api/myhttp'
 			}
 		},
 		
-		// 新增收藏
-		addFav(){
-			let that = this
-			uni.request({
-				method:'POST',
-				url: this.$baseUrl+'/users/addCourseToCollect/'+this.courseId,
-				success(res) {
-					that.ShopDetail.isCollect = 1;
-					uni.showToast({
-						title:res.data.message
-					})
-				}
-			})
-		},
-		// 取消收藏
-		CancelFav(){
-			let that = this
-			uni.request({
-				method:'DELETE',
-				url: this.$baseUrl+'/users/delCourseToCollect/'+this.courseId,
-				success(res) {
-					that.ShopDetail.isCollect = 0;
-					uni.showToast({
-						title:res.data.message
-					})
-				}
-			})
-		},
 		CommitBook(){
-			uni.navigateTo({
-				url:'/pages/discover/SecondPages/BuyCourse?courseId='+this.courseId
+			uni.showToast({
+				title:'已加入订单！',
+				duration:1000
 			})
+			setTimeout(()=>{
+				uni.navigateTo({
+					url:'/pages/profile/SecondPages/MyOrder',
+					
+				})
+			},1100)
+			
 		}
 	},
 		
 	onLoad(data){
+		let id = data.shopId || data.goodId
 		// 商品详细初始化
 		myhttp.get(`/users/goods/getGood/`+data.shopId).then(res=>{
 			console.log(res);
+			this.ShopDetail = res.good
+			this.ShopDetail.goodComment = res.goodComment
+			this.ShopDetail.goodComment.createTime = uni.$u.timeFormat(this.ShopDetail.goodComment.createTime,'yyyy年mm月dd日')
+
 		})
 		
 	

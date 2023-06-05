@@ -6,7 +6,14 @@
 			<view style="padding: 5%;margin: 10% 0;margin-bottom: 6vh;">
 				<!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
 				<u-form labelPosition="left" :model="PetModal" :rules="rules" errorType="message" ref="form1">
-
+					<u-form-item label="头像" :border-bottom="true">
+						<u-upload
+								
+								@afterRead="afterRead"
+								name="file"
+								:maxCount="1"
+							></u-upload>
+						</u-form-item>
 					<u-form-item label="类型" :border-bottom="true">
 						<view class="flex u-flex-around btn-group">
 							<button :style="PetModal.petType==1? 'border:1px solid #11A1F8':''" text="喵喵" shape="circle"
@@ -146,9 +153,11 @@
 
 <script>
 	import myhttp from '../../api/myhttp';
+import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 	export default {
 		data() {
 			return {
+				fileList1:[],
 				// 宠物模型
 				PetModal: {
 					petType: 0,
@@ -232,14 +241,32 @@
 			change(value) {
 				this.PetModal.sterilizationStatus = value
 			},
-
+			
+			
+			afterRead(file, lists, name){
+				console.log(file.file.url);
+				uni.uploadFile({
+					url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
+					filePath: file.file.url,
+					name: 'file',
+					success: (res) => {
+						console.log(res.data);
+						if (res.statusCode == 200) {
+							this.Firstpet.avatar = 'http://10.23.83.140:8080'+res.data
+							
+						}
+						
+					}
+				});
+				
+			},
 
 			// 增加宠物
 			addPet() {
 				// 1 喵喵  2汪汪  3其他
 				let petdata = {
 					"id": this.Firstpet.id,
-					"avatar": 'http://img.touxiangkong.com/uploads/allimg/20203301301/2020/3/YvMJri.jpg',
+					"avatar": this.Firstpet.avatar,
 					"birthday": "2023-05-22T13:27:48.462Z",
 					"gender": this.PetModal.gender,
 					"insectRepellentStatus": 0,
