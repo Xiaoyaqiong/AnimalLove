@@ -66,7 +66,9 @@
 	// 附近列表里的每一个商家
 	padding: 3vw;
 	padding-top: 0;
+	
 	.Nearitem{
+		margin-bottom: 2vh;
 		// outline: 1px solid;
 		display: flex;
 		flex-wrap: wrap;
@@ -77,50 +79,70 @@
 		background: #ffffff;
 		border-radius: 12px;
 		font-size: .8rem;
-		font-family: Microsoft YaHei, Microsoft YaHei-Normal;
-		text-align: CENTER;
-		// color: #af8982;
+		
+		
 		line-height: 20px;
 		// box-shadow: 0px 0px 1px 0px #e1e1e1; 
-		// 商家图片
-		.shopImg{
-			margin: 0 2vw;
-			align-self: center;
-		}
-		
+
 		.mid{
-			margin-left: 5vw;
-			align-items: flex-start;
-			justify-content: center;
-			// align-content: flex-start;
-			display: flex;
-			gap: 0.4rem;
-			flex-direction: column;
+			
+			// margin-top: 1.5vh;
 			// outline: 1px solid;
+			display: flex;
+			gap: 0.5rem;
+			margin: 2vh auto;
 			flex: 1;
-			.content{
-				color: #8b8b8b;
-				.address{
-					margin-right: 2rem;
+			.shopImg{
+				flex: 1;
+				margin: 0 3vw;
+				align-self: center;
+				
+			}
+			.aa{
+				flex: 2;
+				align-self: center;
+				display: flex;
+				flex-direction: column;
+			
+				gap: 0.5vh;
+				// outline: 1px solid;
+				.title{
+					font-size: 1.1rem;
+					font-weight: bold;
+					letter-spacing: 0.1rem;
+				}
+				.content{
+					color: #8b8b8b;
+					.address{
+						margin-right: 2rem;
+					}
 				}
 			}
+			
 		}
 		
 		// 商品列表
 		.shopList{
 			width: 90%;
 			margin: 0 auto;
+			border-top: 1.5px solid #eee;
+			padding-top: 1vh;
 			.shopItem{
 				display: flex;
-				border-top: 1px solid #E8EFFF;
-				border-bottom: 1px solid #E8EFFF;
+				margin-top: .2vh;
+				// outline: 1px solid;
 				
 				.cost{
 					margin-right: 1rem;
+					flex:0.5;
 					color: #FF6900;
 				}
 				.mealName{
 					color: #8B8B8B;
+					letter-spacing: 0.1rem;
+					flex: 2;
+					// outline: 1px solid;
+					// align-self: flex-start;
 				}
 			}
 		}

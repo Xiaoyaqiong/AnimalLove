@@ -37,32 +37,38 @@
 	
 	<!-- 附近商家列表 -->
 	<view class="NearList">
-		<view class="Nearitem" v-for="(item,index) in NearList">
+		<view class="Nearitem" v-for="(item,index) in NearList" @click="ClickDetail(item)">
 			
-			<view class="shopImg">
-				<u--image mode="scaleToFill" width="25vw" height="8vh" radius="10px" :src="item.shopImg"></u--image>
-			</view>
+			
 			<!-- 商家简介 -->
 			<view class="mid">
-				<span>{{item.shopName}}</span>
-				<u-rate :value="item.rate" readonly active-color="#FF6900"></u-rate>
-				<view class="content">
-					<span class="address">{{item.address}}</span>
-					<span class="distance">{{item.distance}}</span>
+				
+				<view class="shopImg" >
+					<u--image mode="scaleToFill" width="25vw" height="8vh" radius="10px" :src="item.shopImg"></u--image>
 				</view>
+				
+				<view class="aa">
+					<span class="title">{{item.shopName}}</span>
+					<u-rate :value="item.rate" readonly active-color="#FF6900"></u-rate>
+					<view class="content">
+						<span class="address">{{item.address}}</span>
+						<span class="distance">{{item.distance}}</span>
+					</view>
+				</view>
+				
+				
+			
 				
 			</view>
 			
 			<view class="shopList">
-				<view class="shopItem" v-for="(good,index) in item.setMeal">
+				<view class="shopItem" v-for="(good,index) in item.goods">
 					<span class="cost">&yen;  {{good.cost}}</span>
 					<span class="mealName">{{good.mealName}}</span>
 					
 
 				</view>
-				<view class="">
-					
-				</view>
+
 			</view>
 			
 		</view>
@@ -73,6 +79,7 @@
 
 <script>
 	import MyBar from '@/components/MyNavbar.vue'
+import myhttp from '../../api/myhttp'
 	export default {
 		data() {
 			return {
@@ -85,9 +92,9 @@
 
 				],
 				swiperList: [
-					'https://cdn.uviewui.com/uview/album/1.jpg',
-					'https://cdn.uviewui.com/uview/album/2.jpg',
-					'https://cdn.uviewui.com/uview/album/3.jpg',
+					// 'https://cdn.uviewui.com/uview/album/1.jpg',
+					// 'https://cdn.uviewui.com/uview/album/2.jpg',
+					// 'https://cdn.uviewui.com/uview/album/3.jpg',
 				],
 				// 附近商家列表
 				NearList:[
@@ -97,7 +104,7 @@
 						rate:5.0,
 						address:'胜桥东路',
 						distance:'1.2km',
-						setMeal:[
+						goods:[
 							{
 								cost:'288',
 								mealName:'公猫呼吸麻醉微创绝育手术'
@@ -114,7 +121,7 @@
 						rate:5.0,
 						address:'胜桥东路',
 						distance:'1.2km',
-						setMeal:[
+						goods:[
 							{
 								cost:'288',
 								mealName:'公猫呼吸麻醉微创绝育手术'
@@ -131,7 +138,7 @@
 						rate:5.0,
 						address:'胜桥东路',
 						distance:'1.2km',
-						setMeal:[
+						goods:[
 							{
 								cost:'288',
 								mealName:'公猫呼吸麻醉微创绝育手术'
@@ -147,10 +154,38 @@
 		},
 		components: {
 			MyBar
+		},
+		methods:{
+			ClickDetail(item){
+				console.log(item)
+				uni.navigateTo({
+					url:'/pages/sameCity/SecondPages/ShopDetail?shopId='+item.shopId
+				})
+			}
+		},
+		onLoad() {
+			// 初始化附近商家数据
+			myhttp.get('/users/goods/list').then(res=>{
+				this.NearList = res
+				// console.log(this.NearList);	
+			})
+
+			// 轮播图
+			myhttp.get('/users/getImage').then(res=>{
+				
+				res.data.forEach(item=>{
+					this.swiperList.push(item.imageUrl)
+				})
+				console.log(this.swiperList);
+			})
+			
 		}
 	}
 </script>
 
 <style lang="scss">
+	page{
+		background: #eee;
+	}
 	@import 'sameCity.scss';
 </style>

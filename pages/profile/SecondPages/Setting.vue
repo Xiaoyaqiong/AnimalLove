@@ -10,7 +10,7 @@
 		</view>
 		<view class="About">
 			<u-cell-group :border="false" title="关于" :customStyle="titleStyle">
-				<u-cell :border="false" class="whitebox" title="关于我们" :label="Version" @click="UpdateVersion">
+				<u-cell :border="false" class="whitebox" title="版本更新" :label="Version" @click="UpdateVersion">
 				</u-cell>
 				<u-cell class="whitebox" :border="false" title="用户协议" isLink url="/pages/Profile/ThirdPage/"></u-cell>
 				<u-cell class="whitebox" :border="false" title="隐私协议" isLink url="/pages/Profile/ThirdPage/"></u-cell>

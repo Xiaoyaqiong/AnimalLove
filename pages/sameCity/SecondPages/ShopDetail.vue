@@ -147,7 +147,7 @@
 				<span class="yennum"></span>
 			</span>
 			<view class="bookbtn">
-				<u-button shape="circle" text="预约课程" color="linear-gradient(to right, #FD88DD, #549BFF)" @tap="CommitBook"></u-button>
+				<u-button shape="circle" text="购买" color="linear-gradient(to right, #FD88DD, #549BFF)" @tap="CommitBook"></u-button>
 			</view>
 		</view>
 			
@@ -156,6 +156,9 @@
 </template>
 
 <script>
+	import MyBar from '@/components/MyNavbar.vue'
+import myhttp from '../../../api/myhttp'
+	
 	export default{
 		data(){
 			return{
@@ -277,74 +280,13 @@
 	},
 		
 	onLoad(data){
-		this.courseId = data.courseId
-		let url = this.$baseUrl+'/api/getCourseInfoById?courseId='+data.courseId
-		let that = this
-		uni.request({
-			url:url,
-			header: {
-				'token': uni.getStorageSync('token')
-			},
-			success(res) {
-				console.log(res.data.data)
-				that.ShopDetail = res.data.data
-				
-			}
+		// 商品详细初始化
+		myhttp.get(`/users/goods/getGood/`+data.shopId).then(res=>{
+			console.log(res);
 		})
 		
+	
 		
-		
-		
-		uni.getSystemInfo({
-			
-		    success: (e) => {
-		      // this.compareVersion(e.SDKVersion, '2.5.0')
-		      let statusBar = 0
-		      let customBar = 0
-		      
-		      
-		      // #ifdef MP
-		      statusBar = e.statusBarHeight
-		      customBar = e.statusBarHeight + 45
-		      if (e.platform === 'android') {
-		        this.$store.commit('SET_SYSTEM_IOSANDROID', false)
-		        customBar = e.statusBarHeight + 50
-		      }
-		      // #endif
-		      
-		      
-		      // #ifdef MP-WEIXIN
-		      statusBar = e.statusBarHeight
-		      // @ts-ignore
-		      const custom = wx.getMenuButtonBoundingClientRect()
-		      customBar = custom.bottom + custom.top - e.statusBarHeight
-		      // #endif
-		
-		
-		      // #ifdef MP-ALIPAY
-		      statusBar = e.statusBarHeight
-		      customBar = e.statusBarHeight + e.titleBarHeight
-		      // #endif
-		
-		
-		      // #ifdef APP-PLUS
-		      console.log('app-plus', e)
-		      statusBar = e.statusBarHeight
-		      customBar = e.statusBarHeight + 45
-		      // #endif
-		
-		
-		      // #ifdef H5
-		      statusBar = 0
-		      customBar = e.statusBarHeight + 45
-		      // #endif
-			  
-			  
-			  that.statusBar =  statusBar
-			  that.customBar =  customBar
-		    }
-		})
-
 		
 	}
 	}

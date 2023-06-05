@@ -204,12 +204,12 @@
 						path: '../../static/icon/user/shoucang.png',
 
 					},
-					{
-						name: '我的聊天',
-						id: 'chat',
-						path: '../../static/icon/user/xinxi.png',
+					// {
+					// 	name: '我的聊天',
+					// 	id: 'chat',
+					// 	path: '../../static/icon/user/xinxi.png',
 
-					},
+					// },
 					{
 						name: '我的订单',
 						id: 'MyOrder',
