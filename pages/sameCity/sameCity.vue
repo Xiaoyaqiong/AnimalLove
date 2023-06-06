@@ -2,7 +2,7 @@
 	<view class="">
 
 		<MyBar></MyBar>
-		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
+		<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view> -->
 		<!-- 三个按钮组 -->
 		<!-- <view class="btnGroup">
 			<view class="btn" v-for="(item,index) in btnGroup">
@@ -16,10 +16,9 @@
 		<!-- 邀请进群 -->
 		<view class="QQQun">
 			<u-avatar-group :urls="urls" size="2rem" gap="0.4"></u-avatar-group>
-
 			<p>邀请您加入附近的宠圈交流群~</p>
 			<view class="joinInbtn">
-				<u-button color="#FF6900" shape="circle" text="立即加入"></u-button>
+				<u-button color="#FF6900" shape="circle" text="立即加入" @click=""></u-button>
 			</view>
 		</view>
 
@@ -37,11 +36,11 @@
 	
 	<!-- 附近商家列表 -->
 	<view class="NearList">
-		<view class="Nearitem" v-for="(item,index) in NearList" @click="ClickDetail(item)">
+		<view class="Nearitem" v-for="(item,index) in NearList" >
 			
 			
 			<!-- 商家简介 -->
-			<view class="mid">
+			<view class="mid" @click="ClickShop(item)">
 				
 				<view class="shopImg" >
 					<u--image mode="scaleToFill" width="25vw" height="8vh" radius="10px" :src="item.shopImg"></u--image>
@@ -56,13 +55,10 @@
 					</view>
 				</view>
 				
-				
-			
-				
 			</view>
 			
 			<view class="shopList">
-				<view class="shopItem" v-for="(good,index) in item.goods">
+				<view class="shopItem" v-for="(good,index) in item.goods" @click="clickGood(good)">
 					<span class="cost">&yen;  {{good.cost}}</span>
 					<span class="mealName">{{good.mealName}}</span>
 					
@@ -156,7 +152,15 @@ import myhttp from '../../api/myhttp'
 			MyBar
 		},
 		methods:{
-			ClickDetail(item){
+			// 商品信息
+			clickGood(item){
+				console.log(item)
+				uni.navigateTo({
+					url:'/pages/sameCity/SecondPages/ShopDetail?goodId='+item.goodId
+				})
+			},
+			// 商家信息
+			ClickShop(item){
 				console.log(item)
 				uni.navigateTo({
 					url:'/pages/sameCity/SecondPages/ShopDetail?shopId='+item.shopId

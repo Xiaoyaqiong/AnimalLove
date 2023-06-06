@@ -38,7 +38,7 @@
 									<view class="teachers">
 										<u-avatar style="margin-right: 23rpx;" :src="item.image"></u-avatar>
 										<view class="teacherDetail">
-											<p class="t1">商品名称</p>
+											<p class="t1">商家名称</p>
 											<p class="Tname">{{item.merchantName}}</p>
 										</view>
 									</view>

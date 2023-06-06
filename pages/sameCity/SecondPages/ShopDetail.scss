@@ -13,7 +13,7 @@ $greenheight:5.3vh;
 	padding:1vh 1.3vh;						// 上下 左右 (内收缩)
 	background: #fff;
 	margin-top: -8%;
-	padding-bottom: 6%;
+	// padding-bottom: 6%;
 	z-index: 10;
 	width: 100%;
 	.content-title{
@@ -102,7 +102,7 @@ $greenheight:5.3vh;
 		margin-top: 1.5vh;
 		padding: 1.5vh;
 		display: flex;
-		gap: 20rpx;
+		gap: 5vw;
 		width: 100%;
 		background: #fff;
 		.teachers{

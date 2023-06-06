@@ -5,7 +5,7 @@
 		<view class="Account">
 			<u-cell-group :border="false" title="账号" :customStyle="{'fontSize':'8px'}">
 				<u-cell class="whitebox" :border="false" title="账户与安全" isLink size="large"
-					url="/pages/personage/ThirdPage/AccountSetting"></u-cell>
+					url="/pages/profile/ThirdPage/AccountSetting"></u-cell>
 			</u-cell-group>
 		</view>
 		<view class="About">

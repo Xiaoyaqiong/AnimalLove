@@ -1,5 +1,7 @@
 <template>
 	<view class="content">
+		<!-- 匹配手机端，腾出手机状态栏的高度，防止手机状态栏遮拦内容 -->
+		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<!-- 头部登录文字 -->
 		<view class="header">
 			<span style="font-weight: bolder;font-size: 50rpx;">登录</span>
@@ -219,6 +221,7 @@ import store from '../../store';
 					uni.switchTab({
 						url:'/pages/profile/profile',
 					})
+
 				})
 
 			}

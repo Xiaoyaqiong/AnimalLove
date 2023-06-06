@@ -127,6 +127,12 @@
 			margin: 0 auto;
 			border-top: 1.5px solid #eee;
 			padding-top: 1vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin: 1.8vh auto;
+			margin-top: .2vh;
+			gap: 2vh;
 			.shopItem{
 				display: flex;
 				margin-top: .2vh;
@@ -134,12 +140,14 @@
 				
 				.cost{
 					margin-right: 1rem;
+					font-size: 1rem;
 					flex:0.5;
 					color: #FF6900;
 				}
 				.mealName{
 					color: #8B8B8B;
 					letter-spacing: 0.1rem;
+					font-size: 1rem;
 					flex: 2;
 					// outline: 1px solid;
 					// align-self: flex-start;

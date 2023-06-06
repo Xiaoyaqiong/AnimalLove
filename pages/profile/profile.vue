@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<u-toast ref="uToast"></u-toast>
 		<!-- 添加宠物模态框 -->
 		<u-popup zIndex="998" class="popup" :show="showAddPet" :round="10" @close="close" @open="open" closeable>
@@ -8,7 +9,8 @@
 				<u-form labelPosition="left" :model="PetModal" :rules="rules" errorType="message" ref="form1">
 					<u-form-item label="头像" :border-bottom="true">
 						<u-upload
-								
+								:fileList="fileList1"
+								:previewFullImage="true"
 								@afterRead="afterRead"
 								name="file"
 								:maxCount="1"
@@ -244,7 +246,7 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 			
 			
 			afterRead(file, lists, name){
-				console.log(file.file.url);
+				
 				uni.uploadFile({
 					url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
 					filePath: file.file.url,
@@ -253,6 +255,7 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 						console.log(res.data);
 						if (res.statusCode == 200) {
 							this.Firstpet.avatar = 'http://10.23.83.140:8080'+res.data
+							this.fileList1.push({'url':this.Firstpet.avatar})
 							
 						}
 						
@@ -367,7 +370,7 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 		},
 
 		onShow() {
-			
+			this.$store.commit('getUserInfo',null)
 		},
 		onLoad() {
 		// 初始化页面

@@ -43,6 +43,13 @@
 				"navigationStyle": "custom"
 			}
 		},
+		// 三级页面
+		{
+			"path": "pages/profile/ThirdPage/AccountSetting",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
 
 		// 二级页面
 		{
