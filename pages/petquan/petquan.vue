@@ -1,5 +1,7 @@
 <template>
 	<view class="content">
+		<!-- 匹配手机端，腾出手机状态栏的高度，防止手机状态栏遮拦内容 -->
+		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<MyBar></MyBar>
 		<view class="nav">
 			<view class="nav-list" v-for="(item,index) in list" :key="item.id" @tap="changeAct(item)">
@@ -17,7 +19,7 @@
 		<view class="detail">
 			<view class="" v-if="act==0">
 				<view class="title blod">
-					话题
+					描述您的宠物性格吧~
 				</view>
 				<!-- <view class="existing_label">
 					<view class="u-page__tag-item" v-for="(item, index) in allTags" :key="index">
@@ -28,7 +30,7 @@
 				</view> -->
 				<view class="">
 					<u-row justify="space-between" gutter="10" v-for="(rowitem,rowindex) in allTags" :key="rowindex" customStyle="margin-bottom: 10px">
-						<u-col v-for="(tagitem,tagindex) in rowitem" :span="tagitem.span" @click="topicDetail(tagitem.id)">
+						<u-col v-for="(tagitem,tagindex) in rowitem" :span="tagitem.span" @click="topicDetail(tagitem)">
 							<view class="demo-layout" :style="{'background-color': tagitem.color}">{{tagitem.name}}</view>
 						</u-col>
 
@@ -40,41 +42,24 @@
 					
 					</u-row> -->
 				</view>
-				<view class="title blod">
+				<view class="title blod" @tap="dianji()">
 					动态
 				</view>
-				<custom-waterfalls-flow :value="Donglist">
-
-					<!-- #ifndef MP-WEIXIN -->
-					<template v-slot:default="item">
-						<view class="item">
-							<view class="title">{{item.title}}</view>
-							<view class="userinfo flex">
-								<view class="left flex">
-									<u-avatar size="19px"></u-avatar>
-									<text class="username">小熊布丁</text>
-								</view>
-								<view class="right">
-									<uni-icons type="heart"></uni-icons>
-									<text class="like">1.1w</text>
-								</view>
-							</view>
-						</view>
-					</template>
-					<!-- #endif -->
-				</custom-waterfalls-flow>
+				<adopt id="filterBox"></adopt>
 			</view>
 			<view class="" v-else="act==1">
 				<view>
 					<u-grid :border="false" col="4">
-						<u-grid-item v-for="(listItem,listIndex) in typelist" :key="listIndex" @click="gotofilter(listItem)">
+						<u-grid-item v-for="(listItem,listIndex) in typelist" :key="listIndex" @click="gotofilter(listItem.id)">
 							<img class="sortImg radius" :src="listItem.src" alt="">
 							<text class="grid-text">{{listItem.title}}</text>
 						</u-grid-item>
 					</u-grid>
 					<u-toast ref="uToast" />
 				</view>
-				<articles></articles>
+				<articles :articlelist="articlelist" :currentPage="currentPage"
+				:pages="pages" :totalCount="totalCount" :status="status" :pageSize="pageSize"
+				></articles>
 			</view>
 		</view>
 
@@ -85,140 +70,94 @@
 	import articles from '../../components/articles.vue'
 	import myhttp from '../../api/myhttp'
 	import MyBar from '@/components/MyNavbar.vue'
+	import adopt from 'pages/zadopt/adopt.vue'
 	export default {
 		components: {
 			articles,
-			MyBar
+			MyBar,
+			adopt
 		},
 		data() {
 			return {
+				currentPage: 1, //当前页码
+				pages: 0, //总页数
+				totalCount: 0, //总条数
+				status: '',
+				pageSize: 5, //一个个数
+				articlelist: [],
+				articleTag:null,
 				typelist: [{
-						name: 'photo',
-						title: '图片',
+						id:1,
+						name: 'miaomiao',
+						title: '喵喵',
 						src:'../../static/icon/index/xiaomaochushou.png'
 					},
 					{
-				  name: 'lock',
-						title: '锁头',
-						src:'../../static/icon/index/xiaomaochushou.png'
+						id:2,
+						name: 'wanwan',
+						title: '汪汪',
+						src:'../../static/icon/index/dogicon.png'
 				 },
 					{
-						name: 'star',
-						title: '星星',
-						src:'../../static/icon/index/xiaomaochushou.png'
+						id:3,
+						name: 'tutu',
+						title: '兔兔',
+						src:'../../static/icon/index/rabbiticon.png'
 					},
 					{
-						name: 'hourglass',
-						title: '沙漏',
-						src:'../../static/icon/index/xiaomaochushou.png'
+						id:4,
+						name: 'yaya',
+						title: '鸭鸭',
+						src:'../../static/icon/index/duckicon.png'
 					},
-					{
-						name: 'home',
-						title: '首页',
-						src:'../../static/icon/index/xiaomaochushou.png'
-					},
-					{
-						name: 'star',
-						title: '音量',
-						src:'../../static/icon/index/xiaomaochushou.png'
-					},
-					{
-						name: 'star',
-						title: '音量',
-						src:'../../static/icon/index/xiaomaochushou.png'
-					},
-					{
-						name: 'star',
-						title: '音量',
-						src:'../../static/icon/index/xiaomaochushou.png'
-					},
+					
 				],
-				Donglist: [{
-						image: 'https://via.placeholder.com/200x500.png/ff0000',
-						title: '德文卷毛，求领养~',
-						type: '德文卷毛',
-						age: '2',
-						time: '3'
-
-					},
-					{
-						image: 'https://via.placeholder.com/200x500.png/ff0000',
-						title: '德文卷毛，求领养德文卷毛，求领养~~',
-						type: '德文卷毛',
-						age: '2',
-						time: '3'
-
-					},
-					{
-						image: 'https://via.placeholder.com/200x200.png/2878ff',
-						title: '德文卷毛，求领养~',
-						type: '德文卷毛',
-						age: '2',
-						time: '3'
-
-					},
-					{
-						image: 'https://via.placeholder.com/200x500.png/ff0000',
-						title: '德文卷毛，求领养~',
-						type: '德文卷毛',
-						age: '2',
-						time: '3'
-
-					},
-					{
-						image: 'https://via.placeholder.com/200x200.png/2878ff',
-						title: '德文卷毛，求领养~',
-						type: '德文卷毛',
-						age: '2',
-						time: '3'
-
-					},
-				],
+				
 				allTags: {
 					row1: [{
-						name: '#我的萌宠',
+						name: '#热情讨好',
 						span: 3,
 						id:0,
 						color:"#F5DCA6",
-						detail:'简介我的萌宠'
+						
 					}, {
-						name: '#小奶猫',
-						span: 6,
+						name: '#胆小内向',
+						span: 4,
 						id:1,
 						color:"#FCF4E0",
-						detail:'简介小奶猫'
+						
 					}, {
-						name: '#德文卷毛',
-						span: 3,
+						name: '#外强中干',
+						span: 5,
 						id:2,
 						color:"#F5DCA6",
-						detail:'简介德文卷毛'
+						
 					}],
 					row2:[{
-						name: '#小短腿',
-						span: 5,
+						name: '#霸道妒忌',
+						span: 4,
 						id:3,
 						color:"#E5EEE5",
-						detail:'简介小短腿'
+						
 					}, {
-						name: '#狗狗日常',
+						name: '#好动热血',
 						span: 5,
 						id:4,
 						color:"#ECE7E3",
-						detail:'简介狗狗日常'
+						
 					}, {
-						name: '#守宫',
-						span: 2,
+						name: '#温暖贴心',
+						span: 3,
 						id:5,
 						color:"#FCF4E0",
-						detail:'简介守宫'
+
 					}]
 				},
 				act: 0,
 
 				list: [{
 						id: 0,
-						name: '动态'
+						name: '领养中心'
 					},
 					{
 						id: 1,
@@ -236,6 +175,34 @@
 		// },
 		
 		methods: {
+			
+			// 获取文章列表
+			loadarticles: function() {
+				// let params=this.articleTag
+				myhttp.get('/articles/list/' + this.currentPage + '/' + this.pageSize,{'tagId':this.articleTag}).then(res => {
+					console.log(res.data.total, 'res.data.records');
+					if (res.resultCode == 200) {
+						res.data.records.forEach(e => {
+							this.articlelist.push(e)
+						})
+						this.pages = res.data.pages
+						this.currentPage = res.data.current
+						this.totalCount = res.data.total
+			
+					} else if (res.resultCode == 401) {
+						uni.navigateTo({
+							url: "../login/login"
+						})
+			
+					} else {
+						uni.showToast({
+							title: "加载错误",
+							icon: "none",
+						})
+					}
+				})
+			
+			},
 			getTopicList(){
 				myhttp.get('/user/article/Topic').then(({data})=>{
 					this.allTopic=data
@@ -246,13 +213,16 @@
 			topicDetail(item){
 				console.log('点击话题',item);
 				    uni.navigateTo({
-				    // url: '/pages/perquan/SecondPages/TopicDetail?id='+id
-					url: 'SecondPages/TopicDetail'
+				    	url: '/pages/zadopt/setup?item='+encodeURIComponent(JSON.stringify(item))
+				    	// ?item=' + encodeURIComponent(JSON.stringify(item))
 				    })
 			},
 			// 据分类筛选文章
 			gotofilter(item){
-				console.log('我点击了',item.name);
+				this.articlelist=[]
+				this.articleTag=item
+				console.log('我点击了',item);
+				this.loadarticles()
 			},
 			click(name) {
 				this.$refs.uToast.success(`点击了第${name}个`)
@@ -285,11 +255,38 @@
 
 				// // 可以根据点击事件改变内容
 				// this.content = item
-			}
+			},
+			thisAsyncIncrement() {
+				this.$store.state.adopt.adoptList=[]
+				this.$store.dispatch('getArticles')
+			},
 		},
 		onShow() {
 			// 页面默认显示的是list列表中第一条数据
 			// this.content = this.list[0]
+		},
+		onLoad() {
+			
+			this.$store.state.adopt.filterList={}
+			this.thisAsyncIncrement()
+		},
+		mounted:function(){
+			this.loadarticles()
+		},
+		onReachBottom() {
+			if (this.currentPage >= this.pages) return;
+			console.log('进入');
+			this.status = 'loading';
+			this.currentPage = ++this.currentPage;
+			setTimeout(() => {
+				this.loadarticles()
+				if (this.currentPage >= this.pages) {
+					this.status = 'nomore'
+				} else {
+			
+					this.status = 'loading'
+				}
+			}, 1000)
 		}
 
 	}
@@ -301,9 +298,16 @@
 			margin-bottom: 11px;
 		}
 	}
-	.sortImg{
-		width: 59px;
-		height: 59px;
+	.sortImg {
+		width: 8vw;
+		height:5vh;
+		border-radius: 10px;
+		
+		img {
+			width: 100%;
+			height: 100%;
+			border-radius: 10px;
+		}
 	}
 	.userinfo{
 		justify-content: space-between;
@@ -330,71 +334,7 @@
 		/* #endif */
 	}
 
-	// .existing_label {
-	// 	width: 100%;
-	// 	margin-top: 10px;
-	// 	display: flex;
-	// 	flex-direction: row;
-	// 	justify-content: flex-start;
-	// 	// align-content: space-between;
-	// 	flex-wrap: wrap;
-
-	// 	// .u-page__tag-item {
-	// 	// 	margin-top: 15px;
-	// 	// 	// background: rgba(41, 41, 69, 0.05);
-	// 	// 	margin-right: 10px;
-	// 	// }
-
-	// 	// .u-page__tag-item:nth-child(3n){
-	// 	// 	margin-right: 0;
-	// 	// }
-	// 	// .u-tag u-tag--circle u-tag--primary--plain u-tag--medium {
-	// 	// 	// margin-right: 0px!important;
-	// 	// }
-
-	// 	/deep/ {
-	// 		.u-tag--primary {
-	// 			border-radius: 10px;
-	// 			background-color: rgba(41, 41, 69, 0.05);
-	// 			border-color: #3285E4 !important;
-	// 			// border-image:linear-gradient(to right,rgba(93, 164, 247, 1), rgba(50, 133, 228, 1))1!important;
-	// 		}
-
-	// 		.u-tag-wrapper {
-	// 			// background:  rgba(41, 41, 69, 0.05);
-	// 			border-radius: 10px;
-	// 		}
-
-	// 		.u-tag u-tag--circle u-tag--primary u-tag--medium {
-	// 			background-color: rgba(41, 41, 69, 0.05);
-	// 		}
-
-	// 		.u-tag--medium {
-	// 			padding: 0 15px;
-	// 			background: rgba(41, 41, 69, 0.05);
-	// 		}
-
-	// 		.u-tag__close--medium {
-	// 			border: 1px solid rgba(122, 122, 140, 1);
-	// 			background: #FFFFFF !important;
-	// 		}
-
-	// 		.u-tag__close {
-	// 			// background-color: #FFFFFF!important;
-	// 			top: 12px;
-	// 			right: 18px;
-	// 		}
-
-	// 		.u-icon__icon {
-	// 			color: rgba(122, 122, 140, 1) !important;
-	// 		}
-
-	// 		// .u-tag u-tag--circle u-tag--primary--plain u-tag--medium {
-	// 		// 	background: red;
-	// 		// }
-	// 	}
-	// }
-
+	
 	.content {
 		margin-top: 8.5vh;
 		margin-left: 12px;

@@ -38,8 +38,8 @@
 						</swiper>
 					</view>
 				</view>
-				<view class="content"><text>当然要拍照记录啊~
-						{{petDetail.title}}
+				<view class="content"><text>{{petDetail.title}}
+						{{petDetail.introduce}}
 					</text></view>
 				<view class="time ">
 					<text>发布于</text>

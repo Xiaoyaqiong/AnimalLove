@@ -1,5 +1,7 @@
 <template>
 	<view class="postarticle ">
+		<!-- 匹配手机端，腾出手机状态栏的高度，防止手机状态栏遮拦内容 -->
+		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<view class="cu-bar">
 			<u-icon name="close" size="20" color="#989898" @click="goBackToorder"></u-icon>
 			<view class="btn"><button class="release flex  align-center  justify-center" @tap="showModal"
@@ -44,7 +46,7 @@
 		</view>
 		<view class="idea">把你的想法分享给全世界</view>
 		<view class="cu-form-group margin-top">
-			<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaAInput" placeholder=""
+			<textarea  :disabled="modalName!=null" @input="textareaAInput" placeholder=""
 				v-model="articleContent"></textarea>
 		</view>
 		<view class="chooseinfo">
@@ -349,8 +351,22 @@
 
 
 			},
-		}
-
+		},
+		onLoad(option) {
+			console.log(option,'option');
+			if(option.flag){
+				return
+			}else{
+				const item = JSON.parse(decodeURIComponent(option.item))
+				console.log(item.name,'item')
+				this.articleContent=item.name
+			}
+			
+			// this.articlesUrl=item.articleUrl
+			// this.articleId=item.id
+			// var pages = getCurrentPages();
+			// console.log(pages,'getCurrentPages');
+		},
 	}
 </script>
 

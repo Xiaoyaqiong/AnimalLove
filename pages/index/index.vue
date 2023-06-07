@@ -76,7 +76,7 @@
 		</view>
 
 		<!-- 常见问题 -->
-		<view class="question">
+		<!-- <view class="question">
 			<view class="title">
 				<text>常见问题</text>
 			</view>
@@ -92,7 +92,7 @@
 					</view>
 				</u-col>
 			</u-row>
-		</view>
+		</view> -->
 		<!-- 推荐文章 -->
 		<articles :articlelist="articlelist" :currentPage="currentPage" 
 		:pages="pages" :totalCount="totalCount" :status="status" :pageSize="pageSize"
@@ -164,6 +164,9 @@ import titleBar from '../../components/titleBar.vue'
 		onLoad() {
 
 		},
+		onShow(){
+			document.body.style.overflow = "auto";
+		},
 		methods: {
 			
 			// 获取文章列表
@@ -229,7 +232,7 @@ import titleBar from '../../components/titleBar.vue'
 			
 					this.status = 'loading'
 				}
-			}, 5000)
+			}, 3000)
 		}
 	}
 </script>

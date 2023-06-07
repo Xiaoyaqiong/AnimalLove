@@ -27,7 +27,7 @@
 			navHeight: {
 				type: Number,
 				default: 0
-			}
+			},
 		},
 		data() {
 			return {
@@ -78,6 +78,7 @@
 				var box=function(e){passive: false ;};
 					document.body.style.overflow='hidden';
 					document.addEventListener("touchmove",box,false);
+					
 				let _open = setTimeout(() => {
 					this.translateValue = 0;
 					_open = null;
@@ -119,7 +120,7 @@
 		position: absolute;
 		z-index: 999999;
 		background: rgba(0, 0, 0, .3);
-		height: calc(100% - 50px);
+		height: calc(100%);
 		width: 100%;
 		left: 0px;
 		overflow: hidden;

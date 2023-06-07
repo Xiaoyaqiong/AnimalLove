@@ -1,12 +1,12 @@
 <template>
-	<view class="content">
+	<view class="">
 		<view class="">
-			<Mynav CenterSlot="领养中心" :MyColor="$topicColor" :backInfo="goBackIndex"></Mynav>
+			<!-- <Mynav CenterSlot="领养中心" :MyColor="$topicColor" :backInfo="goBackIndex"></Mynav> -->
 			<slFilter :menuList="menuList" @result="result" :currentCity="currentCity"></slFilter>
 			<button @click="thisAsyncIncrement"  class="choose">点击筛选您想带走的小可爱哟~</button>
 			<pp-waterfall-flow :value="$store.state.adopt.adoptList" :gap="20" :columns="2" :padding="30" :itemBR="12" imageBR="10rpx"></pp-waterfall-flow>
 			        <!-- <uni-load-more :status="status"></uni-load-more> -->
-			<uni-fab @fabClick="add" :popMenu="false" horizontal="right"></uni-fab>
+			<uni-fab @fabClick="add()" :popMenu="false" horizontal="right"></uni-fab>
 		</view>
 	</view>
 </template>
@@ -93,12 +93,7 @@
 						  ]
 					}
 				],
-				// adoptList: [],
-				// filterList: {
-				// 	'petAge':[],
-				// 	'petGender':[],
-				// 	'petVariety':[],
-				// }
+				
 				adoptList:[]
 			}
 		},
@@ -107,6 +102,7 @@
 				Mynav
 		},
 		onLoad() {
+			this.$store.state.adopt.filterList={}
 			this.thisAsyncIncrement()
 		},
 		methods: {
@@ -116,9 +112,9 @@
 				})
 			},
 			add(){
+				let flag=false
 				uni.navigateTo({
-				
-					url: 'setup'
+					url: '/pages/zadopt/setup?flag='+encodeURI(flag)
 				})
 			},
 			thisAsyncIncrement() {
