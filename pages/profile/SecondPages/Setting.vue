@@ -27,6 +27,7 @@
 
 <script>
 	import Mynav from '@/components/Mynav.vue'
+import myhttp from '../../../api/myhttp'
 	export default {
 		data() {
 			return {
@@ -64,20 +65,16 @@
 
 			},
 			Logout() {
-				uni.removeStorageSync('token')
-				uni.removeStorageSync('userId')
-				uni.request({
-					url: this.$baseUrl + '/api/user/logout',
-					method: 'DELETE',
-					success(res) {
-						console.log(res)
-						if (res.code == 200) {
-							uni.showToast({
-								title: res.msg
-							})
-						}
+				
+				myhttp.delete('/api/user/loginOut').then(res=>{
+					if (res == '登出成功') {
+						uni.showToast({
+							title: res
+						})
 					}
 				})
+				uni.removeStorageSync('token')
+				uni.removeStorageSync('userId')
 				uni.reLaunch({		// 必须把页面栈清空
 					url: '/pages/login/login'
 				})
