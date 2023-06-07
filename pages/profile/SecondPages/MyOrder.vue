@@ -105,11 +105,10 @@
 			Mynav
 		},
 		methods: {
-			
 			ClickDetail(item){
 				console.log(item)
 				uni.navigateTo({
-					url:'/pages/sameCity/SecondPages/ShopDetail?goodsId='+item.goodsId
+					url:'/pages/sameCity/SecondPages/ShopDetail?goodId='+item.goodId
 				})
 			},
 			// 删除订单
