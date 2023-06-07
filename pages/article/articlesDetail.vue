@@ -1,8 +1,7 @@
 <template>
 	
 	<view class="">
-		<!-- 匹配手机端，腾出手机状态栏的高度，防止手机状态栏遮拦内容 -->
-		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
+	
 		<u-navbar :fixed="true" :placeholder="true" @leftClick="backIndex()">
 			<view class="u-nav-slot" slot="center">
 				文章详情

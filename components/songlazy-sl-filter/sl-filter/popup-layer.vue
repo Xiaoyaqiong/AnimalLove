@@ -76,8 +76,8 @@
 				let _this = this;
 				this.ifshow = true;
 				var box=function(e){passive: false ;};
-					document.body.style.overflow='hidden';
-					document.addEventListener("touchmove",box,false);
+					// document.body.style.overflow='hidden';
+					// document.addEventListener("touchmove",box,false);
 					
 				let _open = setTimeout(() => {
 					this.translateValue = 0;
@@ -97,8 +97,8 @@
 				this.timer = setTimeout(() => {
 					this.ifshow = false;
 					var box=function(e){passive: false };
-						document.body.style.overflow=''; // 出现滚动条
-						document.removeEventListener("touchmove",box,false);
+						// document.body.style.overflow=''; // 出现滚动条
+						// document.removeEventListener("touchmove",box,false);
 					this.timer = null;
 					this.iftoggle = false;
 				}, 300);

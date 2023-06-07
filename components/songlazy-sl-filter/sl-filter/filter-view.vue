@@ -255,18 +255,18 @@
 				this.$emit('update:menuList', val)
 			},
 			menuTabClick(index) {
-				uni.createSelectorQuery().select('#filterBox').boundingClientRect(function (rect) {
-				  // 计算组件距离页面顶部的距离（包含滚动位置）
-				  let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-				  let top = rect.top + scrollTop-44;
-				  console.log(top,'top');
+				// uni.createSelectorQuery().select('#filterBox').boundingClientRect(function (rect) {
+				//   // 计算组件距离页面顶部的距离（包含滚动位置）
+				//   let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+				//   let top = rect.top + scrollTop-44;
+				//   console.log(top,'top');
 				
-				  // 滚动页面到组件位置，并固定组件在顶部
-				  uni.pageScrollTo({
-				    scrollTop: top,
-				    duration: 300
-				  });
-				}).exec();
+				//   // 滚动页面到组件位置，并固定组件在顶部
+				//   uni.pageScrollTo({
+				//     scrollTop: top,
+				//     duration: 300
+				//   });
+				// }).exec();
 				console.log(index, 'index');
 				this.menuIndex = index;
 				this.selectDetailList = this.menuList[index].detailList;
