@@ -1,6 +1,7 @@
 <template>
 	<view class="">
 		<view class="">
+			<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view> -->
 			<!-- <Mynav CenterSlot="领养中心" :MyColor="$topicColor" :backInfo="goBackIndex"></Mynav> -->
 			<slFilter :menuList="menuList" @result="result" :currentCity="currentCity"></slFilter>
 			<button @click="thisAsyncIncrement"  class="choose">点击筛选您想带走的小可爱哟~</button>

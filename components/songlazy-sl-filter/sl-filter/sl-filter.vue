@@ -1,39 +1,31 @@
 <template>
 	<view class="content">
-		<view>
-			<view class="select-tab">
-				<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index"
-					@tap="showMenuClick(index)">
-					<view :class="statusList[index].isActive?'select-title':'unselect-title'">{{item.title}}</view>
-					<!-- <text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text> -->
+		<view :style="{height: tabHeight + 1 +'px'}">
+			<view :class="topFixed?'select-tab-fixed-top':'select-tab'" :style="{height: tabHeight+'px'}">
+				<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
+					<text :style="{color:color}">{{item.title}}</text>
+					<text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text>
 				</view>
 			</view>
 		</view>
-		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav"
-			:navHeight="navHeight">
-			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor"
-				:menuList.sync="menuListTemp" ref="slFilterView" @confirm="filterResult"
-				:currentCity="currentCity"></sl-filter-view>
+		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
+		 :tabHeight="tabHeight">
+			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor" :menuList.sync="menuListTemp"
+			 ref="slFilterView" @confirm="filterResult"></sl-filter-view>
 		</popup-layer>
 	</view>
 
 </template>
 
 <script>
-	import popupLayer from '../sl-filter/popup-layer.vue';
-	import slFilterView from './filter-view.vue';
+	import popupLayer from '@/components/songlazy-sl-filter/sl-filter/popup-layer.vue';
+	import slFilterView from '@/components/songlazy-sl-filter/sl-filter/filter-view.vue';
 	export default {
 		components: {
 			popupLayer,
 			slFilterView
 		},
 		props: {
-			currentCity: {
-				type: String,
-				default () {
-					return ''
-				}
-			},
 			menuList: {
 				type: Array,
 				default () {
@@ -82,7 +74,7 @@
 					return newObj;
 				}
 			},
-			titleList() {
+			titleList(){
 				// 使用计算属性来替换生命周期，这样App H5 Ios 都可以兼容
 				let arr = [];
 				let titleArr = [];
@@ -91,9 +83,9 @@
 				for (let i = 0; i < this.menuList.length; i++) {
 					arr.push({
 						'isActive': false
-					});
+					});				
 					r[this.menuList[i].key] = this.menuList[i].title;
-
+				
 					if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
 						titleArr.push({
 							'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
@@ -105,15 +97,14 @@
 							'key': this.menuList[i].key
 						})
 					}
-
+				
 				}
 				this.statusList = arr;
+				
 				this.tempTitleObj = r;
 				return titleArr;
 			}
-			
 		},
-
 
 		data() {
 			return {
@@ -126,31 +117,30 @@
 			};
 		},
 		methods: {
-
 			getMenuListTemp() {
 				let arr = this.menuList;
 				for (let i = 0; i < arr.length; i++) {
 					let item = arr[i];
 					for (let j = 0; j < item.detailList.length; j++) {
 						let d_item = item.detailList[j];
-						// if (j == 0) {
-						// 	// d_item.isSelected = true
-						// } else {
-						// 	d_item.isSelected = false
-						// }
+						if (j == 0) {
+							d_item.isSelected = true
+						} else {
+							d_item.isSelected = false
+						}
 					}
 				}
 				return arr;
 			},
 			// 重置所有选项，包括默认选项，并更新result
 			resetAllSelect(callback) {
-				this.$refs.slFilterView.resetAllSelect(function(e) {
+				this.$refs.slFilterView.resetAllSelect(function(e){
 					callback(e);
 				});
 			},
 			// 重置选项为设置的默认值，并更新result
 			resetSelectToDefault(callback) {
-				this.$refs.slFilterView.resetSelectToDefault(function(e) {
+				this.$refs.slFilterView.resetSelectToDefault(function(e){
 					callback(e);
 				});
 			},
@@ -164,7 +154,6 @@
 				this.selectedIndex = index;
 				if (this.statusList[index].isActive == true) {
 					this.$refs.popupRef.close();
-
 					this.statusList[index].isActive = false
 				} else {
 					this.menuTabClick(index);
@@ -176,7 +165,6 @@
 				for (let i = 0; i < this.statusList.length; i++) {
 					if (index == i) {
 						this.statusList[i].isActive = true;
-
 					} else {
 						this.statusList[i].isActive = false;
 					}
@@ -217,11 +205,11 @@
 
 				this.$refs.popupRef.close()
 				if (obj.isReset) {
-
-				} else {
+					
+				} else{
 					this.$emit("result", val)
 				}
-
+				
 
 			},
 			close() {
@@ -237,14 +225,14 @@
 	@import 'iconfont/iconfont.css';
 
 	.select-tab {
-		/* border-bottom: #F7F7F7 1px solid; */
+		border-bottom: #F7F7F7 1px solid;
 		background-color: #FFFFFF;
 		display: flex;
 		width: 100%;
 	}
 
 	.select-tab-fixed-top {
-		/* border-bottom: #F7F7F7 1px solid; */
+		border-bottom: #F7F7F7 1px solid;
 		background-color: #FFFFFF;
 		display: flex;
 		width: 100%;
@@ -265,26 +253,7 @@
 	.select-tab-fixed-top .select-tab-item {
 		display: flex;
 		justify-content: center;
-		/* align-items: center; */
-
-
-	}
-
-	.select-title {
-		line-height: 44px;
-		color: #FFB600;
-		border-bottom: 5px solid #FFB600;
-		/* padding-bottom:6px; */
-
-	}
-
-	.unselect-title {
-		color: #777777;
-		line-height: 44px;
-	}
-
-	.select-tab {
-		height: 44px;
+		align-items: center;
 	}
 
 	.select-tab .select-tab-item text,

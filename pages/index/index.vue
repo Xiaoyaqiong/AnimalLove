@@ -165,7 +165,7 @@ import titleBar from '../../components/titleBar.vue'
 
 		},
 		onShow(){
-			document.body.style.overflow = "auto";
+			// document.body.style.overflow = "auto";
 		},
 		methods: {
 			
