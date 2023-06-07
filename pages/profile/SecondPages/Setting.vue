@@ -73,18 +73,20 @@
 						console.log(res)
 						if (res.code == 200) {
 							uni.showToast({
-								title: res.message
+								title: res.msg
 							})
 						}
 					}
 				})
 				uni.reLaunch({		// 必须把页面栈清空
-					url: '/pages/splash/agreement/agreement'
+					url: '/pages/login/login'
 				})
-				
+				// #ifdef H5
 				setTimeout(() => {
 					this.$router.go(0)
 				}, 500)
+				// #endif
+				
 			}
 
 		},

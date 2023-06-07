@@ -320,9 +320,9 @@ import myhttp from '../../../api/myhttp'
 				// this.ShopDetail.goodComment.createTime = uni.$u.timeFormat(this.ShopDetail.goodComment.createTime,'yyyy年mm月dd日')
 				this.isShop = 1;	// 是否点击商家 1为是 0为否
 			})
-		}else if (data.goodId){
+		}else if (data.goodsId){
 			// 商品详细初始化
-			myhttp.get(`/users/goods/getGood/`+data.goodId).then(res=>{
+			myhttp.get(`/users/goods/getGood/`+data.goodsId).then(res=>{
 				console.log(res);
 				this.ShopDetail = res.good
 				this.ShopDetail.goodComment = res.goodComment
