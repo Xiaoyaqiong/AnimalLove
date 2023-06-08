@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="content3">
 		<!-- 匹配手机端，腾出手机状态栏的高度，防止手机状态栏遮拦内容 -->
 		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<MyBar></MyBar>
@@ -18,33 +18,36 @@
 		<!-- 内容的改变 -->
 		<view class="detail">
 			<view class="" v-if="act==0">
-				<view class="title blod">
-					描述您的宠物性格吧~
-				</view>
-				<!-- <view class="existing_label">
-					<view class="u-page__tag-item" v-for="(item, index) in allTags" :key="index">
-						<u-tag shape="circle" :text="item.name" :plain="!item.checked" :name="index" @click="TagClick"
-							borderColor='#fff' color='black' @close="closelabelTag">
-						</u-tag>
+				<view class="xingge">
+					<view class="title1 blod">
+						描述您的宠物性格吧~
 					</view>
-				</view> -->
-				<view class="">
-					<u-row justify="space-between" gutter="10" v-for="(rowitem,rowindex) in allTags" :key="rowindex" customStyle="margin-bottom: 10px">
-						<u-col v-for="(tagitem,tagindex) in rowitem" :span="tagitem.span" @click="topicDetail(tagitem)">
-							<view class="demo-layout" :style="{'background-color': tagitem.color}">{{tagitem.name}}</view>
-						</u-col>
-
-					</u-row>
-					<!-- <u-row justify="space-between">
-						<u-col v-for="(rowitem,rowindex) in allTopic" span="4" key="rowindex" @click="topicDetail(rowitem.id)">
-							<view class="demo-layout">{{rowitem.name}}</view>
-						</u-col>
+					<!-- <view class="existing_label">
+						<view class="u-page__tag-item" v-for="(item, index) in allTags" :key="index">
+							<u-tag shape="circle" :text="item.name" :plain="!item.checked" :name="index" @click="TagClick"
+								borderColor='#fff' color='black' @close="closelabelTag">
+							</u-tag>
+						</view>
+					</view> -->
+					<view class="">
+						<u-row justify="space-between" gutter="10" v-for="(rowitem,rowindex) in allTags" :key="rowindex" customStyle="margin-bottom: 10px">
+							<u-col v-for="(tagitem,tagindex) in rowitem" :span="tagitem.span" @click="topicDetail(tagitem)">
+								<view class="demo-layout" :style="{'background-color': tagitem.color}">{{tagitem.name}}</view>
+							</u-col>
 					
-					</u-row> -->
+						</u-row>
+						<!-- <u-row justify="space-between">
+							<u-col v-for="(rowitem,rowindex) in allTopic" span="4" key="rowindex" @click="topicDetail(rowitem.id)">
+								<view class="demo-layout">{{rowitem.name}}</view>
+							</u-col>
+						
+						</u-row> -->
+					</view>
 				</view>
-				<view class="title blod" @tap="dianji()">
+				
+				<!-- <view class="title blod" @tap="dianji()">
 					动态
-				</view>
+				</view> -->
 				<adopt id="filterBox"></adopt>
 			</view>
 			<view class="" v-else="act==1">
@@ -85,6 +88,7 @@
 				status: '',
 				pageSize: 5, //一个个数
 				articlelist: [],
+				isNeedRefresh:true,//是否需要刷新文章列表
 				articleTag:null,
 				typelist: [{
 						id:1,
@@ -182,13 +186,15 @@
 				myhttp.get('/articles/list/' + this.currentPage + '/' + this.pageSize,{'tagId':this.articleTag}).then(res => {
 					console.log(res.data.total, 'res.data.records');
 					if (res.resultCode == 200) {
+						// this.articlelist=[]
 						res.data.records.forEach(e => {
 							this.articlelist.push(e)
 						})
+						// this.articlelist = res.data.records;
 						this.pages = res.data.pages
 						this.currentPage = res.data.current
 						this.totalCount = res.data.total
-			
+						
 					} else if (res.resultCode == 401) {
 						uni.navigateTo({
 							url: "../login/login"
@@ -201,14 +207,9 @@
 						})
 					}
 				})
+			 this.isNeedRefresh = true; 
+			},
 			
-			},
-			getTopicList(){
-				myhttp.get('/user/article/Topic').then(({data})=>{
-					this.allTopic=data
-					console.log(this.allTopic,'allTopic');
-				})
-			},
 			// 点击话题详情
 			topicDetail(item){
 				console.log('点击话题',item);
@@ -219,10 +220,14 @@
 			},
 			// 据分类筛选文章
 			gotofilter(item){
-				this.articlelist=[]
-				this.articleTag=item
-				console.log('我点击了',item);
-				this.loadarticles()
+				  
+				  this.articlelist = [];  // 清空原有文章列表 
+				  this.currentPage = 0;   // 重置当前页码为0
+				  this.pages=0;
+				  this.status=''
+				  this.articleTag = item;   // 将当前标签值设置为传入的tag值
+				   this.loadarticles(); // 加载新类型文章列表数据
+				
 			},
 			click(name) {
 				this.$refs.uToast.success(`点击了第${name}个`)
@@ -262,17 +267,21 @@
 			},
 		},
 		onShow() {
-			// 页面默认显示的是list列表中第一条数据
-			// this.content = this.list[0]
+		  if (this.isNeedRefresh) {
+			  this.articlelist = [];
+			  this.currentPage = 0;
+		    this.loadarticles();
+		    this.isNeedRefresh = false;
+		  }
 		},
 		onLoad() {
-			
+			 this.isNeedRefresh = true;
 			this.$store.state.adopt.filterList={}
 			this.thisAsyncIncrement()
 		},
-		mounted:function(){
-			this.loadarticles()
-		},
+		// mounted:function(){
+		// 	this.loadarticles()
+		// },
 		onReachBottom() {
 			if (this.currentPage >= this.pages) return;
 			console.log('进入');
@@ -293,6 +302,18 @@
 </script>
 
 <style lang="scss" scoped>
+	.xingge{
+		padding: 16rpx;
+		background-color: #bcc0c8;
+		border-radius: 20rpx;
+	}
+	.title1{
+		font-style: italic;
+		text-shadow: 1px 1px 2px wheat;
+		color: #e2deda;
+		margin: 16rpx 0rpx;
+		font-size: 1.2rem;
+	}
 	.detail{
 		.title{
 			margin-bottom: 11px;
@@ -335,8 +356,8 @@
 	}
 
 	
-	.content {
-		margin-top: 8.5vh;
+	.content3 {
+		margin-top: 7vh;
 		margin-left: 12px;
 		margin-right: 14px;
 	}

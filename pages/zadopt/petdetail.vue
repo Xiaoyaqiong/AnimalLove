@@ -19,7 +19,7 @@
 			</view>
 			
 			<view class="release align-end">
-				<u-icon name="star"></u-icon>
+				<u-icon name="trash" @click="deletepages"></u-icon>
 			</view>
 		</view>
 		
@@ -72,7 +72,7 @@
 					</view>
 				</view>
 				
-				<view class="cu-bar foot input" :style="[{bottom:InputBottom+'px'}]">
+				<!-- <view class="cu-bar foot input" :style="[{bottom:InputBottom+'px'}]">
 					<view class="send  flex  padding align-center justify-center text-left">
 						<input :adjust-position="false" :focus="false" maxlength="300" cursor-spacing="10" placeholder="说点什么"
 							@focus="InputFocus" @blur="InputBlur">
@@ -86,7 +86,7 @@
 					<view class="apprecy1 "><text class="cuIcon-favor"></text></view>
 					<text class="appnum3">127</text>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		
@@ -109,6 +109,23 @@
 			}
 		},
 		methods: {
+			// 删除文章
+			deletepages(){
+				myhttp.delete(`/users/pets/Adopt/delete/${this.id}`).then((res)=>{
+					if(res.msg=='该文章非用户所发，无法删除'){
+						uni.showToast({
+							title:res.msg,
+							icon:'error'
+						})
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon:'success'
+						})
+					}
+					
+				})
+			},
 			getpetDetail(){
 				myhttp.get(`/users/pets/Adopt/List/${this.id}`).then((res)=>{
 					this.petDetail= res.data

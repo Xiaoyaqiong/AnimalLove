@@ -26,8 +26,8 @@
 			</view>
 		</view>
 		<view class="cu-bar bg-white ">
-			<view class="title">
-				<input type="text" v-model="title">
+			<view class="biaoti title">
+				<input type="text" placeholder="请输入帖子标题" v-model="title">
 			</view>
 		</view>
 		<view class="cu-form-group">
@@ -46,7 +46,7 @@
 		</view>
 		<view class="idea">把你的想法分享给全世界</view>
 		<view class="cu-form-group margin-top">
-			<textarea  :disabled="modalName!=null" @input="textareaAInput" placeholder=""
+			<textarea  :disabled="modalName!=null" placeholder="请输入帖子详情" @input="textareaAInput" 
 				v-model="articleContent"></textarea>
 		</view>
 		<view class="chooseinfo">

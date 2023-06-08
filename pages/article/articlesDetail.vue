@@ -1,8 +1,8 @@
 <template>
 	
 	<view class="">
-	
-		<u-navbar :fixed="true" :placeholder="true" @leftClick="backIndex()">
+		
+		<u-navbar :fixed="true" :placeholder="false" @leftClick="backIndex()">
 			<view class="u-nav-slot" slot="center">
 				文章详情
 			</view>
@@ -12,7 +12,10 @@
 			</view>
 		</u-navbar>
 		<!-- 外部链接 -->
-			<web-view :src="articlesUrl" ></web-view>
+		<view>
+			<web-view :src="articlesUrl"  style="height: calc(100% - 100rpx); margin-top: 60rpx;"></web-view>
+		</view>
+			
 			<!-- 底部喜欢 -->
 			<u-tabbar
 				:fixed="true"
@@ -21,7 +24,7 @@
 				inactiveColor="#ff0000"
 				
 			>
-				<u-tabbar-item :text="'喜欢'+likecount" :icon="likeFlag?'heart-fill':'heart'" @click="like(likeFlag)"></u-tabbar-item>
+				<u-tabbar-item :fixed="true" :placeholder="false" :text="'喜欢'+likecount" :icon="likeFlag?'heart-fill':'heart'" @click="like(likeFlag)"></u-tabbar-item>
 			</u-tabbar>
 			
 	</view>
@@ -39,7 +42,7 @@
 				collectCount:0,
 				likeFlag:0,
 				likecount:0,
-				articleId:0
+				articleId:0,
 			}
 		},
 		onLoad(option) {
@@ -49,6 +52,7 @@
 			this.articleId=item.id
 			var pages = getCurrentPages();
 			console.log(pages,'getCurrentPages');
+
 		},
 		components: {
 			Mynav

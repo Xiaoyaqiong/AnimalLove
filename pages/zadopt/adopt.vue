@@ -1,8 +1,8 @@
 <template>
 	<view class="">
 		<view class="">
-			<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view> -->
-			<!-- <Mynav CenterSlot="领养中心" :MyColor="$topicColor" :backInfo="goBackIndex"></Mynav> -->
+			<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
+			<Mynav CenterSlot="领养中心" :MyColor="$topicColor" :backInfo="goBackIndex"></Mynav> -->
 			<slFilter :menuList="menuList" @result="result" :currentCity="currentCity"></slFilter>
 			<button @click="thisAsyncIncrement"  class="choose">点击筛选您想带走的小可爱哟~</button>
 			<pp-waterfall-flow :value="$store.state.adopt.adoptList" :gap="20" :columns="2" :padding="30" :itemBR="12" imageBR="10rpx"></pp-waterfall-flow>
@@ -107,11 +107,11 @@
 			this.thisAsyncIncrement()
 		},
 		methods: {
-			goBackIndex() {
-				uni.switchTab({
-					url: "/pages/index/index"
-				})
-			},
+			// goBackIndex() {
+			// 	uni.switchTab({
+			// 		url: "/pages/index/index"
+			// 	})
+			// },
 			add(){
 				let flag=false
 				uni.navigateTo({

@@ -38,23 +38,23 @@
 					<view class="animal-card">
 						<view class="ani-img">
 							<img class="info-img"
-								src="https://img2.baidu.com/it/u=3202947311,1179654885&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500"
+								:src=item.image
 								alt="">
 						</view>
 						<view class="ani-info">
 							<view class="info1">
-								<text>大黑</text>
+								<text>萌宠</text>
 								<u-icon :name="item.sex?'man':'woman'" :color="item.sex?'#11A1F8':'#ffaaff'" size="1.5rem"></u-icon>
 							</view>
-							<view>{{item.breed}}</view>
-							<view>{{item.ageYear}}年{{item.ageMonth}}月</view>
+							<view>{{item.petVariety}}</view>
+							<view>{{item.ageYear}}</view>
 						</view>
 					</view>
 				</u-col>
 			</u-row>
 		</view>
 		<!-- 问医生 -->
-		<title-bar :page="page2" :title="title1" :src="src2"></title-bar>
+		<!-- <title-bar :page="page2" :title="title1" :src="src2"></title-bar>
 		<view class="doctor-content">
 			<u-row justify="space-between" gutter="10">
 				<u-col span="4" v-for="(item,index) in 3" :key="index">
@@ -73,7 +73,7 @@
 					</view>
 				</u-col>
 			</u-row>
-		</view>
+		</view> -->
 
 		<!-- 常见问题 -->
 		<!-- <view class="question">
@@ -143,14 +143,14 @@ import titleBar from '../../components/titleBar.vue'
 				src:"",
 				keyword:'',
 				list3: [{
-					image: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-					title: '昨夜星辰昨夜风，',
+					image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201705%2F04%2F20170504162516_rMfES.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1688777125&t=7b8005fe497451a3b16e17ccbad0e6d4',
+					title: '您的爱宠经常翻家吗',
 				}, {
-					image: 'https://cdn.uviewui.com/uview/swiper/swiper1.png',
-					title: '身无彩凤双飞翼，'
+					image: 'https://petweb1-1253856731.cos.ap-beijing.myqcloud.com/uploads/20210318/9ffc1f2a46e16015d87c164fe0205adb.cdn.sohucs.com_images_20171213_171def574b114c7e97f3dae63377002d.jpeg&refer=http___5b0988e595225.cdn.sohucs.jpg',
+					title: '如何为爱宠平衡营养，'
 				}, {
-					image: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
-					title: '谁念西风独自凉，'
+					image: 'https://img.zcool.cn/community/01299f5541b018000001e78c01448b.jpg@3000w_1l_0o_100sh.jpg',
+					title: '狗狗心情不好？'
 				}],
 				title1: "问医生",
 				
@@ -162,7 +162,7 @@ import titleBar from '../../components/titleBar.vue'
 			}
 		},
 		onLoad() {
-
+			
 		},
 		onShow(){
 			// document.body.style.overflow = "auto";
@@ -209,8 +209,11 @@ import titleBar from '../../components/titleBar.vue'
 			// 	// #endif
 			// },
 			getadoptCenter(){
-				myhttp.get('/users/pets/AdoptList').then(({data})=>{
-					this.adoptData=data
+				myhttp.get('/users/pets/Adopt/AdoptListSift').then(({data})=>{
+					
+					this.adoptData=data.slice(0, 2)
+					this.adoptData.forEach((item) => {
+						item.image = 'http://10.23.83.140:8080' + item.image;})
 					console.log(this.adoptData,'adoptData');
 				})
 			}
