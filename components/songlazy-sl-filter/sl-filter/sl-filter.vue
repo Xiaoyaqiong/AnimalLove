@@ -1,17 +1,19 @@
 <template>
 	<view class="content">
-		<view >
-			<view class="select-tab" >
-				<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index" @tap="showMenuClick(index)">
+		<view>
+			<view class="select-tab">
+				<view class="select-tab-item" :style="{width: itemWidth}" v-for="(item,index) in titleList" :key="index"
+					@tap="showMenuClick(index)">
 					<view :class="statusList[index].isActive?'select-title':'unselect-title'">{{item.title}}</view>
 					<!-- <text class="arrows sl-font" :class="statusList[index].isActive?up:down"></text> -->
 				</view>
 			</view>
 		</view>
-		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav" :navHeight="navHeight"
-		 >
-			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor" :menuList.sync="menuListTemp"
-			 ref="slFilterView" @confirm="filterResult" :currentCity="currentCity"></sl-filter-view>
+		<popup-layer ref="popupRef" :direction="'bottom'" @close="close" :isTransNav="isTransNav"
+			:navHeight="navHeight">
+			<sl-filter-view :ref="'slFilterView'" :independence="independence" :themeColor="themeColor"
+				:menuList.sync="menuListTemp" ref="slFilterView" @confirm="filterResult"
+				:currentCity="currentCity"></sl-filter-view>
 		</popup-layer>
 	</view>
 
@@ -26,9 +28,9 @@
 			slFilterView
 		},
 		props: {
-			currentCity:{
-				type:String,
-				default(){
+			currentCity: {
+				type: String,
+				default () {
 					return ''
 				}
 			},
@@ -93,9 +95,9 @@
 					// 	'title': this.menuList[i].title,
 					// 	'key': this.menuList[i].key
 					// })
-			
+
 					r[this.menuList[i].key] = this.menuList[i].title;
-			
+
 					if (this.menuList[i].reflexTitle && this.menuList[i].defaultSelectedIndex > -1) {
 						titleArr.push({
 							'title': this.menuList[i].detailList[this.menuList[i].defaultSelectedIndex].title,
@@ -107,16 +109,16 @@
 							'key': this.menuList[i].key
 						})
 					}
-			
+
 				}
-								this.statusList = arr;
-								
-								this.tempTitleObj = r;
-								return titleArr;
+				this.statusList = arr;
+
+				this.tempTitleObj = r;
+				return titleArr;
 			},
 		},
-		
-		
+
+
 		data() {
 			return {
 				down: 'sl-down',
@@ -124,12 +126,12 @@
 				tabHeight: 50,
 				statusList: [],
 				selectedIndex: '',
-				
+
 				tempTitleObj: {}
 			};
 		},
 		methods: {
-			
+
 			getMenuListTemp() {
 				let arr = this.menuList;
 				for (let i = 0; i < arr.length; i++) {
@@ -147,13 +149,13 @@
 			},
 			// 重置所有选项，包括默认选项，并更新result
 			resetAllSelect(callback) {
-				this.$refs.slFilterView.resetAllSelect(function(e){
+				this.$refs.slFilterView.resetAllSelect(function(e) {
 					callback(e);
 				});
 			},
 			// 重置选项为设置的默认值，并更新result
 			resetSelectToDefault(callback) {
-				this.$refs.slFilterView.resetSelectToDefault(function(e){
+				this.$refs.slFilterView.resetSelectToDefault(function(e) {
 					callback(e);
 				});
 			},
@@ -167,7 +169,7 @@
 				this.selectedIndex = index;
 				if (this.statusList[index].isActive == true) {
 					this.$refs.popupRef.close();
-					
+
 					this.statusList[index].isActive = false
 				} else {
 					this.menuTabClick(index);
@@ -179,7 +181,7 @@
 				for (let i = 0; i < this.statusList.length; i++) {
 					if (index == i) {
 						this.statusList[i].isActive = true;
-						
+
 					} else {
 						this.statusList[i].isActive = false;
 					}
@@ -220,11 +222,11 @@
 
 				// this.$refs.popupRef.close()
 				if (obj.isReset) {
-					
-				} else{
+
+				} else {
 					this.$emit("result", val)
 				}
-				
+
 
 			},
 			close() {
@@ -269,23 +271,27 @@
 		display: flex;
 		justify-content: center;
 		/* align-items: center; */
-		
-		
+
+
 	}
-	.select-title{
+
+	.select-title {
 		line-height: 44px;
-		color:#FFB600;
+		color: #FFB600;
 		border-bottom: 5px solid #FFB600;
 		/* padding-bottom:6px; */
-		
+
 	}
-	.unselect-title{
+
+	.unselect-title {
 		color: #777777;
 		line-height: 44px;
 	}
+
 	.select-tab {
-		height:44px;
+		height: 44px;
 	}
+
 	.select-tab .select-tab-item text,
 	.select-tab-fixed-top .select-tab-item text {
 		color: #666666;

@@ -2,26 +2,7 @@
 	<view class="content">
 		
 		<MyBar></MyBar>
-		<!-- <view class="NAVBAR">
-			<MyNav 
-					>
-					<view
-					    class="u-nav-slot"
-					    slot="center"
-					>
-					  <u-search   placeholder="请输入关键字..."  :showAction="false" v-model="keyword"></u-search>
-					</view>
-
-					<view
-					    class="u-nav-slot"
-					    slot="right"
-					>
-					<u-icon name="chat"></u-icon>
-					</view>
-					</MyNav>
-
-			</view> -->
-		
+	
 		<!-- 轮播 -->
 		<view class="swiper">
 			<view class="u-demo-block">
@@ -29,9 +10,27 @@
 					:autoplay="false" radius="5" bgColor="#ffffff"></u-swiper>
 			</view>
 		</view>
-		<!-- 宠物领养 -->
-		<title-bar :src="src1" :page="page1"></title-bar>
-
+		<!-- 宠物领养bar -->
+		<view class="titleBar">
+			<u-row justify="space-between" gutter="">
+				<u-col span="1">
+					<!-- <img class="icon" :src="src" alt="" srcset=""> -->
+					<u-image width="30" height="30" src="../../static/icon/index/xiaomaochushou.png"></u-image>
+				</u-col>
+				<u-col span="9">
+					<view class="title">
+						宠物领养
+					</view>
+				</u-col>
+				<u-col span="3">
+					<view data-control="control" @click="goPage" class="action">
+						<text class="more">更多</text>
+						<u-icon name="arrow-right" color="#8B8B8B" size="1.5rem"></u-icon>
+					</view>
+				</u-col>
+			</u-row>
+		</view>
+<!-- 宠物领养前两条内容 -->
 		<view class="adopt-content">
 			<u-row justify="space-between" gutter="10">
 				<u-col span="6" v-for="(item,index) in adoptData" :key="index">
@@ -120,11 +119,11 @@
 	import MyBar from '@/components/MyNavbar.vue'
 	import articles from '../../components/articles.vue'
 import myhttp from '../../api/myhttp'
-import titleBar from '../../components/titleBar.vue'
+// import titleBar from '../../components/titleBar.vue'
 	// import MyNav from '../../uni_modules/uview-ui/components/u-navbar/MyNavBar.vue'
 	export default {
 		components: {
-			titleBar,
+			// titleBar,
 			articles,
 			MyBar
 			// MyNav
@@ -137,10 +136,9 @@ import titleBar from '../../components/titleBar.vue'
 				status: '',
 				pageSize: 4, //一个个数
 				articlelist: [],
-				src1:"../static/icon/index/xiaomaochushou.png",
-				src2:"../static/icon/index/wenzhen.png",
-				src3:"../static/icon/index/renzhen.png",
-				src:"",
+				// src:"../static/icon/index/xiaomaochushou.png",
+				// src2:"../static/icon/index/wenzhen.png",
+				// src3:"../static/icon/index/renzhen.png",
 				keyword:'',
 				list3: [{
 					image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201705%2F04%2F20170504162516_rMfES.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1688777125&t=7b8005fe497451a3b16e17ccbad0e6d4',
@@ -168,7 +166,14 @@ import titleBar from '../../components/titleBar.vue'
 			// document.body.style.overflow = "auto";
 		},
 		methods: {
-			
+			goPage(){
+				
+					uni.navigateTo({
+						url:'/pages/zadopt/adoptpage'
+					})
+				
+				
+			},
 			// 获取文章列表
 			loadarticles: function() {
 				myhttp.get('/articles/list/' + this.currentPage + '/' + this.pageSize).then(res => {

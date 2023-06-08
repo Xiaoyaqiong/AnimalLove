@@ -1,7 +1,7 @@
 <template>
 	<view class="content3">
 		<!-- 匹配手机端，腾出手机状态栏的高度，防止手机状态栏遮拦内容 -->
-		<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view> -->
+		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<MyBar></MyBar>
 		<view class="nav">
 			<view class="nav-list" v-for="(item,index) in list" :key="item.id" @tap="changeAct(item)">
@@ -51,10 +51,10 @@
 				<adopt id="filterBox"></adopt>
 			</view>
 			<view class="" v-else="act==1">
-				<view>
+				<view class="pagetype">
 					<u-grid :border="false" col="4">
 						<u-grid-item v-for="(listItem,listIndex) in typelist" :key="listIndex" @click="gotofilter(listItem.id)">
-							<img class="sortImg radius" :src="listItem.src" alt="">
+						 <u-image :width="iconWidth" :height="iconWidth" :src="listItem.src"></u-image>
 							<text class="grid-text">{{listItem.title}}</text>
 						</u-grid-item>
 					</u-grid>
@@ -90,6 +90,7 @@
 				articlelist: [],
 				isNeedRefresh:true,//是否需要刷新文章列表
 				articleTag:null,
+				iconWidth: 43,
 				typelist: [{
 						id:1,
 						name: 'miaomiao',
@@ -161,7 +162,7 @@
 
 				list: [{
 						id: 0,
-						name: '动态'
+						name: '领养中心'
 					},
 					{
 						id: 1,
@@ -302,6 +303,9 @@
 </script>
 
 <style lang="scss" scoped>
+	.pagetype{
+		margin-top: 0.3vh;
+	}
 	.xingge{
 		padding: 16rpx;
 		background-color: #bcc0c8;
@@ -368,6 +372,7 @@
 		width: 270px;
 		height: 30px;
 		margin: 0px auto;
+		margin-top: 0.3vh;
 		display: flex;
 		align-items: center;
 		justify-content: space-around;

@@ -2,8 +2,8 @@
 	<view class="titleBar">
 		<u-row justify="space-between" gutter="">
 			<u-col span="1">
-				<img class="icon" :src="src" alt="" srcset="">
-				<!-- <u-icon :name="name" size="1.5rem"></u-icon> -->
+				<!-- <img class="icon" :src="src" alt="" srcset=""> -->
+				 <image class="tubiao" :src="src"></image>
 			</u-col>
 			<u-col span="9">
 				<view class="title">
@@ -26,12 +26,13 @@
 		data(){
 			return{
 				// page:"哈哈哈"
+				iconWidth:43
 			}
 		},
 		props: {
 			title: {
 				type: String, //定义属性类型
-				default: "动态", //属性的默认值
+				default: "宠物领养", //属性的默认值
 			},
 			src: {
 				type: String, //定义属性类型
@@ -68,9 +69,11 @@
 </script>
 
 <style>
-	.icon{
-		width: 32px;
-		height: 32px;
+	.tubiao{
+		
+				width: 60rpx;
+				height: 60rpx;
+			
 	}
 	.titleBar{
 		margin-top: 1.25rem;

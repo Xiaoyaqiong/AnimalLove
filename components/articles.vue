@@ -2,10 +2,11 @@
 	<view class="articles">
 		<u-row justify="space-between" gutter="10">
 			<u-col span="1">
-				<img class="icon" :src="src" alt="" srcset="" >
+				<!-- <img class="icon" :src="src" alt="" srcset="" > -->
+				 <u-image width="30" height="30" src="../static/icon/index/book.png"></u-image>
 			</u-col>
 			<u-col span="12">
-				<view class="blod">
+				<view class="title">
 					推荐文章
 				</view>
 			</u-col>
@@ -30,7 +31,7 @@
 			<view>
 				<u-row class="articleItem" v-for="(item,index) in articlelist" :key="index" @click="gotoDetail(item)">
 					<u-col span="8">
-						<view class="title">
+						<view class="title1">
 							{{item.articleTitle}}
 						</view>
 						<view class="secondtitle">
@@ -84,7 +85,6 @@
 		data() {
 			return {
 				
-				src: "../static/icon/index/book.png"
 			}
 		},
 		onLoad() {
@@ -119,11 +119,19 @@
 </script>
 
 <style lang="scss" scoped>
+	// .tubiao1{
+	// 	width: 70rpx;
+	// 	height: 70rpx;
+	// }
+	.title{
+		font-weight: bold;
+		padding: 0.5rem;
+	}
 	.articleItem {
 		border-radius: 10px;
 		box-shadow: 0px 0px 1px 0px #e1e1e1;
 		padding: 1vh 3vw;
-		.title{
+		.title1{
 			margin-bottom: 1.5vh;
 			font-size: 0.8rem;
 		}

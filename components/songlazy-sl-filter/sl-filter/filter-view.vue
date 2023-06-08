@@ -30,7 +30,7 @@
 								<view 
 									class='filter-content-detail-item-default'
 									:style="{'border-color':detailItem.isSelected?$topicColor:'#F0F0F0','color':detailItem.isSelected?$topicColor:'#000000'}"
-									@tap="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
+									@click="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
 									{{detailItem.title}}
 								</view>
 							</view>
@@ -352,7 +352,7 @@
 						// this.selectedTitleObj[key] = list[index].title;
 						console.log(this.selectedObj[key], 'selectobj');
 					}
-
+					
 					for (let i = 0; i < list.length; i++) {
 						if (index == i) {
 
@@ -503,11 +503,10 @@
 	}
 
 	.filter-content-detail-item-default {
-		background-color: #F0F0F0;
 		text-align: center;
 		border: 1px solid;
 		background-color: #FFFFFF;
-		color: #666666;
+		/* color: #666666; */
 		width: 100px;
 		height: 34px;
 		line-height: 34px;

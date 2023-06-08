@@ -1,8 +1,8 @@
 <template>
 	
-	<view class="">
+	<view class="page-container">
 		
-		<u-navbar :fixed="true" :placeholder="false" @leftClick="backIndex()">
+		<u-navbar :fixed="true" :placeholder="true" :safeAreaInsetTop="true" @leftClick="backIndex()">
 			<view class="u-nav-slot" slot="center">
 				文章详情
 			</view>
@@ -12,15 +12,16 @@
 			</view>
 		</u-navbar>
 		<!-- 外部链接 -->
-		<view>
-			<web-view  :webview-styles="{'height':'90%'}" :fullscreen='false' :src="articlesUrl"  style="height: calc(100% - 100rpx); margin-top: 60rpx;"></web-view>
+		<view class="webview-wrapper">
+			<web-view :src="articlesUrl" :fullscreen="false" webview-styles="height: calc(100vh - 100rpx);margin-top: 60rpx;"></web-view>
 		</view>
 			
 			<!-- 底部喜欢 -->
 			<u-tabbar
 				:fixed="true"
-				:placeholder="false"
-				:safeAreaInsetBottom="false"
+				:placeholder="true"
+				:safeAreaInsetBottom="true"
+				:zIndex="99999"
 				inactiveColor="#ff0000"
 				
 			>
@@ -127,5 +128,12 @@
 </script>
 
 <style>
-	
+	.page-container{
+		/* height: 100%; */
+	}
+	.webview-wrapper{
+		/* height: calc(100vh - 100rpx); */
+		/* 调整Webview的高度，减去导航栏的高度 */
+		/* margin-top: 60rpx; */
+	}
 </style>
