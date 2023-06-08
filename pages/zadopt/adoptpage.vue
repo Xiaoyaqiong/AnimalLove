@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view> -->
-		<Mynav CenterSlot="领养中心" :MyColor="$topicColor" :backInfo="goBackIndex"></Mynav>
+		<Mynav CenterSlot="动态" :MyColor="$topicColor" :backInfo="goBackIndex"></Mynav>
 	
 	
 		<adopt></adopt>

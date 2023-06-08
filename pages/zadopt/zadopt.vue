@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view>
-			<u-navbar title="领养中心" titleStyle="color:#FFFFFF" :safeAreaInsetTop="true" :bgColor="$topicColor"
+			<u-navbar title="动态" titleStyle="color:#FFFFFF" :safeAreaInsetTop="true" :bgColor="$topicColor"
 				:is-fixed="true">
 				<view class="u-nav-slot" slot="left">
 					<u-icon name="arrow-left" size="19" color="#FFFFFF" @click="goBackIndex"></u-icon>
