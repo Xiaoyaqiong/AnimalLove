@@ -13,7 +13,7 @@
 		</u-navbar>
 		<!-- 外部链接 -->
 		<view class="webview-wrapper">
-			<web-view :src="articlesUrl" :fullscreen="false" webview-styles="height: calc(100vh - 100rpx);margin-top: 60rpx;"></web-view>
+				<webview :src="src"></webview>
 		</view>
 			
 			<!-- 底部喜欢 -->
@@ -33,6 +33,7 @@
 
 <script>
 	import Mynav from '@/components/Mynav.vue'
+	import webview from '../article/webview.vue'
 	import myhttp from '../../api/myhttp.js'
 	export default{
 		data(){
@@ -44,19 +45,27 @@
 				likeFlag:0,
 				likecount:0,
 				articleId:0,
+				src:''
 			}
+		},
+		props:{
+			
 		},
 		onLoad(option) {
 			const item = JSON.parse(decodeURIComponent(option.item))
 			console.log(item,'item')
 			this.articlesUrl=item.articleUrl
+			// this.articlesUrl1=item.articleUrl
+			this.src=this.articlesUrl
 			this.articleId=item.id
 			var pages = getCurrentPages();
 			console.log(pages,'getCurrentPages');
-
+			
 		},
+		
 		components: {
-			Mynav
+			Mynav,
+			webview
 		},
 		methods:{
 			// 喜欢状态

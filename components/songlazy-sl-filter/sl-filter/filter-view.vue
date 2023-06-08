@@ -29,7 +29,7 @@
 							<view class="filter-content-detail-div" v-for="(detailItem,idx) in selectDetailList" :key="idx">
 								<view 
 									class='filter-content-detail-item-default'
-									:style="{'border-color':detailItem.isSelected?$topicColor:'#F0F0F0','color':detailItem.isSelected?$topicColor:'#000000'}"
+									:style="{'border-color':detailItem.isSelected?'#FFB600':'#F0F0F0','color':detailItem.isSelected?'#FFB600':'#000000'}"
 									@click="itemTap(idx,selectDetailList,item.isMutiple,item.key)">
 									{{detailItem.title}}
 								</view>
