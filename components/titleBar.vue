@@ -32,7 +32,7 @@
 		props: {
 			title: {
 				type: String, //定义属性类型
-				default: "宠物领养", //属性的默认值
+				default: "动态", //属性的默认值
 			},
 			src: {
 				type: String, //定义属性类型

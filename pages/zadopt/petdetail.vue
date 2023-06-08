@@ -122,6 +122,12 @@
 							title:res.msg,
 							icon:'success'
 						})
+						
+						// 删除后刷新页面
+						uni.redirectTo({
+							url:'/pages/profile/SecondPages/wodefabu'
+						})
+						
 					}
 					
 				})

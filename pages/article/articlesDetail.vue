@@ -13,7 +13,7 @@
 		</u-navbar>
 		<!-- 外部链接 -->
 		<view class="webview-wrapper">
-			<web-view :src="articlesUrl" :fullscreen="false" webview-styles="height: calc(100vh - 100rpx);margin-top: 60rpx;"></web-view>
+			<web-view :src="articlesUrl" webview-styles="height: calc(100vh - 100rpx);margin-top: 60rpx;"></web-view>
 		</view>
 			
 			<!-- 底部喜欢 -->

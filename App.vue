@@ -4,9 +4,6 @@
 	} from '@/api/message.js'
 	export default {
 		onLaunch: function() {
-			
-		},
-		onShow: function() {
 			reqInterceptor()
 			console.log(uni.getStorageSync('token'));
 			if (uni.getStorageSync('token') == null || uni.getStorageSync('token') == '') {
@@ -18,6 +15,9 @@
 					// url:'/pages/sameCity/sameCity'
 				});
 			} 
+		},
+		onShow: function() {
+			
 		},
 		onHide: function() {
 			// console.log('App Hide')

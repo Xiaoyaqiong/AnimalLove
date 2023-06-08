@@ -19,7 +19,7 @@
 				</u-col>
 				<u-col span="9">
 					<view class="title">
-						宠物领养
+						动态
 					</view>
 				</u-col>
 				<u-col span="3">
