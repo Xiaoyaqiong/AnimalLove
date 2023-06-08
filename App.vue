@@ -4,8 +4,12 @@
 	} from '@/api/message.js'
 	export default {
 		onLaunch: function() {
+			
+		},
+		onShow: function() {
 			reqInterceptor()
-			if (uni.getStorageSync('token') == null || uni.getStorageSync('token') == "") {
+			console.log(uni.getStorageSync('token'));
+			if (uni.getStorageSync('token') == null || uni.getStorageSync('token') == '') {
 				uni.redirectTo({
 					url: '/pages/login/login'
 				})
@@ -14,9 +18,6 @@
 					// url:'/pages/sameCity/sameCity'
 				});
 			} 
-		},
-		onShow: function() {
-			// console.log('App Show')
 		},
 		onHide: function() {
 			// console.log('App Hide')

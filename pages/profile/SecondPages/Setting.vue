@@ -74,6 +74,7 @@ import myhttp from '../../../api/myhttp'
 					}
 				})
 				uni.removeStorageSync('token')
+				
 				uni.removeStorageSync('userId')
 				uni.reLaunch({		// 必须把页面栈清空
 					url: '/pages/login/login'

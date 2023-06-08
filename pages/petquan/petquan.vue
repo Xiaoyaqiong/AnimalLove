@@ -1,7 +1,7 @@
 <template>
 	<view class="content3">
 		<!-- 匹配手机端，腾出手机状态栏的高度，防止手机状态栏遮拦内容 -->
-		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
+		<!-- <view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view> -->
 		<MyBar></MyBar>
 		<view class="nav">
 			<view class="nav-list" v-for="(item,index) in list" :key="item.id" @tap="changeAct(item)">
