@@ -4,8 +4,8 @@
 		<view class="status_bar" style="height: var(--status-bar-height); width: 100%;"></view>
 		<view class="cu-bar">
 			<u-icon name="close" size="20" color="#989898" @click="goBackToorder"></u-icon>
-			<view class="btn"><u-button class="release flex  align-center  justify-center" @tap="showModal"
-					data-target="DialogModal1">发布</u-button></view>
+			<view class="btn"><button class="release flex  align-center  justify-center" @tap="showModal"
+					data-target="DialogModal1">发布</button></view>
 		</view>
 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">

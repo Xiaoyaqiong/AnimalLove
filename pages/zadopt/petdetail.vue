@@ -124,8 +124,8 @@
 						})
 						
 						// 删除后刷新页面
-						uni.redirectTo({
-							url:'/pages/profile/SecondPages/wodefabu'
+						uni.reLaunch({
+							url:'/pages/profile/profile'
 						})
 						
 					}

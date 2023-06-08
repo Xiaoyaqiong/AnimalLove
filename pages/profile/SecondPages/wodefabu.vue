@@ -2,7 +2,7 @@
 	<view class="">
 		
 		<!-- 自定义导航栏 -->
-		<Mynav CenterSlot="我的发布" MyColor="#eee"  autoback></Mynav>
+		<Mynav CenterSlot="我的发布" MyColor="#eee"  ></Mynav>
 		
 					<view class="main1 " v-if="fabulist.length == 0">
 						<view class="justify-center align-center  padding text-center">
@@ -71,7 +71,7 @@ import moment from 'moment';
 			Mynav
 		},
 		methods: {
-
+			
 			// 跳转课程
 			ClickToDetail(courseId) {
 				// console.log(Cid)
