@@ -2,7 +2,7 @@
 	<!-- 自定义导航组件 -->
 	<view class="Mynav">
 		<u-navbar :fixed="true" :placeholder="true" :bgColor="MyColor"  :leftClick="backInfo"
-			:autoBack="autoback" >
+			:autoBack="autoback" leftIconColor="#ffffff">
 			<view class="u-nav-slot" slot="center">
 				{{CenterSlot}}
 			</view>
@@ -30,7 +30,7 @@
 			},
 			"MyColor": {
 				type: String,
-				default: '#fff'
+				default: '#FFB600'
 			},
 			"autoback": {
 				type: Boolean,
@@ -68,5 +68,6 @@
 	/* 标题字号 */
 	.u-nav-slot {
 		font-size: 1.08rem;
+		color: white;
 	}
 </style>

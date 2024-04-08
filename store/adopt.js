@@ -68,8 +68,8 @@ export default {
 				await myhttp.get(url,params ).then(res => {
 					state.adoptList = res.data
 					state.adoptList.forEach((item) => {
-						item.image = 'http://10.23.83.140:8080' + item.image;
-						momentFlag = moment(item.registrationTime, 'YYYYMMDDTHH:mm:ss.SSS+Z ZZ')
+						item.image = 'http://127.0.0.1:8888' + item.image;
+						momentFlag = moment(item.registrationTime, 'YYYYMMDDTHH:mm:ss')
 							.fromNow()
 						if (momentFlag.charAt(0) == 'a') {
 			 			momentFlag = momentFlag.replace('a', 1)

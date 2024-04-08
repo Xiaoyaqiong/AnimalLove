@@ -10,7 +10,7 @@
 		},
 		props:{
 			src:{
-				type: String,
+				type: "",
 				default: "", 
 			}
 		},

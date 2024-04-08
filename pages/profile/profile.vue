@@ -25,10 +25,7 @@
 							<button :style="PetModal.petType==3? 'border:1px solid #11A1F8':''" text="其他" shape="circle"
 								style="color: #000;" color="#e8efff" @click="setPet('petType',3)">其他</button>
 						</view>
-
-
 					</u-form-item>
-
 					<u-form-item label="性别" :border-bottom="true">
 						<view class="flex btn3">
 							<button :style="PetModal.gender=='man'? 'border:1px solid #11A1F8':''" icon="man"
@@ -39,10 +36,6 @@
 								@click="setPet('gender','woman')">女</button>
 						</view>
 					</u-form-item>
-
-
-
-
 					<u-form-item label="年龄" :border-bottom="true">
 						<view class="flex btn3">
 							<button :style="PetModal.petAge=='0~3个月'? 'border:1px solid #11A1F8':''" shape="circle"
@@ -223,7 +216,7 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 					// },
 					{
 						name: '我的订单',
-						id: 'MyOrder',
+						id: 'Order',
 						path: '../../static/icon/user/qianbao.png',
 
 					},
@@ -248,13 +241,14 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 			afterRead(file, lists, name){
 				
 				uni.uploadFile({
-					url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
+					// url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
+					url: 'http://127.0.0.1:8888/file/uploads', //仅为示例，非真实的接口地址
 					filePath: file.file.url,
 					name: 'file',
 					success: (res) => {
 						console.log(res.data);
 						if (res.statusCode == 200) {
-							this.Firstpet.avatar = 'http://10.23.83.140:8080'+res.data
+							this.Firstpet.avatar = 'http://127.0.0.1:8888'+res.data
 							this.fileList1.push({'url':this.Firstpet.avatar})
 							
 						}
@@ -334,10 +328,6 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 						iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/default.png'
 					})
 				}
-
-
-
-
 				setTimeout(() => {
 					uni.navigateTo({
 						url: url,

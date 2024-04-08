@@ -96,7 +96,7 @@ import moment from 'moment';
 			 myhttp.get('/users/pets/AdoptByUser').then(res => {
 				that.fabulist = res.data
 				that.fabulist.forEach((item) => {
-					item.image = 'http://10.23.83.140:8080' + item.image;
+					item.image = 'http://127.0.0.1:8888' + item.image;
 					momentFlag = moment(item.registrationTime, 'YYYYMMDDTHH:mm:ss.SSS+Z ZZ')
 						.fromNow()
 					if (momentFlag.charAt(0) == 'a') {

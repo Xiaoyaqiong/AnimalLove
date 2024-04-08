@@ -198,7 +198,6 @@ import myhttp from '../../api/myhttp'
 						})
 					}
 				})
-			
 			},
 			// 跳转URL
 			// openURL() {
@@ -218,7 +217,7 @@ import myhttp from '../../api/myhttp'
 					
 					this.adoptData=data.slice(0, 2)
 					this.adoptData.forEach((item) => {
-						item.image = 'http://10.23.83.140:8080' + item.image;})
+						item.image = 'http://127.0.0.1:8888' + item.image;})
 					console.log(this.adoptData,'adoptData');
 				})
 			}
@@ -237,7 +236,6 @@ import myhttp from '../../api/myhttp'
 				if (this.currentPage >= this.pages) {
 					this.status = 'nomore'
 				} else {
-			
 					this.status = 'loading'
 				}
 			}, 3000)

@@ -64,9 +64,32 @@
 				"navigationStyle": "custom"
 			}
 		},
-		
+		{
+			"path": "pages/sameCity/SecondPages/mymap",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/sameCity/SecondPages/AddOrder",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/sameCity/SecondPages/OrderDetail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
 		{
 			"path": "pages/profile/SecondPages/MyOrder",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/profile/SecondPages/Order",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -153,7 +176,7 @@
 			"pagePath": "pages/sameCity/sameCity",
 			"selectedIconPath": "static/icon/tabbar/suozaichengshi.png",
 			"iconPath": "static/icon/tabbar/suozaichengshi.png",
-			"text": "同城"
+			"text": "托运"
 		},
 		{
 			"pagePath": "pages/petquan/petquan",

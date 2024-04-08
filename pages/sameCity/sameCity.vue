@@ -29,35 +29,39 @@
 		
 		<view class="Mapicon">
 			<u-icon style="display: inline-block" name="/static/icon/SameCity/fujin.png" size="2rem"></u-icon>
-			<span style="font-weight: bold;">附近</span>
+			<span style="font-weight: bold;">订单</span>
+			<u-icon class="add" name="plus" @click="addOrder()"></u-icon>
 		</view>
 		</view>
 
 	
 	<!-- 附近商家列表 -->
 	<view class="NearList">
-		<view class="Nearitem" v-for="(item,index) in NearList" >
+		<view class="Nearitem" v-for="(item,index) in OrderList" @click="ClickOrder(index)">
 			
-			
+		
 			<!-- 商家简介 -->
-			<view class="mid" @click="ClickShop(item)">
-				
-				<view class="shopImg" >
+			
+			<view class="mid">
+				<!-- <view class="shopImg" >
 					<u--image mode="scaleToFill" width="25vw" height="8vh" radius="10px" :src="item.shopImg"></u--image>
 				</view>
-				
+				 -->
 				<view class="aa">
-					<span class="title">{{item.shopName}}</span>
-					<u-rate gutter="3" :value="item.rate" readonly active-color="#FF6900"></u-rate>
+					<span class="title">订单标题：{{item.title}}</span>
+					<!-- <u-rate gutter="3" :value="item.rate" readonly active-color="#FF6900"></u-rate> -->
 					<view class="content">
-						<span class="address">{{item.address}}</span>
-						<span class="distance">{{item.distance}}</span>
+						<span class="address">费用:{{item.price}}元</span>
+						<span class="distance">联系方式:{{item.phone}}</span>
+					</view>
+					<view class="time">
+						<span>{{item.createTime}}</span>
 					</view>
 				</view>
 				
 			</view>
 			
-			<view class="shopList">
+			<!-- <view class="shopList">
 				<view class="shopItem" v-for="(good,index) in item.goods" @click="clickGood(good)">
 					<span class="cost">&yen;  {{good.cost}}</span>
 					<span class="mealName">{{good.mealName}}</span>
@@ -65,7 +69,7 @@
 
 				</view>
 
-			</view>
+			</view> -->
 			
 		</view>
 	</view>
@@ -94,64 +98,72 @@ import myhttp from '../../api/myhttp'
 				],
 				// 附近商家列表
 				NearList:[
-					{
-						shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
-						shopName:'喵呜阿旺宠物医院（24小时）',
-						rate:5.0,
-						address:'胜桥东路',
-						distance:'1.2km',
-						goods:[
-							{
-								cost:'288',
-								mealName:'公猫呼吸麻醉微创绝育手术'
-							},
-							{
-								cost:'188',
-								mealName:'洗牙套餐'
-							}
-						]
-					},
-					{
-						shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
-						shopName:'喵呜阿旺宠物医院（24小时）',
-						rate:5.0,
-						address:'胜桥东路',
-						distance:'1.2km',
-						goods:[
-							{
-								cost:'288',
-								mealName:'公猫呼吸麻醉微创绝育手术'
-							},
-							{
-								cost:'188',
-								mealName:'洗牙套餐'
-							}
-						]
-					},
-					{
-						shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
-						shopName:'喵呜阿旺宠物医院（24小时）',
-						rate:5.0,
-						address:'胜桥东路',
-						distance:'1.2km',
-						goods:[
-							{
-								cost:'288',
-								mealName:'公猫呼吸麻醉微创绝育手术'
-							},
-							{
-								cost:'188',
-								mealName:'洗牙套餐'
-							}
-						]
-					}
-				]
+				// 	{
+				// 		shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
+				// 		shopName:'喵呜阿旺宠物医院（24小时）',
+				// 		rate:5.0,
+				// 		address:'胜桥东路',
+				// 		distance:'1.2km',
+				// 		goods:[
+				// 			{
+				// 				cost:'288',
+				// 				mealName:'公猫呼吸麻醉微创绝育手术'
+				// 			},
+				// 			{
+				// 				cost:'188',
+				// 				mealName:'洗牙套餐'
+				// 			}
+				// 		]
+				// 	},
+				// 	{
+				// 		shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
+				// 		shopName:'喵呜阿旺宠物医院（24小时）',
+				// 		rate:5.0,
+				// 		address:'胜桥东路',
+				// 		distance:'1.2km',
+				// 		goods:[
+				// 			{
+				// 				cost:'288',
+				// 				mealName:'公猫呼吸麻醉微创绝育手术'
+				// 			},
+				// 			{
+				// 				cost:'188',
+				// 				mealName:'洗牙套餐'
+				// 			}
+				// 		]
+				// 	},
+				// 	{
+				// 		shopImg:'https://cdn.uviewui.com/uview/album/1.jpg',
+				// 		shopName:'喵呜阿旺宠物医院（24小时）',
+				// 		rate:5.0,
+				// 		address:'胜桥东路',
+				// 		distance:'1.2km',
+				// 		goods:[
+				// 			{
+				// 				cost:'288',
+				// 				mealName:'公猫呼吸麻醉微创绝育手术'
+				// 			},
+				// 			{
+				// 				cost:'188',
+				// 				mealName:'洗牙套餐'
+				// 			}
+				// 		]
+				// 	}
+				
+				],
+				OrderList:[]
 			}
 		},
 		components: {
 			MyBar
 		},
 		methods:{
+			// 添加单子
+			addOrder(){
+				uni.navigateTo({
+					url:'/pages/sameCity/SecondPages/AddOrder'
+				})
+			},
 			// 商品信息
 			clickGood(item){
 				console.log(item)
@@ -159,13 +171,28 @@ import myhttp from '../../api/myhttp'
 					url:'/pages/sameCity/SecondPages/ShopDetail?goodId='+item.goodId
 				})
 			},
-			// 商家信息
-			ClickShop(item){
-				console.log(item)
+			// 订单信息
+			ClickOrder(index){
+				// console.log('测试是第几个',index)
 				uni.navigateTo({
-					url:'/pages/sameCity/SecondPages/ShopDetail?shopId='+item.shopId
+					url:'/pages/sameCity/SecondPages/OrderDetail?orderId='+index+'&source=pageA'
 				})
+			},
+			// 获取全部的托运单子信息
+			getOrders() {
+			  myhttp.get('/petOrder/orders/getOrders').then(res => {
+				  // console.log('d单子全部测试',res.data);
+			    this.OrderList = res.data
+			      .filter(item => item.status == 1) // 过滤 status 等于 2 的订单
+			      .map(item => {
+			        const createTime = new Date(item.createTime).toISOString().split("T")[0];
+			        return { ...item, createTime };
+			      });
+			  });
 			}
+		},
+		onShow() {
+			this.getOrders()
 		},
 		onLoad() {
 			// 初始化附近商家数据
@@ -173,7 +200,8 @@ import myhttp from '../../api/myhttp'
 				this.NearList = res
 				// console.log(this.NearList);	
 			})
-
+			// 初始化未接单信息
+			this.getOrders(),
 			// 轮播图
 			myhttp.get('/users/getImage').then(res=>{
 				

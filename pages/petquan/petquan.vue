@@ -274,6 +274,8 @@
 		    this.loadarticles();
 		    this.isNeedRefresh = false;
 		  }
+		  this.$store.state.adopt.filterList={}
+		  this.thisAsyncIncrement()
 		},
 		onLoad() {
 			 this.isNeedRefresh = true;

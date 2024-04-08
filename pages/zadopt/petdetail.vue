@@ -19,7 +19,7 @@
 			</view>
 			
 			<view class="release align-end">
-				<u-icon name="trash" @click="deletepages"></u-icon>
+				<u-icon v-if="isCurrentUser" name="trash" @click="deletepages"></u-icon>
 			</view>
 		</view>
 		
@@ -105,7 +105,9 @@
 				InputBottom: 0,
 				src: 'https://cdn.uviewui.com/uview/album/1.jpg',
 				petDetail:{},
-				commentFlag:false
+				commentFlag:false,
+				isCurrentUser:false,
+				postUserName:null
 			}
 		},
 		methods: {
@@ -134,6 +136,7 @@
 			},
 			getpetDetail(){
 				myhttp.get(`/users/pets/Adopt/List/${this.id}`).then((res)=>{
+					this.postUserName=res.data.userName
 					this.petDetail= res.data
 					this.petDetail.registrationTime=moment(this.petDetail.registrationTime).format("MMMM Do YYYY"); 
 					if(this.petDetail.comment==null){
@@ -155,6 +158,7 @@
 			InputBlur(e) {
 				this.InputBottom = 0
 			},
+			// 判断是否为当前用户的文章
 			
 		},
 		//生命周期
@@ -167,6 +171,21 @@
 			// 		this.petDetail= res.data.title
 			// 	})
 			// }
+		},
+		onReady(){
+			if(true){
+				console.log('mymytest');
+				myhttp.get('/users/getUser').then(res=>{
+					console.log('打印出postname',this.postUserName);
+					console.log('判断',res.userName==this.postUserName);
+					if(res.userName==this.postUserName){
+						this.isCurrentUser=true
+						
+					}else{
+						this.isCurrentUser=false
+					}
+				})
+			}
 		},
 		onLoad(option){
 			this.id = JSON.parse(decodeURIComponent(option.id))
@@ -245,7 +264,6 @@
 	.swiper-item image {
 		width: 100%;
 		height: 350upx !important;
-
 	}
 
 	.active {

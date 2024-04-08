@@ -157,6 +157,9 @@ import store from '../../store';
 						safeAreaInsetTop: true
 					})
 				}
+				// else if(this.password==null || this.code==null){
+				// 	console.log('mytest')
+				// }
 				else{
 					switch (this.loginType) {
 						case 0:
@@ -174,33 +177,39 @@ import store from '../../store';
 			// 邮箱登陆
 			loginByEmail() {
 				let that = this
-				// console.log(that.code)
-				that.$myhttp.post('/api/user/login',
-					   {
-						email: that.email,
-						verifyCode:that.code
-						// email: "826697618@qq.com",
-						// verifyCode:"221916"
-						},
-						
-					).then(res=>{
-						// console.log(res)
-						// 保存用户token
-						
-						uni.setStorageSync('token', res.data.token); 
-						this.$store.commit('getUserInfo',res.data)
-						
-						// 保存用户信息
-						// uni.setStorageSync('userInfo', res.data.data.user); 
-						
-						
-						uni.switchTab({
-							url:'/pages/profile/profile',
-						})
-						
+				if(that.code==''){
+					uni.showToast({
+						title:'未输入验证码',
+						icon:'error'
 					})
-					
-					
+				}else{
+					that.$myhttp.post('/api/user/login',
+						   {
+							email: that.email,
+							verifyCode:that.code
+							// email: "826697618@qq.com",
+							// verifyCode:"221916"
+							},
+							
+						).then(res=>{
+							// console.log(res)
+							// 保存用户token
+							
+							uni.setStorageSync('token', res.data.token); 
+							this.$store.commit('getUserInfo',res.data)
+							
+							// 保存用户信息
+							// uni.setStorageSync('userInfo', res.data.data.user); 
+							
+							
+							uni.switchTab({
+								url:'/pages/profile/profile',
+							})
+							
+						})
+				}
+				// console.log(that.code)
+				
 				
 			},
 			// 密码登陆

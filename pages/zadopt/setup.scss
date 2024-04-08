@@ -69,3 +69,28 @@
 	justify-content: center;
 	// align-items: center;
 }
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pet-btn,
+.gender-btn,
+.age-btn {
+  color: #000;
+  // background-color: #e8efff;
+  border-radius: 50%;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+  cursor: pointer;
+}
+
+.pet-btn.active,
+.age-btn.active {
+  border: 1px solid #FFB600;
+}
+
+.gender-btn.active {
+  border: 1px solid #FFB600;
+}

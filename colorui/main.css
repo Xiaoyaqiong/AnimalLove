@@ -2284,7 +2284,7 @@ button.cuIcon.lg {
 	font-weight: 900;
 	color: #333333;
 	line-height: 100upx;
-	padding: 0 30upx;
+	/* padding: 0 30upx; */
 }
 
 .cu-card.article>.cu-item .content {
@@ -2319,7 +2319,7 @@ button.cuIcon.lg {
 
 .cu-form-group {
 	background-color: #ffffff;
-	padding: 1upx 30upx;
+	padding: 1upx 18px;
 	display: flex;
 	align-items: center;
 	min-height: 100upx;

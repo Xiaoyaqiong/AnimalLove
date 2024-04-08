@@ -25,11 +25,6 @@
 				</view>
 			</view>
 		</view>
-		<view class="cu-bar bg-white ">
-			<view class="biaoti title">
-				<input type="text" placeholder="请输入帖子标题" v-model="title">
-			</view>
-		</view>
 		<view class="cu-form-group">
 			<view class="grid col-4 grid-square flex-sub">
 				<view class="bg-img" v-for="(item,index) in imagesUrl" :key="index" @tap="ViewImage"
@@ -44,51 +39,95 @@
 				</view>
 			</view>
 		</view>
-		<view class="idea">把你的想法分享给全世界</view>
+		<view class="cu-bar bg-white ">
+			<view class="biaoti title">
+				<u--input type="text" border="surround" placeholder="填写博人眼球的标题吧~" v-model="title"></u--input>
+			</view>
+		</view>
+		<!-- <view class="idea">把你的想法分享给全世界</view> -->
 		<view class="cu-form-group margin-top">
-			<textarea  :disabled="modalName!=null" placeholder="请输入帖子详情" @input="textareaAInput" 
-				v-model="articleContent"></textarea>
+				<textarea  :disabled="modalName!=null" placeholder="添加正文" @input="textareaAInput"
+					v-model="articleContent"></textarea>
 		</view>
-		<view class="chooseinfo">
-			<u-form labelPosition="left" :model="PetModal" errorType="message" ref="form1" >
-
-				<u-form-item label="类型" :border-bottom="true">
-					<view class="flex u-flex-around btn-group">
-						<button :style="PetModal.petType==1? 'border:1px solid #11A1F8':''" text="喵喵" shape="circle"
-							style="color: #000;" color="#e8efff" @click="setPet('petType',1)">喵喵</button>
-						<button :style="PetModal.petType==2? 'border:1px solid #11A1F8':''" text="汪汪" shape="circle"
-							style="color: #000;" color="#e8efff" @click="setPet('petType',2)">汪汪</button>
-						<button :style="PetModal.petType==3? 'border:1px solid #11A1F8':''" text="其他" shape="circle"
-							style="color: #000;" color="#e8efff" @click="setPet('petType',3)">其他</button>
-					</view>
-
-
-				</u-form-item>
-
-				<u-form-item label="性别" :border-bottom="true">
-					<view class="flex btn3">
-						<button :style="PetModal.petSex==0? 'border:1px solid #11A1F8':''" icon="man" shape="circle"
-							iconColor="#11A1F8" color="#e8efff" @click="setPet('petSex',0)">男</button>
-						<button :style="PetModal.petSex==1? 'border:1px solid #E793CF':''" icon="woman" shape="circle"
-							iconColor="#E793CF" color="#e8efff" @click="setPet('petSex',1)">女</button>
-					</view>
-				</u-form-item>
-
-				<u-form-item label="年龄" :border-bottom="true">
-					<view class="flex btn3">
-						<button :style="PetModal.petAge=='0~3个月'? 'border:1px solid #11A1F8':''" shape="circle"
-							color="#e8efff" @click="setPet('petAge','0~3个月')"> 0~3个月</button>
-						<button :style="PetModal.petAge=='0~1岁'? 'border:1px solid #11A1F8':''" shape="circle"
-							color="#e8efff" @click="setPet('petAge','0~1岁')"> 0~1岁</button>
-						<button :style="PetModal.petAge=='1~3岁'? 'border:1px solid #11A1F8':''" shape="circle"
-							color="#e8efff" @click="setPet('petAge','1~3岁')"> 1~3岁</button>
-						<button :style="PetModal.petAge=='3岁以上'? 'border:1px solid #11A1F8':''" shape="circle"
-							color="#e8efff" @click="setPet('petAge','3岁以上')"> 3岁以上</button>
-					</view>
-				</u-form-item>
-			</u-form>
-			
-		</view>
+		<div class="chooseinfo">
+    <u-form labelPosition="left" :model="PetModal" errorType="message" ref="form1">
+      <u-form-item label="类型" :border-bottom="true">
+        <div class="flex u-flex-around btn-group">
+          <button 
+            class="pet-btn"
+            :class="{ 'active': PetModal.petType === 1 }"
+            @click="setPet('petType', 1)"
+          >
+            喵喵
+          </button>
+          <button 
+            class="pet-btn"
+            :class="{ 'active': PetModal.petType === 2 }"
+            @click="setPet('petType', 2)"
+          >
+            汪汪
+          </button>
+          <button 
+            class="pet-btn"
+            :class="{ 'active': PetModal.petType === 3 }"
+            @click="setPet('petType', 3)"
+          >
+            其他
+          </button>
+        </div>
+      </u-form-item>
+      <u-form-item label="性别" :border-bottom="true">
+        <div class="flex btn3">
+          <button 
+            class="gender-btn"
+            :class="{ 'active': PetModal.petSex === 0 }"
+            @click="setPet('petSex', 0)"
+          >
+            男
+          </button>
+          <button 
+            class="gender-btn"
+            :class="{ 'active': PetModal.petSex === 1 }"
+            @click="setPet('petSex', 1)"
+          >
+            女
+          </button>
+        </div>
+      </u-form-item>
+      <u-form-item label="年龄" :border-bottom="true">
+        <div class="flex btn3">
+          <button 
+            class="age-btn"
+            :class="{ 'active': PetModal.petAge === '0~3个月' }"
+            @click="setPet('petAge', '0~3个月')"
+          >
+            0~3月
+          </button>
+          <button 
+            class="age-btn"
+            :class="{ 'active': PetModal.petAge === '0~1岁' }"
+            @click="setPet('petAge', '0~1岁')"
+          >
+            0~1岁
+          </button>
+          <button 
+            class="age-btn"
+            :class="{ 'active': PetModal.petAge === '1~3岁' }"
+            @click="setPet('petAge', '1~3岁')"
+          >
+            1~3岁
+          </button>
+          <button 
+            class="age-btn"
+            :class="{ 'active': PetModal.petAge === '3岁以上' }"
+            @click="setPet('petAge', '3岁以上')"
+          >
+            3岁以上
+          </button>
+        </div>
+      </u-form-item>
+    </u-form>
+  </div>
 
 
 	</view>
@@ -187,7 +226,7 @@
 				that.imagesUrl.forEach((item) => {
 					console.log(item);
 					uni.uploadFile({
-						url: 'http://10.23.83.140:8080/file/uploads', //仅为示例，非真实的接口地址
+						url: 'http://127.0.0.1:8888/file/uploads', //仅为示例，非真实的接口地址
 						filePath: item,
 						name: 'file',
 						success: (res) => {
@@ -310,8 +349,7 @@
 				}, 1000)
 				setTimeout(()=>{
 					this.goBackToorder()
-					
-				},2000)
+				},1000)
 				
 						
 				// uni.request({

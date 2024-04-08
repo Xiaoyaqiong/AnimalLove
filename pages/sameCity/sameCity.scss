@@ -53,12 +53,12 @@
 .Middleswiper{
 	margin: 0 auto;
 	width: 92%;
-	
 	.Mapicon{
 		display: flex;
 		align-items: center;
 		gap: .6rem;
 		margin-top: 2vh;
+		
 	}
 }
 
@@ -66,7 +66,6 @@
 	// 附近列表里的每一个商家
 	padding: 3vw;
 	padding-top: 0;
-	
 	.Nearitem{
 		margin-bottom: 2vh;
 		// outline: 1px solid;
@@ -75,7 +74,7 @@
 		padding: 1vw;
 		padding-top: 0;
 		width: 95vw;
-		min-height: 20vh;
+		min-height: 10vh;
 		background: #ffffff;
 		border-radius: 12px;
 		font-size: .8rem;
@@ -88,22 +87,22 @@
 			
 			// margin-top: 1.5vh;
 			// outline: 1px solid;
-			display: flex;
-			gap: 0.5rem;
-			margin: 2vh auto;
-			flex: 1;
-			.shopImg{
-				flex: 1;
-				margin: 0 3vw;
-				align-self: center;
-				
-			}
+			// display: flex;
+			// gap: 0.5rem;
+			margin: 2vh 0vh;
+			// flex: 1;
+			// .shopImg{
+			// 	flex: 1;
+			// 	margin: 0 3vw;
+			// 	align-self: center;
+			// }
 			.aa{
-				flex: 2;
-				align-self: center;
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-start;
+				// flex: 2;
+				margin: 0 3vw;
+				// align-self: center;
+				// display: flex;
+				// flex-direction: column;
+				// justify-content: flex-start;
 				gap: 0.5vh;
 				// outline: 1px solid;
 				.title{
@@ -131,7 +130,7 @@
 			flex-direction: column;
 			justify-content: center;
 			margin: 1.8vh auto;
-			margin-top: .2vh;
+			// margin-top: .2vh;
 			gap: 2vh;
 			.shopItem{
 				display: flex;
