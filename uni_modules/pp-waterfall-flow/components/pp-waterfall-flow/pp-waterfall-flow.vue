@@ -7,7 +7,7 @@
 					<view class="title">{{item.title}}</view>
 					<view class="desc">
 						<text>{{item.petVariety}}|{{item.ageYear}}</text>
-						<text>{{item.registrationTime}}</text>
+						<!-- <text>{{item.registrationTime}}</text> -->
 					</view>
 				</view>
 			</view>

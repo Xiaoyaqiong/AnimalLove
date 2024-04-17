@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 自定义导航栏 -->
-		<Mynav CenterSlot="收藏" MyColor="#eee" RightIcon=""></Mynav>
+		<Mynav CenterSlot="收藏" RightIcon=""></Mynav>
 		<!-- <view class="main1 " v-if="NearlyList.length == 0">
 			<view class="justify-center align-center  padding text-center">
 				<view style="color: #0f1418;font-size: 1.26rem;margin-bottom: 1rem;">你还没有收藏</view>

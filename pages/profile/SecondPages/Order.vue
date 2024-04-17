@@ -3,7 +3,7 @@
 		<Mynav CenterSlot="我的订单" MyColor="#FFA500"></Mynav>
 		<u-tabs :list="list1" @click="handleClick"></u-tabs>
 		<view class="order-list">
-		      <view v-for="(order, index) in OrderList" :key="index" class="order-item" @click="ClickOrder(order)">
+		      <view v-for="(order, index) in OrderList" :key="index" class="order-item" @click="ClickOrder(index,flag)">
 		        <view class="order-header">订单标题:{{ order.title }}</view>
 		        <view class="order-contact">联系方式: {{ order.phone }}</view>
 		        <view class="order-fee">费用: {{ order.price }} 元</view>
@@ -42,10 +42,12 @@
 		      });
 		    },
 			// 订单信息
-			ClickOrder(item){
-				console.log(item)
+			ClickOrder(index,flag){
+				flag=this.flag
+				const order = this.OrderList[index]
+				const orderId = order.id
 				uni.navigateTo({
-					url:'/pages/sameCity/SecondPages/OrderDetail?orderId='+item.id+'&source=pageB'
+					url:'/pages/sameCity/SecondPages/OrderDetail?orderId='+orderId+'&source=pageB'
 				})
 			},
 		  },

@@ -2,7 +2,7 @@
 	<view class="">
 		
 		<!-- 自定义导航栏 -->
-		<Mynav CenterSlot="我的发布" MyColor="#eee"  ></Mynav>
+		<Mynav CenterSlot="我的发布"  ></Mynav>
 		
 					<view class="main1 " v-if="fabulist.length == 0">
 						<view class="justify-center align-center  padding text-center">

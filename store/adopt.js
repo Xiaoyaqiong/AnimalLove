@@ -10,7 +10,8 @@ export default {
 			petAge:[],
 			petGender:[],
 			petVariety:[]
-		}
+		},
+		indexAdpot:[]
 	},
 	mutations: {
 		// changereturn(state) {
@@ -41,8 +42,7 @@ export default {
 		// }
 		async getArticles({
 			state,
-			commit,
-			
+			commit,	
 		},url = `/users/pets/Adopt/AdoptListSift`) {
 			// const filters = {...state.filterList} // 将当前过滤器克隆为对象进行运算
 			// state.filterList

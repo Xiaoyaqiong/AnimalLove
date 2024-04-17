@@ -162,35 +162,40 @@
 			
 		},
 		//生命周期
-		created() {
-
+		async created() {
+		  try {
+		    const res1 = await myhttp.get(`/users/pets/Adopt/List/${this.id}`);
+		    this.postUserName = res1.data.userName;
+		    // console.log('打印值', this.postUserName);
+		    this.petDetail = res1.data;
+		    this.petDetail.registrationTime = moment(this.petDetail.registrationTime).format("MMMM Do YYYY");
+		    this.commentFlag = this.petDetail.comment == null;
+		
+		    const res2 = await myhttp.get('/users/getUser');
+		    // console.log('打印出 postname', this.postUserName);
+		    // console.log('打印返回值', res2.userName);
+		    if (res2.userName === this.postUserName) {
+		      this.isCurrentUser = true;
+		    } else {
+		      this.isCurrentUser = false;
+		    }
+		  } catch (error) {
+		    console.error(error);
+		  }
 		},
 		computed:{
-			// getpetDetail(){
-			// 	myhttp.get(`/users/pets/Adopt/List/${this.id}`).then((res)=>{
-			// 		this.petDetail= res.data.title
-			// 	})
-			// }
+			
 		},
 		onReady(){
-			if(true){
-				console.log('mymytest');
-				myhttp.get('/users/getUser').then(res=>{
-					console.log('打印出postname',this.postUserName);
-					console.log('判断',res.userName==this.postUserName);
-					if(res.userName==this.postUserName){
-						this.isCurrentUser=true
-						
-					}else{
-						this.isCurrentUser=false
-					}
-				})
-			}
+				
 		},
 		onLoad(option){
 			this.id = JSON.parse(decodeURIComponent(option.id))
 			console.log(this.id,'id')
-			this.getpetDetail()
+			
+		},
+		onShow() {
+			
 		}
 	}
 </script>

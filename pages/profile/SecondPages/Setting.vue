@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<Mynav CenterSlot="设置" MyColor="#eee" :backInfo="backInfo"></Mynav>
+		<Mynav CenterSlot="设置" :backInfo="backInfo"></Mynav>
  
 		<view class="Account">
 			<u-cell-group :border="false" title="账号" :customStyle="{'fontSize':'8px'}">
@@ -18,7 +18,7 @@
 		</view>
 		<!-- 确认按钮 -->
 		<view class="LogOutBtn">
-			<u-button :customStyle="{'color':'#000','height':'3rem'}" color="#E3E3E3" shape="circle" text="退出登录"
+			<u-button :customStyle="{'color':'#fff','height':'3rem'}" color="#FFB600" shape="circle" text="退出登录" 
 				@click="Logout">
 			</u-button>
 		</view>

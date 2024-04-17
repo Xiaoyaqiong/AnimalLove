@@ -10,17 +10,18 @@
 		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<view class="action" @tap="hideModal('1')">
-						<text class="cuIcon-close text-red"></text>
-					</view>
+					<!-- <view class="action" @tap="hideModal('1')">
+						<text class="cuIcon-close text-orange">X</text>
+					</view> -->
+					<u-icon name="close" size="20" color="#989898" @click="goBackToorder"></u-icon>
 				</view>
-				<view class="padding-xl">
+				<view class="padding-xl text-lg">
 					是否确认发布
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action">
-						<button class="cu-btn line-blue text-blue" @tap="hideModal('ca')">取消</button>
-						<button class="cu-btn bg-blue margin-left" @tap="hideModal('yes')">确定</button>
+						<button class="cu-btn" @tap="hideModal('ca')">取消</button>
+						<button class="cu-btn bg-orange margin-left" @tap="hideModal('yes')">确定</button>
 					</view>
 				</view>
 			</view>
@@ -349,7 +350,7 @@
 				}, 1000)
 				setTimeout(()=>{
 					this.goBackToorder()
-				},1000)
+				},2000)
 				
 						
 				// uni.request({

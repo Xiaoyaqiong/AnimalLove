@@ -151,7 +151,8 @@ import myhttp from '../../api/myhttp'
 				// 	}
 				
 				],
-				OrderList:[]
+				OrderList:[],
+				orderId: null
 			}
 		},
 		components: {
@@ -173,10 +174,15 @@ import myhttp from '../../api/myhttp'
 			},
 			// 订单信息
 			ClickOrder(index){
-				// console.log('测试是第几个',index)
+				const order = this.OrderList[index]
+				const orderId = order.id
 				uni.navigateTo({
-					url:'/pages/sameCity/SecondPages/OrderDetail?orderId='+index+'&source=pageA'
+					url:'/pages/sameCity/SecondPages/OrderDetail?orderId='+orderId+'&source=pageA'
 				})
+				
+				// uni.navigateTo({
+				// 	url:'/pages/sameCity/SecondPages/OrderDetail?orderId='+index+'&source=pageA'
+				// })
 			},
 			// 获取全部的托运单子信息
 			getOrders() {
@@ -186,7 +192,7 @@ import myhttp from '../../api/myhttp'
 			      .filter(item => item.status == 1) // 过滤 status 等于 2 的订单
 			      .map(item => {
 			        const createTime = new Date(item.createTime).toISOString().split("T")[0];
-			        return { ...item, createTime };
+			        return { ...item, createTime};
 			      });
 			  });
 			}

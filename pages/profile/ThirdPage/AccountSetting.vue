@@ -3,7 +3,7 @@
 
 	<view class="">
 		<!-- 自定义导航栏 -->
-		<Mynav CenterSlot="账号与安全" MyColor="#eee"></Mynav>
+		<Mynav CenterSlot="账号与安全"></Mynav>
 
 		<view class="container">
 			<u-cell-group :border="false">
@@ -22,7 +22,7 @@
 		<u-popup :show="show" @close="close" @open="open" :round="10" mode="center">
 			<view>
 				<u--input  type="password" placeholder="请输入新密码" border="bottom" :maxlength="8"     v-model="password"></u--input>
-				<u-button text="确认修改" color="linear-gradient(to right, rgb(66, 83, 216), rgb(213, 51, 186))" @click="changePwd"></u-button>
+				<u-button text="确认修改" color="#FFB600" @click="changePwd"></u-button>
 			</view>
 		</u-popup>
 

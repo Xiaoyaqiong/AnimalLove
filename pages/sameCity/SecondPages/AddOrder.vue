@@ -65,7 +65,7 @@
 				})
 			},
 			goBackToorder() {
-				this.submitOrder()
+				
 				uni.navigateBack({
 					delta: 1
 				})
@@ -77,7 +77,10 @@
 			          content: '是否确认提交?',
 			          success: (res) => {
 			            if (res.confirm) {
-			              this.goBackToorder();
+							this.submitOrder()
+							setTimeout(()=>{
+								this.goBackToorder();
+							},2000)
 			            } else if (res.cancel) {
 			              console.log('用户点击取消');
 			            }

@@ -8,7 +8,7 @@
 		        <text>{{ item.value }}</text>
 		      </view>
 		    </view>
-		    <u-button  v-if="showTakeOrderBtn" @click="TakeOrderTip()" class="take-order-btn">接单</u-button>
+		    <u-button @click="TakeOrderTip()" :disabled="isDisabled" class="take-order-btn">{{statusText}}</u-button>
 		  </view>
 	</view>
 </template>
@@ -19,16 +19,23 @@
 	export default{
 		data() {
 		    return {
-				showTakeOrderBtn:false,
 		      order: {
 		        
 		      },
-			  orderId:null
+			  orderId:null,
+			  orderUser:null,
+			  statusText:'待接单中',
+			  isDisabled:false,
+			  takeOrderId:null,
+			  orderList:[],
+			  orderItem:{},
+			  status:null
 		    }
 		  },
 		   computed: {
 		        orderItems() {
 		          return [
+					{ label: '订单标题', value: this.order.title },
 		            { label: '订单描述', value: this.order.reason },
 		            { label: '地址', value: this.order.address },
 		            { label: '联系方式', value: this.order.phone },
@@ -39,10 +46,10 @@
 		      },
 		methods:{
 			TakeOrder(){
-				let orderId={
-					"id":this.orderId
+				let takeOrderId={
+					"id":this.takeOrderId
 				}
-				myhttp.post('/petOrder/orders/receiveOrder',orderId).then(res=>{
+				myhttp.post('/petOrder/orders/receiveOrder',takeOrderId).then(res=>{
 					if (res.message === '宠物订单不存在') {
 					  uni.showToast({
 					    title: '这是自发的单子不能自接哦',
@@ -62,7 +69,7 @@
 				})
 			},
 			TakeOrderTip(){
-				console.log('myorder',this.orderId)
+				console.log('myorder',this.takeOrderId)
 				uni.showModal({
 				      title: '提示',
 				      content: '是否确认接单?',
@@ -76,19 +83,90 @@
 				      }
 				    });
 			},
-			
+		},
+		async created() {
+			try{
+				const res1=await myhttp.get('/petOrder/orders/getOrders');
+				this.orderList = res1.data;
+				let orderItem={}
+				// this.status=null
+				for (orderItem of this.orderList) {
+				  if (orderItem.id == this.orderId) {
+				    this.order=orderItem
+					this.order.createTime = new Date(this.order.createTime).toISOString().split("T")[0];
+					this.status=this.order.status
+					this.takeOrderId=this.order.id
+					this.orderUser=this.order.userId
+				  }
+				  console.log('1146',this.order);
+				}
+				// this.order=res1.data[this.orderId]
+				
+				// this.order.createTime = new Date(this.order.createTime).toISOString().split("T")[0];
+				// for (const orderItem of orderList) {
+				//   if (orderItem.id === this.orderId) {
+				//     this.order=orderItem
+				// 	this.order.createTime = new Date(this.order.createTime).toISOString().split("T")[0];
+				//   }
+				// }
+				// console.log('127',order);
+				// const status=this.order.status
+				// this.takeOrderId=this.order.id
+				// this.orderUser=this.order.userId
+				// this.order.createTime = new Date(this.order.createTime).toISOString().split("T")[0];
+				
+				
+				
+				const res2=await myhttp.get('/users/getUser');
+				if(this.status==1){
+					if(res2.id==this.orderUser){
+						console.log('isDisabled',this.isDisabled);
+						this.statusText='待接单中...'
+						this.isDisabled=true
+					}else{
+						console.log('isDisabled2',this.isDisabled);
+						this.statusText='接单'
+						this.isDisabled=false
+					}
+				}else if(this.status==2){
+					this.statusText='已被接单'
+					this.isDisabled=true
+				}
+			}catch(error){
+				console.error(error);
+			}
+		  
 		},
 		onLoad(options) {
 			if (options.source === 'pageA') {
-							this.showTakeOrderBtn = true;
+							// this.showTakeOrderBtn = true;
 						} else if (options.source === 'pageB') {
-							this.showTakeOrderBtn = false;}
+							// this.showTakeOrderBtn = false;
+							}
 			this.orderId = options.orderId; 
-			myhttp.get('/petOrder/orders/getOrders').then(res=>{
-				console.log('2355',res.data[this.orderId])
-				this.order=res.data[this.orderId]
-				this.order.createTime = new Date(this.order.createTime).toISOString().split("T")[0];
-			})
+			// console.log('1129',this.orderId);
+			// // const orderList=[]
+			// // myhttp.get('/petOrder/orders/getOrders').then(res=>{orderList=res.data})
+			// myhttp.get('/petOrder/orders/getOrders').then(res => {
+			// 	this.orderList=res.data
+			// 	console.log('0049',this.orderList.length);
+			// 	let orderItem={}
+			// 	for (orderItem of this.orderList) {
+			// 	  if (orderItem.id == this.orderId) {
+			// 	    this.order=orderItem
+			// 		this.order.createTime = new Date(this.order.createTime).toISOString().split("T")[0];
+			// 	  }
+			// 	  console.log('1146',this.order.id);
+			// 	}
+			// });
+			
+			// const orderList = res.data;
+			
+			
+			// console.log('127',orderItem);
+			// const status=this.order.status
+			// this.takeOrderId=this.order.id
+			// this.orderUser=this.order.userId
 		},
 		components: {
 			Mynav

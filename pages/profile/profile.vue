@@ -176,11 +176,11 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 				iconWidth: 43, // 控制icon大小
 				Firstpet: {
 					id:0,
-					nickName: '小黄',
+					nickName: '昵称未设置',
 					gender: 'man',
 					tags: [
-						'1岁以内',
-						'未绝育'
+						'未设置',
+						'未设置'
 					]
 				},
 
@@ -367,10 +367,10 @@ import { data } from '../../uni_modules/uview-ui/libs/mixin/mixin';
 		
 		// 请求宠物数据
 		myhttp.get('/users/pets/list').then(res => {
-			this.Firstpet = res.data[res.data.length-1]
-			this.Firstpet.tags = [this.Firstpet.ageYear,this.Firstpet.sterilizationStatus]
-			
-			
+			if(res.data.length!=0){
+				this.Firstpet = res.data[res.data.length-1]
+				this.Firstpet.tags = [this.Firstpet.ageYear,this.Firstpet.sterilizationStatus]
+			}
 		})
 
 		}
